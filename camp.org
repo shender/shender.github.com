@@ -1,4 +1,6 @@
 
+[[http://github.com/shender/report/blob/master/report.pdf][Текущая версия отчёта по лагерю]]
+
 * Эксперименты
 
 [[http://shender.github.com/exp.html][Список экспериментов, выполненных в летнем физическом лагере в 2010 году]]
