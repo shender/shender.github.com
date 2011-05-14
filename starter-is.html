@@ -1,0 +1,1669 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+               "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+lang="en" xml:lang="en">
+<head>
+<title>Emacs Starter Kit</title>
+<meta http-equiv="Content-Type" content="text/html;charset=utf-8"/>
+<meta name="generator" content="Org-mode"/>
+<meta name="generated" content="2011-05-14 16:22:55 CEST"/>
+<meta name="author" content="Igor Shenderovich"/>
+<meta name="description" content=""/>
+<meta name="keywords" content=""/>
+<style type="text/css">
+ <!--/*--><![CDATA[/*><!--*/
+  html { font-family: Times, serif; font-size: 12pt; }
+  .title  { text-align: center; }
+  .todo   { color: red; }
+  .done   { color: green; }
+  .tag    { background-color: #add8e6; font-weight:normal }
+  .target { }
+  .timestamp { color: #bebebe; }
+  .timestamp-kwd { color: #5f9ea0; }
+  .right  {margin-left:auto; margin-right:0px;  text-align:right;}
+  .left   {margin-left:0px;  margin-right:auto; text-align:left;}
+  .center {margin-left:auto; margin-right:auto; text-align:center;}
+  p.verse { margin-left: 3% }
+  pre {
+	border: 1pt solid #AEBDCC;
+	background-color: #F3F5F7;
+	padding: 5pt;
+	font-family: courier, monospace;
+        font-size: 90%;
+        overflow:auto;
+  }
+  table { border-collapse: collapse; }
+  td, th { vertical-align: top;  }
+  th.right  { text-align:center;  }
+  th.left   { text-align:center;   }
+  th.center { text-align:center; }
+  td.right  { text-align:right;  }
+  td.left   { text-align:left;   }
+  td.center { text-align:center; }
+  dt { font-weight: bold; }
+  div.figure { padding: 0.5em; }
+  div.figure p { text-align: center; }
+  textarea { overflow-x: auto; }
+  .linenr { font-size:smaller }
+  .code-highlighted {background-color:#ffff00;}
+  .org-info-js_info-navigation { border-style:none; }
+  #org-info-js_console-label { font-size:10px; font-weight:bold;
+                               white-space:nowrap; }
+  .org-info-js_search-highlight {background-color:#ffff00; color:#000000;
+                                 font-weight:bold; }
+  /*]]>*/-->
+</style>
+<script type="text/javascript">
+<!--/*--><![CDATA[/*><!--*/
+ function CodeHighlightOn(elem, id)
+ {
+   var target = document.getElementById(id);
+   if(null != target) {
+     elem.cacheClassElem = elem.className;
+     elem.cacheClassTarget = target.className;
+     target.className = "code-highlighted";
+     elem.className   = "code-highlighted";
+   }
+ }
+ function CodeHighlightOff(elem, id)
+ {
+   var target = document.getElementById(id);
+   if(elem.cacheClassElem)
+     elem.className = elem.cacheClassElem;
+   if(elem.cacheClassTarget)
+     target.className = elem.cacheClassTarget;
+ }
+/*]]>*///-->
+</script>
+
+</head>
+<body>
+<div id="content">
+
+<h1 class="title">Emacs Starter Kit</h1>
+
+<div id="outline-container-1" class="outline-2">
+<h2 id="sec-1"><span class="section-number-2">1</span> Загрузка основных пакетов. &nbsp;&nbsp;&nbsp;<span class="tag"><span class="load">load</span></span></h2>
+<div class="outline-text-2" id="text-1">
+
+
+<p>
+Типографика (<a href="http://www.emacswiki.org/emacs/TypographicalPunctuationMarks">typopunct</a>), облегчённая работа с TeX (<a href="http://www.gnu.org/software/auctex/">AuCTeX</a>, <a href="http://staff.science.uva.nl/~dominik/Tools/cdlatex/">CDLaTeX</a>),
+красивое цитирование в текстах (boxquote).
+</p>
+
+
+
+<pre class="src src-emacs-lisp">(load <span style="color: #8b2252;">"auctex.el"</span> nil t t)
+(load <span style="color: #8b2252;">"preview-latex.el"</span> nil t t)
+
+(<span style="color: #a020f0;">require</span> '<span style="color: #008b8b;">typopunct</span>)
+(<span style="color: #a020f0;">require</span> '<span style="color: #008b8b;">cdlatex</span>)
+(<span style="color: #a020f0;">require</span> '<span style="color: #008b8b;">boxquote</span>)
+</pre>
+
+
+
+</div>
+
+</div>
+
+<div id="outline-container-2" class="outline-2">
+<h2 id="sec-2"><span class="section-number-2">2</span> Редактирование текста. &nbsp;&nbsp;&nbsp;<span class="tag"><span class="edit">edit</span></span></h2>
+<div class="outline-text-2" id="text-2">
+
+
+
+</div>
+
+<div id="outline-container-2_1" class="outline-3">
+<h3 id="sec-2_1"><span class="section-number-3">2.1</span> Русский язык. </h3>
+<div class="outline-text-3" id="text-2_1">
+
+
+<p>
+Раскладка переключается по Caps Lock (записан как F13, в файле <a href="file:///home/igor/.xinitrc">xinitrc</a>
+записан редирект с Caps Lock на F13).
+</p>
+<p>
+При переключении раскладки меняются правила для typopunct, в
+частности, тип кавычек (здесь он упоминается как francais — это
+обыкновенные кавычки–«ёлочки»). 
+</p>
+
+
+
+<pre class="src src-emacs-lisp">(global-set-key [f13] 'toggle-input-method)
+(add-hook 'input-method-activate-hook (<span style="color: #a020f0;">lambda</span> ()
+                                        (typopunct-change-language
+                                         'francais t)))
+(add-hook 'input-method-inactivate-hook (<span style="color: #a020f0;">lambda</span> ()
+                                          (typopunct-change-language
+                                           'english t)))
+</pre>
+
+
+
+</div>
+
+</div>
+
+<div id="outline-container-2_2" class="outline-3">
+<h3 id="sec-2_2"><span class="section-number-3">2.2</span> Настройка copy-paste </h3>
+<div class="outline-text-3" id="text-2_2">
+
+
+
+
+
+<pre class="src src-emacs-lisp">(transient-mark-mode 1)
+(setq mark-even-if-inactive t)
+(setq x-select-enable-clipboard t        <span style="color: #b22222;">; </span><span style="color: #b22222;">copy-paste should work ...
+</span>  interprogram-paste-function            <span style="color: #b22222;">; </span><span style="color: #b22222;">...with...
+</span>  'x-cut-buffer-or-selection-value)      <span style="color: #b22222;">; </span><span style="color: #b22222;">...other X clients
+</span>
+(<span style="color: #a020f0;">when</span> (fboundp file-name-shadow-mode)    <span style="color: #b22222;">; </span><span style="color: #b22222;">emacs22+
+</span>  (file-name-shadow-mode t))             <span style="color: #b22222;">; </span><span style="color: #b22222;">be smart about filenames in mbuf
+</span></pre>
+
+
+
+<p>
+Копирование строчек без выделения. 
+</p>
+
+
+
+<pre class="src src-emacs-lisp">(<span style="color: #a020f0;">defadvice</span> <span style="color: #0000ff;">kill-ring-save</span> (before slick-copy activate compile) <span style="color: #8b2252;">"When called
+  interactively with no active region, copy a single line instead."</span>
+  (interactive (<span style="color: #a020f0;">if</span> mark-active (list (region-beginning) (region-end)) (message
+  <span style="color: #8b2252;">"Copied line"</span>) (list (line-beginning-position) (line-beginning-position
+  2)))))
+
+(<span style="color: #a020f0;">defadvice</span> <span style="color: #0000ff;">kill-region</span> (before slick-cut activate compile)
+  <span style="color: #8b2252;">"When called interactively with no active region, kill a single line instead."</span>
+  (interactive
+    (<span style="color: #a020f0;">if</span> mark-active (list (region-beginning) (region-end))
+      (list (line-beginning-position)
+        (line-beginning-position 2)))))
+</pre>
+
+
+
+</div>
+
+</div>
+
+<div id="outline-container-2_3" class="outline-3">
+<h3 id="sec-2_3"><span class="section-number-3">2.3</span> <span class="todo TODO"> TODO</span> Словарь. </h3>
+<div class="outline-text-3" id="text-2_3">
+
+
+<ul>
+<li>словарь по запросу, сделано с помощью консольной утилиты sdcv. 
+
+
+
+
+<pre class="src src-emacs-lisp">(global-set-key (kbd <span style="color: #8b2252;">"&lt;pause&gt;"</span>) 'sdcv-search-pointer+)
+</pre>
+
+
+</li>
+</ul>
+
+</div>
+
+</div>
+
+<div id="outline-container-2_4" class="outline-3">
+<h3 id="sec-2_4"><span class="section-number-3">2.4</span> ispell. </h3>
+<div class="outline-text-3" id="text-2_4">
+
+
+<p>
+Проверка орфографии на лету. 
+</p>
+
+
+
+<pre class="src src-emacs-lisp">(global-set-key (kbd <span style="color: #8b2252;">"C-&lt;f7&gt;"</span>) 
+  (<span style="color: #a020f0;">lambda</span>()(interactive)
+    (ispell-change-dictionary <span style="color: #8b2252;">"ru-yeyo"</span>)
+    (flyspell-buffer)
+    (flyspell-mode t)))
+</pre>
+
+
+
+</div>
+
+</div>
+
+<div id="outline-container-2_5" class="outline-3">
+<h3 id="sec-2_5"><span class="section-number-3">2.5</span> Поиск и замена. </h3>
+<div class="outline-text-3" id="text-2_5">
+
+
+
+
+
+<pre class="src src-emacs-lisp">(global-set-key (kbd <span style="color: #8b2252;">"C-s"</span>) 'isearch-forward-regexp)
+(global-set-key (kbd <span style="color: #8b2252;">"\C-r"</span>) 'isearch-backward-regexp)
+(global-set-key (kbd <span style="color: #8b2252;">"C-M-s"</span>) 'isearch-forward)
+(global-set-key (kbd <span style="color: #8b2252;">"C-M-r"</span>) 'isearch-backward)
+
+(<span style="color: #a020f0;">when</span> (<span style="color: #a020f0;">require</span> '<span style="color: #008b8b;">browse-kill-ring</span> nil 'noerror)
+  (browse-kill-ring-default-keybindings))
+
+(global-set-key (kbd <span style="color: #8b2252;">"M-n"</span>) 'next-error)
+(global-set-key (kbd <span style="color: #8b2252;">"M-p"</span>) 'previous-error)
+
+(add-hook 'isearch-mode-end-hook
+          (<span style="color: #a020f0;">lambda</span> ()
+            (<span style="color: #a020f0;">when</span> isearch-forward (goto-char isearch-other-end))))
+
+(autoload 'kill-ring-search <span style="color: #8b2252;">"kill-ring-search"</span>
+  <span style="color: #8b2252;">"Search the kill ring in the minibuffer."</span>
+  (interactive))
+</pre>
+
+
+
+</div>
+
+</div>
+
+<div id="outline-container-2_6" class="outline-3">
+<h3 id="sec-2_6"><span class="section-number-3">2.6</span> Редактирование при помощи <code>sudo</code>. </h3>
+<div class="outline-text-3" id="text-2_6">
+
+
+<p>
+Функция <code>sudo-edit</code>: открытие файла с правами <code>root</code>. Работает через
+<code>tramp</code>. Может работать удалённо. 
+</p>
+
+
+
+<pre class="src src-emacs-lisp">(<span style="color: #a020f0;">defun</span> <span style="color: #0000ff;">sudo-edit</span> (<span style="color: #228b22;">&amp;optional</span> arg)
+  (interactive <span style="color: #8b2252;">"p"</span>)
+  (<span style="color: #a020f0;">if</span> (or arg (not buffer-file-name))
+      (find-file (concat <span style="color: #8b2252;">"/sudo:root@localhost:"</span> (ido-read-file-name <span style="color: #8b2252;">"File: "</span>)))
+    (find-alternate-file (concat <span style="color: #8b2252;">"/sudo:root@localhost:"</span> buffer-file-name))))
+</pre>
+
+
+
+</div>
+
+</div>
+
+<div id="outline-container-2_7" class="outline-3">
+<h3 id="sec-2_7"><span class="section-number-3">2.7</span> Выделение текста. </h3>
+<div class="outline-text-3" id="text-2_7">
+
+
+<p>
+Среди прочего используется <code>cua-mode</code> для выделения прямоугольниками.
+</p>
+
+
+
+<pre class="src src-emacs-lisp">(<span style="color: #a020f0;">require</span> '<span style="color: #008b8b;">cua-base</span>)
+(setq cua-enable-cua-keys nil)         
+(cua-mode t)      
+</pre>
+
+
+
+</div>
+
+</div>
+
+<div id="outline-container-2_8" class="outline-3">
+<h3 id="sec-2_8"><span class="section-number-3">2.8</span> Цитирование и комментирование. </h3>
+<div class="outline-text-3" id="text-2_8">
+
+
+<p>
+Для цитирования используется <code>boxquote</code>, подгруженное в первом
+разделе. 
+</p>
+<p>
+Теперь определим для неё хоткеи. 
+</p>
+
+
+
+<pre class="src src-emacs-lisp">(global-set-key (kbd <span style="color: #8b2252;">"C-;"</span>) 'boxquote-region)
+(global-set-key (kbd <span style="color: #8b2252;">"C-'"</span>) 'boxquote-unbox)
+</pre>
+
+
+
+<p>
+Комментирование и раскомментирование: <code>C-l</code>. 
+</p>
+
+
+
+<pre class="src src-emacs-lisp">(global-set-key (kbd <span style="color: #8b2252;">"C-l"</span>) 'comment-or-uncomment-region)
+</pre>
+
+
+
+</div>
+
+</div>
+
+<div id="outline-container-2_9" class="outline-3">
+<h3 id="sec-2_9"><span class="section-number-3">2.9</span> Всякое по мелочи. </h3>
+<div class="outline-text-3" id="text-2_9">
+
+
+
+
+
+<pre class="src src-emacs-lisp">(setq default-major-mode 'text-mode)
+
+(global-set-key (kbd <span style="color: #8b2252;">"C-z"</span>) 'undo)
+(global-set-key (kbd <span style="color: #8b2252;">"M-g"</span>) 'goto-line)
+
+(global-set-key <span style="color: #8b2252;">"\C-w"</span> 'backward-kill-word)
+
+(global-set-key [(shift insert)] 'yank)
+(global-set-key [(shift delete)] 'kill-region)
+
+(global-set-key [(control k)] 'kill-line)
+
+
+</pre>
+
+
+</div>
+
+</div>
+
+<div id="outline-container-2_10" class="outline-3">
+<h3 id="sec-2_10"><span class="section-number-3">2.10</span> Типографика: окавычивание выделенного слова. &nbsp;&nbsp;&nbsp;<span class="tag"><span class="typo">typo</span></span></h3>
+<div class="outline-text-3" id="text-2_10">
+
+
+
+
+
+<pre class="src src-emacs-lisp">(<span style="color: #a020f0;">defadvice</span> <span style="color: #0000ff;">typopunct-insert-quotation-mark</span> (around wrap-region activate)
+  (<span style="color: #a020f0;">let*</span> ((lang (or (get-text-property (point) 'typopunct-language)
+                   typopunct-buffer-language))
+         (omark (<span style="color: #a020f0;">if</span> single
+                    (typopunct-opening-single-quotation-mark lang)
+                  (typopunct-opening-quotation-mark lang)))
+         (qmark (<span style="color: #a020f0;">if</span> single
+                    (typopunct-closing-single-quotation-mark lang)
+                  (typopunct-closing-quotation-mark lang))))
+    (<span style="color: #a020f0;">cond</span>
+     (mark-active
+      (<span style="color: #a020f0;">let</span> ((skeleton-end-newline nil)
+            (singleo (typopunct-opening-single-quotation-mark lang))
+            (singleq (typopunct-closing-single-quotation-mark lang)))
+        (<span style="color: #a020f0;">if</span> (&gt; (point) (mark))
+            (exchange-point-and-mark))
+        (<span style="color: #a020f0;">save-excursion</span>
+          (<span style="color: #a020f0;">while</span> (re-search-forward (regexp-quote (string omark)) (mark) t)
+            (replace-match (regexp-quote (string singleo)) nil nil)))
+        (<span style="color: #a020f0;">save-excursion</span>
+          (<span style="color: #a020f0;">while</span> (re-search-forward (regexp-quote (string qmark)) (mark) t)
+            (replace-match (regexp-quote (string singleq)) nil nil)))
+        (skeleton-insert (list nil omark '_ qmark) -1)))
+     ((looking-at (regexp-opt (list (string omark) (string qmark))))
+      (forward-char 1))
+     (t ad-do-it))))
+</pre>
+
+
+
+</div>
+</div>
+
+</div>
+
+<div id="outline-container-3" class="outline-2">
+<h2 id="sec-3"><span class="section-number-2">3</span> Файл с паролями. &nbsp;&nbsp;&nbsp;<span class="tag"><span class="secrets">secrets</span></span></h2>
+<div class="outline-text-2" id="text-3">
+
+
+<p>
+Для всех паролей от учётных записей и т.д. создан специальный <a href="secrets.el.gpg">файл</a>
+(защищённый GPG). К сожалению, функция <code>require</code> не понимает
+запароленных файлов, поэтому нужно сделать ещё <a href="secrets.el">библиотеку</a>,
+единственная функция которой — открывать шифрованный файл с паролями. 
+</p>
+<p>
+Сначала подключим EasyPG. 
+</p>
+
+
+
+<pre class="src src-emacs-lisp">(<span style="color: #a020f0;">require</span> '<span style="color: #008b8b;">epa</span>)
+(epa-file-enable)
+</pre>
+
+
+
+<p>
+Здесь определяется функция, которая подгружает файл с паролями. При
+этом спрашивается passphrase — это происходит только в первый раз. 
+</p>
+
+
+
+<pre class="src src-emacs-lisp">(<span style="color: #a020f0;">defun</span> <span style="color: #0000ff;">start-secrets</span> ()
+  (interactive)
+  (load-library <span style="color: #8b2252;">"secrets.el.gpg"</span>)
+)
+</pre>
+
+
+
+</div>
+
+</div>
+
+<div id="outline-container-4" class="outline-2">
+<h2 id="sec-4"><span class="section-number-2">4</span> Jabber. &nbsp;&nbsp;&nbsp;<span class="tag"><span class="jabber">jabber</span></span></h2>
+<div class="outline-text-2" id="text-4">
+
+
+<p>
+Логины и пароли от аккаунтов спрятаны в зашифрованном файле. 
+</p>
+
+</div>
+
+<div id="outline-container-4_1" class="outline-3">
+<h3 id="sec-4_1"><span class="section-number-3">4.1</span> Настройки соединения &nbsp;&nbsp;&nbsp;<span class="tag"><span class="connection">connection</span></span></h3>
+<div class="outline-text-3" id="text-4_1">
+
+
+<p>
+Сначала подгрузим джаббер. Также скажем ему автоматически
+переподключаться при разрыве соединения, а также использовать
+правильную ssl–программу. 
+</p>
+
+
+
+<pre class="src src-emacs-lisp">(<span style="color: #a020f0;">require</span> '<span style="color: #008b8b;">jabber</span>)           
+
+(setq jabber-auto-reconnect t)
+(setq jabber-connection-ssl-program (quote gnutls))
+</pre>
+
+
+
+</div>
+
+</div>
+
+<div id="outline-container-4_2" class="outline-3">
+<h3 id="sec-4_2"><span class="section-number-3">4.2</span> Хоткеи &nbsp;&nbsp;&nbsp;<span class="tag"><span class="hotkeys">hotkeys</span></span></h3>
+<div class="outline-text-3" id="text-4_2">
+
+
+</div>
+
+<div id="outline-container-4_2_1" class="outline-4">
+<h4 id="sec-4_2_1"><span class="section-number-4">4.2.1</span> Операции внутри буфера </h4>
+<div class="outline-text-4" id="text-4_2_1">
+
+
+<p>
+Переключение на новое сообщение: <code>C-x C-a</code>. 
+</p>
+<p>
+Переключение к ростеру: <code>C-F12</code>.
+</p>
+
+
+
+<pre class="src src-emacs-lisp">(global-set-key <span style="color: #8b2252;">"\C-x\C-a"</span> 'jabber-activity-switch-to)
+(global-set-key [(control f12)] 'jabber-switch-to-roster-buffer)
+</pre>
+
+
+
+</div>
+
+</div>
+
+<div id="outline-container-4_2_2" class="outline-4">
+<h4 id="sec-4_2_2"><span class="section-number-4">4.2.2</span> Подключение и отключение </h4>
+<div class="outline-text-4" id="text-4_2_2">
+
+
+<p>
+Используется внешний скрипт, так как нужно пробрасывать
+ssh–туннель. Кроме того, в скрипте работают оповещения о
+подключении/отключении.  
+</p>
+<p>
+Подключение: <code>C-XF86Forward</code> (<a href="file:///home/igor/.scripts/jabber_connect.sh">скрипт</a>). 
+Отключение: <code>C-XF86-Back</code> (<a href="file:///home/igor/.scripts/jabber_disconnect.sh">скрипт</a>). 
+</p>
+
+
+
+<pre class="src src-emacs-lisp">(global-set-key (kbd <span style="color: #8b2252;">"&lt;C-XF86Forward&gt;"</span>)
+                (<span style="color: #a020f0;">lambda</span> ()
+                  (interactive)
+                  (call-process-shell-command <span style="color: #8b2252;">"/home/igor/.scripts/jabber_connect.sh"</span> nil 0)
+                  )
+                )
+
+(global-set-key (kbd <span style="color: #8b2252;">"&lt;C-XF86Back&gt;"</span>)
+                (<span style="color: #a020f0;">lambda</span> ()
+                  (interactive)
+                  (call-process-shell-command <span style="color: #8b2252;">"/home/igor/.scripts/jabber_disconnect.sh"</span> nil 0)
+                  )
+                )
+</pre>
+
+
+
+</div>
+</div>
+
+</div>
+
+<div id="outline-container-4_3" class="outline-3">
+<h3 id="sec-4_3"><span class="section-number-3">4.3</span> Настройки внешнего вида чата &nbsp;&nbsp;&nbsp;<span class="tag"><span class="theme">theme</span></span></h3>
+<div class="outline-text-3" id="text-4_3">
+
+
+</div>
+
+<div id="outline-container-4_3_1" class="outline-4">
+<h4 id="sec-4_3_1"><span class="section-number-4">4.3.1</span> Формат ростера &nbsp;&nbsp;&nbsp;<span class="tag"><span class="roster">roster</span></span></h4>
+<div class="outline-text-4" id="text-4_3_1">
+
+
+
+
+
+<pre class="src src-emacs-lisp">(jabber-roster-toggle-binding-display)
+(jabber-roster-toggle-offline-display)
+(setq jabber-roster-line-format <span style="color: #8b2252;">"%c %-35n %u %-8s  %S"</span>)
+(setq jabber-roster-show-title nil)
+</pre>
+
+
+
+</div>
+
+</div>
+
+<div id="outline-container-4_3_2" class="outline-4">
+<h4 id="sec-4_3_2"><span class="section-number-4">4.3.2</span> Формат строчек чата &nbsp;&nbsp;&nbsp;<span class="tag"><span class="chat">chat</span></span></h4>
+<div class="outline-text-4" id="text-4_3_2">
+
+
+
+
+
+<pre class="src src-emacs-lisp">(setq jabber-chat-buffer-show-avatar nil)
+(setq jabber-chat-delayed-time-format <span style="color: #8b2252;">"%Y-%m-%d %H:%M:%S"</span>)
+(setq jabber-chat-fill-long-lines t)
+(setq jabber-chat-local-prompt-format <span style="color: #8b2252;">"[%t] Igor Shenderovich&gt; "</span>)
+(setq jabber-chat-time-format <span style="color: #8b2252;">"%Y-%m-%d %H:%M:%S"</span>)
+
+(setq jabber-rare-time-format <span style="color: #8b2252;">"%a %e %b %Y %H:%M"</span>)
+
+(setq jabber-display-menu t)
+</pre>
+
+
+
+</div>
+
+</div>
+
+<div id="outline-container-4_3_3" class="outline-4">
+<h4 id="sec-4_3_3"><span class="section-number-4">4.3.3</span> Цвета &nbsp;&nbsp;&nbsp;<span class="tag"><span class="colors">colors</span></span></h4>
+<div class="outline-text-4" id="text-4_3_3">
+
+
+
+
+
+<pre class="src src-emacs-lisp">(custom-set-faces
+ '(jabber-chat-prompt-foreign ((t (<span style="color: #7a378b;">:foreground</span> <span style="color: #8b2252;">"red"</span>))))
+ '(jabber-chat-prompt-local ((t (<span style="color: #7a378b;">:foreground</span> <span style="color: #8b2252;">"#4682b4"</span> <span style="color: #7a378b;">:weight</span> thin))))
+ '(jabber-chat-prompt-system ((t (<span style="color: #7a378b;">:foreground</span> <span style="color: #8b2252;">"red"</span> <span style="color: #7a378b;">:weight</span> light))))
+ '(jabber-chat-text-local ((t nil)))
+ '(jabber-roster-user-away ((t (<span style="color: #7a378b;">:foreground</span> <span style="color: #8b2252;">"#6b8e23"</span> <span style="color: #7a378b;">:slant</span> italic <span style="color: #7a378b;">:weight</span> normal))))
+ '(jabber-roster-user-online ((t (<span style="color: #7a378b;">:foreground</span> <span style="color: #8b2252;">"black"</span> <span style="color: #7a378b;">:slant</span> normal <span style="color: #7a378b;">:weight</span> bold))))
+ '(jabber-title-large ((t (<span style="color: #7a378b;">:inherit</span> variable-pitch <span style="color: #7a378b;">:weight</span> bold <span style="color: #7a378b;">:height</span> 1.5 <span style="color: #7a378b;">:width</span> ultra-expanded))))
+ '(jabber-title-medium ((t (<span style="color: #7a378b;">:foreground</span> <span style="color: #8b2252;">"#a52a2a"</span> <span style="color: #7a378b;">:height</span> 1.2 <span style="color: #7a378b;">:width</span> normal))))
+ '(jabber-title-small ((t (<span style="color: #7a378b;">:foreground</span> <span style="color: #8b2252;">"#b8860b"</span> <span style="color: #7a378b;">:weight</span> bold <span style="color: #7a378b;">:height</span> 0.8 <span style="color: #7a378b;">:width</span> semi-expanded)))))
+</pre>
+
+
+
+</div>
+</div>
+
+</div>
+
+<div id="outline-container-4_4" class="outline-3">
+<h3 id="sec-4_4"><span class="section-number-3">4.4</span> Хуки на jabber-mode &nbsp;&nbsp;&nbsp;<span class="tag"><span class="hooks">hooks</span>&nbsp;<span class="hotkeys">hotkeys</span></span></h3>
+<div class="outline-text-3" id="text-4_4">
+
+
+<p>
+Включение <a href="file:///home/igor/.emacs.d/plugins/typopunct.el">typopunct</a> для типографики (тире, кавычки). 
+</p>
+<p>
+Переход по урл на комбинации <code>C-c RET</code>.
+</p>
+
+
+
+<pre class="src src-emacs_lisp">(add-hook 'jabber-chat-mode-hook 'typopunct-mode)
+(add-hook 'jabber-chat-mode-hook 'goto-address)
+</pre>
+
+
+
+</div>
+
+</div>
+
+<div id="outline-container-4_5" class="outline-3">
+<h3 id="sec-4_5"><span class="section-number-3">4.5</span> История &nbsp;&nbsp;&nbsp;<span class="tag"><span class="history">history</span></span></h3>
+<div class="outline-text-3" id="text-4_5">
+
+
+<p>
+История хранится в этой <a href="file:///home/igor/.emacs.d/jabber/">папке</a>, по файлу на каждого адресата.
+</p>
+
+
+
+<pre class="src src-emacs-lisp">(setq jabber-global-history-filename <span style="color: #8b2252;">"~/.emacs.d/jabber_global_message_log"</span>)
+(setq jabber-history-dir <span style="color: #8b2252;">"~/.emacs.d/jabber"</span>)
+(setq jabber-history-enabled t)
+(setq jabber-use-global-history nil)
+</pre>
+
+
+
+<p>
+Файл с историей открывается с помощью функции <code>jabber-visit-history</code>. 
+</p>
+
+
+
+<pre class="src src-emacs-lisp">(<span style="color: #a020f0;">defun</span> <span style="color: #0000ff;">jabber-visit-history</span> (jid)
+  <span style="color: #8b2252;">"Visit jabber history with JID in a new buffer.
+
+Performs well only for small files.  Expect to wait a few seconds
+for large histories.  Adapted from `</span><span style="color: #008b8b;">jabber-chat-create-buffer</span><span style="color: #8b2252;">'."</span>
+  (interactive (list (jabber-read-jid-completing <span style="color: #8b2252;">"JID: "</span>)))
+  (<span style="color: #a020f0;">let</span> ((buffer (generate-new-buffer (format <span style="color: #8b2252;">"*-jabber-history-%s-*"</span>
+                                             (jabber-jid-displayname jid)))))
+    (switch-to-buffer buffer)
+    (make-local-variable 'jabber-chat-ewoc)
+    (setq jabber-chat-ewoc (ewoc-create #'jabber-chat-pp))
+    (mapc 'jabber-chat-insert-backlog-entry
+          (nreverse (jabber-history-query nil nil t t <span style="color: #8b2252;">"."</span>
+                                          (jabber-history-filename jid))))
+    (view-mode)))
+</pre>
+
+
+
+</div>
+</div>
+
+</div>
+
+<div id="outline-container-5" class="outline-2">
+<h2 id="sec-5"><span class="section-number-2">5</span> LaTeX. &nbsp;&nbsp;&nbsp;<span class="tag"><span class="latex">latex</span></span></h2>
+<div class="outline-text-2" id="text-5">
+
+
+
+</div>
+
+<div id="outline-container-5_1" class="outline-3">
+<h3 id="sec-5_1"><span class="section-number-3">5.1</span> Запуск AuCTeX. &nbsp;&nbsp;&nbsp;<span class="tag"><span class="auctex">auctex</span></span></h3>
+<div class="outline-text-3" id="text-5_1">
+
+
+<p>
+Для облегчения работы с техом в емаксе есть специальный плагин —
+AuCTeX. 
+</p>
+
+
+
+<pre class="src src-emacs-lisp">(load <span style="color: #8b2252;">"auctex.el"</span> nil t t)
+(load <span style="color: #8b2252;">"preview-latex.el"</span> nil t t)
+</pre>
+
+
+
+</div>
+
+</div>
+
+<div id="outline-container-5_2" class="outline-3">
+<h3 id="sec-5_2"><span class="section-number-3">5.2</span> Основные особенности моды. &nbsp;&nbsp;&nbsp;<span class="tag"><span class="hooks">hooks</span></span></h3>
+<div class="outline-text-3" id="text-5_2">
+
+
+<p>
+Несколько хуков на теховскую моду: автозаполнение, <code>RefTeX</code> для
+удобной вставки ссылок, а также очень удобный <a href="http://staff.science.uva.nl/~dominik/Tools/cdlatex/">СDLaTeX</a>.
+</p>
+
+
+
+<pre class="src src-emacs-lisp">(add-hook 'LaTeX-mode-hook 'auto-fill-mode)
+(add-hook 'LaTeX-mode-hook 'turn-on-reftex)
+</pre>
+
+
+
+<p>
+В качестве основной команды компиляции — <code>Synctex</code> (см. следующий
+раздел).
+</p>
+
+
+
+<pre class="src src-emacs-lisp">(setq reftex-label-alist '((nil ?e nil <span style="color: #8b2252;">"~\\eqref{%s}"</span> nil nil)))
+(setq TeX-save-query nil)
+(setq TeX-command-force <span style="color: #8b2252;">"Synctex"</span>)
+</pre>
+
+
+
+</div>
+
+</div>
+
+<div id="outline-container-5_3" class="outline-3">
+<h3 id="sec-5_3"><span class="section-number-3">5.3</span> Хоткеи. &nbsp;&nbsp;&nbsp;<span class="tag"><span class="hotkeys">hotkeys</span></span></h3>
+<div class="outline-text-3" id="text-5_3">
+
+
+<p>
+Вставка внутренних ссылок: на уравнения, разделы, картинки и т.д.:
+<code>C-]</code>. Работает с помощью <code>RefTeX</code>. 
+</p>
+
+
+
+<pre class="src src-emacs-lisp">(global-set-key <span style="color: #8b2252;">"\C-]"</span> 'reftex-reference)
+</pre>
+
+
+
+</div>
+
+</div>
+
+<div id="outline-container-5_4" class="outline-3">
+<h3 id="sec-5_4"><span class="section-number-3">5.4</span> SyncTeX и обратный поиск. &nbsp;&nbsp;&nbsp;<span class="tag"><span class="synctex">synctex</span>&nbsp;<span class="dbus">dbus</span>&nbsp;<span class="evince">evince</span></span></h3>
+<div class="outline-text-3" id="text-5_4">
+
+
+<p>
+В качестве дефолтной теховской команды используется специальный
+<a href="file:///home/igor/.scripts/synctex-emacs.sh">скрипт</a>, вызывающий synctex для синхронизации исходника *.tex и
+получающегося *.pdf. В результате работает обратный поиск по *.pdf в
+evince. 
+</p>
+
+
+
+<pre class="src src-emacs-lisp">(<span style="color: #a020f0;">eval-after-load</span> <span style="color: #8b2252;">"tex"</span>
+  '(add-to-list 'TeX-command-list 
+                '(<span style="color: #8b2252;">"Synctex"</span> <span style="color: #8b2252;">"/home/igor/.scripts/synctex-emacs.sh %t %b %n"</span> TeX-run-TeX nil t) t)) 
+</pre>
+
+
+
+<p>
+Обратный поиск работает так: по клику в evince на участке текста идёт
+сигнал в dbus (для этого нужен evince &gt;=2.32). В емаксе есть
+встроенная библиотека для взаимодействия с dbus. Для того, чтобы она
+работала в случае синхронизации pdf с tex, есть следующий код (взят из
+<a href="http://thread.gmane.org/gmane.emacs.auctex.general/4074/">этой</a> ветки): 
+</p>
+
+
+
+<pre class="src src-emacs-lisp">(<span style="color: #a020f0;">require</span> '<span style="color: #008b8b;">dbus</span>)
+
+(<span style="color: #a020f0;">defun</span> <span style="color: #0000ff;">th-evince-sync</span> (file linecol)
+  (<span style="color: #a020f0;">let</span> ((buf (get-buffer file))
+        (line (car linecol))
+        (col (cadr linecol)))
+    (<span style="color: #a020f0;">if</span> (null buf)
+        (message <span style="color: #8b2252;">"Sorry, %s is not opened..."</span> file)
+      (switch-to-buffer buf)
+      (goto-line (car linecol))
+      (<span style="color: #a020f0;">unless</span> (= col -1)
+        (move-to-column col)))))
+
+(dbus-register-signal
+ <span style="color: #7a378b;">:session</span> nil <span style="color: #8b2252;">"/org/gnome/evince/Window/0"</span> <span style="color: #8b2252;">"org.gnome.evince.Window"</span> <span style="color: #8b2252;">"SyncSource"</span> 'th-evince-sync)
+</pre>
+
+
+
+</div>
+</div>
+
+</div>
+
+<div id="outline-container-6" class="outline-2">
+<h2 id="sec-6"><span class="section-number-2">6</span> Org-mode. &nbsp;&nbsp;&nbsp;<span class="tag"><span class="org">org</span></span></h2>
+<div class="outline-text-2" id="text-6">
+
+
+
+</div>
+
+<div id="outline-container-6_1" class="outline-3">
+<h3 id="sec-6_1"><span class="section-number-3">6.1</span> Общие параметры. </h3>
+<div class="outline-text-3" id="text-6_1">
+
+
+
+
+
+<pre class="src src-emacs-lisp">(setq org-directory <span style="color: #8b2252;">"~/dc/org/"</span>)
+(setq org-return-follows-link t)
+(setq org-completion-use-ido t)
+(setq org-use-property-inheritance t)
+(setq org-agenda-include-diary nil)
+(add-hook 'org-agenda-mode-hook '(<span style="color: #a020f0;">lambda</span> () (hl-line-mode 1)))
+</pre>
+
+
+
+<p>
+Несколько хуков на org-mode.
+</p>
+
+
+
+<pre class="src src-emacs-lisp">(add-hook 'org-mode-hook 'turn-on-org-cdlatex)
+(add-hook 'org-mode-hook 'typopunct-mode)
+(add-hook 'org-mode-hook 'auto-fill-mode)
+(add-hook 'org-mode-hook 'org-indent-mode)
+</pre>
+
+
+
+</div>
+
+</div>
+
+<div id="outline-container-6_2" class="outline-3">
+<h3 id="sec-6_2"><span class="section-number-3">6.2</span> Дополнительные библиотеки. &nbsp;&nbsp;&nbsp;<span class="tag"><span class="babel">babel</span></span></h3>
+<div class="outline-text-3" id="text-6_2">
+
+
+<p>
+Поддержка исходного кода в sh.
+</p>
+
+
+
+<pre class="src src-emacs-lisp">(<span style="color: #a020f0;">require</span> '<span style="color: #008b8b;">org-babel-sh</span>)
+</pre>
+
+
+
+<p>
+Поддержка <code>org-protocol</code>. Нужно для взаимодействия с Хромом. 
+</p>
+
+
+
+<pre class="src src-emacs-lisp">(<span style="color: #a020f0;">require</span> '<span style="color: #008b8b;">org-protocol</span>)
+</pre>
+
+
+
+</div>
+
+</div>
+
+<div id="outline-container-6_3" class="outline-3">
+<h3 id="sec-6_3"><span class="section-number-3">6.3</span> Хоткеи. &nbsp;&nbsp;&nbsp;<span class="tag"><span class="hotkeys">hotkeys</span></span></h3>
+<div class="outline-text-3" id="text-6_3">
+
+
+
+
+
+<pre class="src src-emacs-lisp">(global-set-key <span style="color: #8b2252;">"\C-ca"</span> 'org-agenda)
+(define-key global-map <span style="color: #8b2252;">"\C-cc"</span> 'org-capture)
+</pre>
+
+
+
+</div>
+
+</div>
+
+<div id="outline-container-6_4" class="outline-3">
+<h3 id="sec-6_4"><span class="section-number-3">6.4</span> Функции. </h3>
+<div class="outline-text-3" id="text-6_4">
+
+
+</div>
+
+<div id="outline-container-6_4_1" class="outline-4">
+<h4 id="sec-6_4_1"><span class="section-number-4">6.4.1</span> Набор функций для org-capture. </h4>
+<div class="outline-text-4" id="text-6_4_1">
+
+
+<p>
+При внешнем вызове org-capture создаётся отдельное окно размером 80x20
+по центру экрана. При завершении capture окно закрывается.
+</p>
+<p>
+XBindkeys выполняет эту функцию по нажатию клавиши <code>ScrollLock</code>.
+</p>
+
+
+
+<pre class="src src-emacs-lisp">(<span style="color: #a020f0;">defadvice</span> <span style="color: #0000ff;">org-capture-finalize</span> (after delete-remember-frame activate)
+  <span style="color: #8b2252;">"Advise org-capture-finalize to close the frame if it is the remember frame"</span>
+  (<span style="color: #a020f0;">if</span> (equal <span style="color: #8b2252;">"_CAPTURE_"</span> (frame-parameter nil 'name))
+    (delete-frame))
+)
+(add-hook 'org-capture-mode-hook
+          'delete-other-windows)
+
+(<span style="color: #a020f0;">defun</span> <span style="color: #0000ff;">make-remember-frame</span> ()
+  <span style="color: #8b2252;">"Create a new frame and run org-capture"</span>
+  (interactive)  
+  (make-frame '((name . <span style="color: #8b2252;">"_CAPTURE_"</span>) (width . 80) (height . 20)))
+  (select-frame-by-name <span style="color: #8b2252;">"_CAPTURE_"</span>)
+  (modify-frame-parameters nil
+                           '(
+                             (vertical-scroll-bars . nil)
+                             (menu-bar-lines . nil)
+                             (tool-bar-lines . nil)))
+  (org-capture)
+  (<span style="color: #a020f0;">when</span> (fboundp 'x-focus-frame) (x-focus-frame nil)) <span style="color: #b22222;">;; </span><span style="color: #b22222;">X only....
+</span>)
+</pre>
+
+
+
+</div>
+
+</div>
+
+<div id="outline-container-6_4_2" class="outline-4">
+<h4 id="sec-6_4_2"><span class="section-number-4">6.4.2</span> Выведение плана недели в область извещений. </h4>
+<div class="outline-text-4" id="text-6_4_2">
+
+
+<p>
+Функция, срабатывающая при вызове агенды снаружи емакса. Файл агенды
+экспортируется во внешний <a href="file:///tmp/org-agenda.txt">файл</a>, который потом средствами Awesome
+показывается как нотификация.
+</p>
+
+
+
+<pre class="src src-emacs-lisp">(<span style="color: #a020f0;">defun</span> <span style="color: #0000ff;">th-org-update-agenda-file</span> (<span style="color: #228b22;">&amp;optional</span> force)
+  (interactive)
+  (<span style="color: #a020f0;">save-excursion</span>
+    (<span style="color: #a020f0;">save-window-excursion</span>
+      (<span style="color: #a020f0;">let</span> ((file <span style="color: #8b2252;">"/tmp/org-agenda.txt"</span>))
+        (org-agenda-list)
+        (org-write-agenda file)))))
+</pre>
+
+
+
+</div>
+
+</div>
+
+<div id="outline-container-6_4_3" class="outline-4">
+<h4 id="sec-6_4_3"><span class="section-number-4">6.4.3</span> <span class="todo TODO"> TODO</span> Публикация. </h4>
+<div class="outline-text-4" id="text-6_4_3">
+
+
+<p>
+Публикация файлов *.org в простой html, без заголовков и титулов. 
+</p>
+
+
+
+<pre class="src src-emacs-lisp">(<span style="color: #a020f0;">defun</span> <span style="color: #0000ff;">is/publish</span> (file <span style="color: #228b22;">&amp;optional</span> with-header-footer)
+  (interactive <span style="color: #8b2252;">"fFile:\nP"</span>)
+  (<span style="color: #a020f0;">save-excursion</span>
+    (<span style="color: #a020f0;">let</span> ((exist (get-file-buffer file)) (b (find-file-noselect file)))
+      (set-buffer b)
+      (org-export-as-html 0 t nil nil (not with-header-footer))
+      (<span style="color: #a020f0;">when</span> (not exist)
+        (kill-buffer-if-not-modified b)
+        )))
+  )
+</pre>
+
+
+
+</div>
+
+</div>
+
+<div id="outline-container-6_4_4" class="outline-4">
+<h4 id="sec-6_4_4"><span class="section-number-4">6.4.4</span> Всплывающие сообщения. </h4>
+<div class="outline-text-4" id="text-6_4_4">
+
+
+<p>
+Данная функция написана для вспылывающих сообщений, появляющихся при событиях
+календаря. Вызывается <a href="file:///home/igor/.scripts/popup.sh">скрипт</a>, показывающий в аскетичном виде входящую
+в него строчку. 
+</p>
+
+
+
+<pre class="src src-emacs-lisp">(<span style="color: #a020f0;">defun</span> <span style="color: #0000ff;">is/popup</span> (title msg <span style="color: #228b22;">&amp;optional</span> icon)
+  <span style="color: #8b2252;">"Show a popup if we're on X, or echo it otherwise; TITLE is the title
+of the message, MSG is the context. Optionally, you can provide an ICON and
+a sound to be played"</span>
+  (interactive)
+  (<span style="color: #a020f0;">if</span> (eq window-system 'x)
+      (shell-command (concat <span style="color: #8b2252;">"/home/igor/.scripts/popup.sh -t "</span> <span style="color: #8b2252;">"'"</span> title <span style="color: #8b2252;">"' -m "</span> <span style="color: #8b2252;">"'"</span> msg <span style="color: #8b2252;">"' -i "</span> (<span style="color: #a020f0;">if</span> icon (concat <span style="color: #8b2252;">" "</span> icon)) <span style="color: #8b2252;">" -p top_right"</span>))
+    <span style="color: #b22222;">;; </span><span style="color: #b22222;">text only version
+</span>    (message (concat title <span style="color: #8b2252;">": "</span> msg))
+    )
+  )
+</pre>
+
+
+
+</div>
+</div>
+
+</div>
+
+<div id="outline-container-6_5" class="outline-3">
+<h3 id="sec-6_5"><span class="section-number-3">6.5</span> Calendar. </h3>
+<div class="outline-text-3" id="text-6_5">
+
+
+<p>
+Сначала о встроенном емаксовском календаре. 
+</p>
+
+
+
+<pre class="src src-emacs-lisp">(setq 
+  diary-file  <span style="color: #8b2252;">"~/.emacs.d/diary"</span>    <span style="color: #b22222;">;        </span><span style="color: #b22222;">; keep my ~/ clean
+</span>  holidays-in-diary-buffer          nil            
+  mark-holidays-in-calendar         t
+  all-christian-calendar-holidays   nil      <span style="color: #b22222;">;; </span><span style="color: #b22222;">show christian 
+</span>  all-islamic-calendar-holidays     nil      <span style="color: #b22222;">;; </span><span style="color: #b22222;">don't show islamic
+</span>  all-hebrew-calendar-holidays      nil      <span style="color: #b22222;">;; </span><span style="color: #b22222;">don't show hebrew
+</span>  display-time-24hr-format          t        <span style="color: #b22222;">;; </span><span style="color: #b22222;">use 24h format
+</span>  display-time-day-and-date         nil      <span style="color: #b22222;">;; </span><span style="color: #b22222;">don't display time
+</span>  display-time-format               nil      <span style="color: #b22222;">;;</span><span style="color: #b22222;">
+</span>  display-time-use-mail-icon        nil      <span style="color: #b22222;">;; </span><span style="color: #b22222;">don't show mail icon
+</span>  calendar-latitude                 48.5     <span style="color: #b22222;">;; </span><span style="color: #b22222;">my...
+</span>  calendar-longitude                2.21     <span style="color: #b22222;">;; </span><span style="color: #b22222;">...position
+</span>  calendar-location-name <span style="color: #8b2252;">"Paris"</span>)
+</pre>
+
+
+
+</div>
+</div>
+
+</div>
+
+<div id="outline-container-7" class="outline-2">
+<h2 id="sec-7"><span class="section-number-2">7</span> Git. &nbsp;&nbsp;&nbsp;<span class="tag"><span class="git">git</span></span></h2>
+<div class="outline-text-2" id="text-7">
+
+
+<p>
+Для работы с <code>git</code> внутри емакса используется <code>magit</code>. 
+</p>
+
+
+
+<pre class="src src-emacs-lisp">(global-set-key <span style="color: #8b2252;">"\C-c\C-g"</span> 'magit-status)
+</pre>
+
+
+
+</div>
+
+</div>
+
+<div id="outline-container-8" class="outline-2">
+<h2 id="sec-8"><span class="section-number-2">8</span> <span class="todo TODO"> TODO</span> Wanderlust &nbsp;&nbsp;&nbsp;<span class="tag"><span class="wl">wl</span></span></h2>
+<div class="outline-text-2" id="text-8">
+
+
+<p>
+По нажатию <code>F11</code> (ловится с помощью <code>xbindkeys</code>) открывается новый
+фрейм заданного размера с почтой внутри. 
+</p>
+
+
+
+<pre class="src src-emacs-lisp">(<span style="color: #a020f0;">defun</span> <span style="color: #0000ff;">make-wl-frame</span> ()
+  <span style="color: #8b2252;">"Create a new frame and run wl"</span>
+  (interactive)  
+  (make-frame '((name . <span style="color: #8b2252;">"_WL_"</span>) (width . 100) (height . 40)))
+  (select-frame-by-name <span style="color: #8b2252;">"_WL_"</span>)
+  (modify-frame-parameters nil
+                           '(
+                             (vertical-scroll-bars . nil)
+                             (menu-bar-lines . nil)
+                             (tool-bar-lines . nil)))
+  (wl)
+  (<span style="color: #a020f0;">when</span> (fboundp 'x-focus-frame) (x-focus-frame nil)) <span style="color: #b22222;">;; </span><span style="color: #b22222;">X only....
+</span>)
+</pre>
+
+
+
+</div>
+
+</div>
+
+<div id="outline-container-9" class="outline-2">
+<h2 id="sec-9"><span class="section-number-2">9</span> Внешний вид редактора. &nbsp;&nbsp;&nbsp;<span class="tag"><span class="look">look</span></span></h2>
+<div class="outline-text-2" id="text-9">
+
+
+
+</div>
+
+<div id="outline-container-9_1" class="outline-3">
+<h3 id="sec-9_1"><span class="section-number-3">9.1</span> Тулбар и меню. </h3>
+<div class="outline-text-3" id="text-9_1">
+
+
+<p>
+По умолчанию спрятаны. 
+</p>
+
+
+
+<pre class="src src-emacs-lisp">(setq inhibit-startup-message t)
+(scroll-bar-mode -1)
+(tool-bar-mode -1)
+(menu-bar-mode -1)
+</pre>
+
+
+
+</div>
+
+</div>
+
+<div id="outline-container-9_2" class="outline-3">
+<h3 id="sec-9_2"><span class="section-number-3">9.2</span> Мода по умолчанию. </h3>
+<div class="outline-text-3" id="text-9_2">
+
+
+<p>
+Обычный текст.
+</p>
+
+
+
+<pre class="src src-emacs-lisp">(setq default-major-mode 'text-mode)
+</pre>
+
+
+
+</div>
+
+</div>
+
+<div id="outline-container-9_3" class="outline-3">
+<h3 id="sec-9_3"><span class="section-number-3">9.3</span> Cкроллинг. </h3>
+<div class="outline-text-3" id="text-9_3">
+
+
+
+
+
+<pre class="src src-emacs-lisp">(setq scroll-margin 1                  
+scroll-conservatively 100000           
+scroll-up-aggressively 0.01            
+scroll-down-aggressively 0.01)         
+</pre>
+
+
+
+</div>
+
+</div>
+
+<div id="outline-container-9_4" class="outline-3">
+<h3 id="sec-9_4"><span class="section-number-3">9.4</span> Настройка темы. </h3>
+<div class="outline-text-3" id="text-9_4">
+
+
+<p>
+Чёрные буквы на белом фоне. 
+</p>
+
+
+
+<pre class="src src-emacs-lisp">(show-paren-mode t)
+(setq show-paren-delay 0)
+(setq show-paren-style 'expression)
+(set-face-background 'show-paren-match-face <span style="color: #8b2252;">"honeydew2"</span>)
+(set-face-foreground 'show-paren-match-face <span style="color: #8b2252;">"black"</span>)
+(set-face-attribute 'show-paren-match-face nil <span style="color: #7a378b;">:weight</span> 'normal)
+</pre>
+
+
+
+</div>
+
+</div>
+
+<div id="outline-container-9_5" class="outline-3">
+<h3 id="sec-9_5"><span class="section-number-3">9.5</span> Modeline. </h3>
+<div class="outline-text-3" id="text-9_5">
+
+
+
+
+
+<pre class="src src-emacs-lisp">(setq default-mode-line-format
+'(<span style="color: #8b2252;">"-"</span>
+mode-line-mule-info
+mode-line-modified
+mode-line-frame-identification
+mode-line-buffer-identification
+<span style="color: #8b2252;">"  "</span>
+global-mode-string
+<span style="color: #8b2252;">"   %[("</span> mode-name mode-line-process minor-mode-alist <span style="color: #8b2252;">"%n"")%]--"</span>
+(line-number-mode <span style="color: #8b2252;">"L%l--"</span>)
+(column-number-mode <span style="color: #8b2252;">"C%c--"</span>)
+(-3 . <span style="color: #8b2252;">"%p"</span>)
+<span style="color: #8b2252;">"-%-"</span>)
+)
+</pre>
+
+
+
+</div>
+
+</div>
+
+<div id="outline-container-9_6" class="outline-3">
+<h3 id="sec-9_6"><span class="section-number-3">9.6</span> Не спамить минибуфер. </h3>
+<div class="outline-text-3" id="text-9_6">
+
+
+
+
+
+<pre class="src src-emacs-lisp">(setq icomplete-prospects-height 2)
+</pre>
+
+
+
+</div>
+</div>
+
+</div>
+
+<div id="outline-container-10" class="outline-2">
+<h2 id="sec-10"><span class="section-number-2">10</span> Работа с буферами и окнами. </h2>
+<div class="outline-text-2" id="text-10">
+
+
+
+</div>
+
+<div id="outline-container-10_1" class="outline-3">
+<h3 id="sec-10_1"><span class="section-number-3">10.1</span> Перемещение по окнам. </h3>
+<div class="outline-text-3" id="text-10_1">
+
+
+<p>
+Для переключения между окнами типа «влево–вправо–вверх–вниз»
+используется клавиша <code>Win</code>. Для переключения типа
+«следующее–предыдущее» используются клавиши, расположенные сверху от
+стрелок.
+</p>
+
+
+
+<pre class="src src-emacs-lisp">(windmove-default-keybindings 'super)
+(global-set-key (kbd <span style="color: #8b2252;">"M-o"</span>) 'other-window)
+(global-set-key (kbd <span style="color: #8b2252;">"M-1"</span>) 'delete-other-windows)
+(global-set-key (kbd <span style="color: #8b2252;">"M-2"</span>) 'split-window-vertically)
+(global-set-key (kbd <span style="color: #8b2252;">"M-3"</span>) 'split-window-horizontally)
+(global-set-key (kbd <span style="color: #8b2252;">"M-0"</span>) 'delete-window)
+(global-set-key (kbd <span style="color: #8b2252;">"&lt;XF86Back&gt;"</span>) (<span style="color: #a020f0;">lambda</span>() (interactive) (other-window -1)))
+(global-set-key (kbd <span style="color: #8b2252;">"&lt;XF86Forward&gt;"</span>) (<span style="color: #a020f0;">lambda</span>() (interactive)
+(other-window 1)))
+
+(fset 'yes-or-no-p 'y-or-n-p)
+</pre>
+
+
+
+</div>
+
+</div>
+
+<div id="outline-container-10_2" class="outline-3">
+<h3 id="sec-10_2"><span class="section-number-3">10.2</span> Переключение между буферами. </h3>
+<div class="outline-text-3" id="text-10_2">
+
+
+<p>
+Сделано с помощью <code>ibuffer</code>.
+</p>
+
+
+
+<pre class="src src-emacs-lisp">(global-set-key <span style="color: #8b2252;">"\C-x\C-b"</span> 'ibuffer)
+</pre>
+
+
+
+</div>
+
+</div>
+
+<div id="outline-container-10_3" class="outline-3">
+<h3 id="sec-10_3"><span class="section-number-3">10.3</span> Закрытие буфера: <code>F12</code>. </h3>
+<div class="outline-text-3" id="text-10_3">
+
+
+
+
+
+<pre class="src src-emacs-lisp">(global-set-key [f12] 'kill-this-buffer)
+</pre>
+
+
+
+</div>
+
+</div>
+
+<div id="outline-container-10_4" class="outline-3">
+<h3 id="sec-10_4"><span class="section-number-3">10.4</span> Ibiffer. </h3>
+<div class="outline-text-3" id="text-10_4">
+
+
+<p>
+Уникальные имена для каждого буфера. 
+</p>
+
+
+
+<pre class="src src-emacs-lisp">(<span style="color: #a020f0;">require</span> '<span style="color: #008b8b;">uniquify</span>)
+
+(setq 
+    uniquify-buffer-name-style 'post-forward
+    uniquify-separator <span style="color: #8b2252;">":"</span>
+    uniquify-after-kill-buffer-p t
+    uniquify-ignore-buffers-re <span style="color: #8b2252;">"^\\*"</span>)
+</pre>
+
+
+
+<p>
+Разбрасывание буферов по категориям, в зависимости от используемой в
+каждом из них моды. 
+</p>
+
+
+
+<pre class="src src-emacs-lisp">(setq ibuffer-saved-filter-groups
+  (quote ((<span style="color: #8b2252;">"default"</span>      
+            (<span style="color: #8b2252;">"org"</span> <span style="color: #b22222;">;; </span><span style="color: #b22222;">all org-related buffers
+</span>              (mode . org-mode))  
+            (<span style="color: #8b2252;">"mail"</span>
+              (or  <span style="color: #b22222;">;; </span><span style="color: #b22222;">mail-related buffers
+</span>               (mode . message-mode)
+               (mode . mail-mode)
+               (mode . post-mode)
+               <span style="color: #b22222;">;; </span><span style="color: #b22222;">etc.; all your mail related modes
+</span>               ))
+            (<span style="color: #8b2252;">"emacs configs"</span>
+              (filename . <span style="color: #8b2252;">"~/.emacs.d/"</span>))
+            (<span style="color: #8b2252;">"jabber"</span>
+             (name . <span style="color: #8b2252;">"jabber"</span>))
+            (<span style="color: #8b2252;">"science"</span>
+             (filename . <span style="color: #8b2252;">"~/dc/notes/"</span>))
+            (<span style="color: #8b2252;">"programming"</span> <span style="color: #b22222;">;;</span><span style="color: #b22222;">
+</span>              (or
+                (mode . c-mode)
+                (mode . perl-mode)
+                (mode . python-mode)
+                (mode . sh-mode)
+                )) 
+            ))))
+
+(add-hook 'ibuffer-mode-hook
+  (<span style="color: #a020f0;">lambda</span> ()
+    (ibuffer-switch-to-saved-filter-groups <span style="color: #8b2252;">"default"</span>)))
+
+(set-default 'imenu-auto-rescan t)
+</pre>
+
+
+
+</div>
+</div>
+
+</div>
+
+<div id="outline-container-11" class="outline-2">
+<h2 id="sec-11"><span class="section-number-2">11</span> Хоткеи из общей моды. &nbsp;&nbsp;&nbsp;<span class="tag"><span class="hotkeys">hotkeys</span></span></h2>
+<div class="outline-text-2" id="text-11">
+
+
+
+</div>
+
+<div id="outline-container-11_1" class="outline-3">
+<h3 id="sec-11_1"><span class="section-number-3">11.1</span> Закладки. </h3>
+<div class="outline-text-3" id="text-11_1">
+
+
+<p>
+Установка закладок и переход к ним.
+</p>
+
+
+
+<pre class="src src-emacs-lisp">(setq bookmark-default-file <span style="color: #8b2252;">"~/.emacs.d/emacs-bookmarks"</span>)
+
+(global-set-key [f5] 'bookmark-set)
+(global-set-key [f6] 'bookmark-jump)
+</pre>
+
+
+</div>
+
+</div>
+
+<div id="outline-container-11_2" class="outline-3">
+<h3 id="sec-11_2"><span class="section-number-3">11.2</span> Выход и закрытие емакса. </h3>
+<div class="outline-text-3" id="text-11_2">
+
+
+<p>
+По нажатию <code>F4</code> вызываеся <code>save-buffers-kill-emacs</code>, без
+дополнительных вопросов. 
+</p>
+
+
+
+<pre class="src src-emacs=lisp">(global-set-key [f4]  'save-buffers-kill-emacs)
+
+(defadvice save-buffers-kill-emacs (around no-query-kill-emacs activate)
+  <span style="color: #8b2252;">"Prevent annoying \"Active processes exist\" query when you quit Emacs."</span>
+  (flet ((process-list ())) ad-do-it))
+</pre>
+
+
+
+</div>
+
+</div>
+
+<div id="outline-container-11_3" class="outline-3">
+<h3 id="sec-11_3"><span class="section-number-3">11.3</span> Saveplace. </h3>
+<div class="outline-text-3" id="text-11_3">
+
+
+<p>
+Пакет для сохранения места работы в файле. 
+</p>
+
+
+
+<pre class="src src-emacs-lisp">(<span style="color: #a020f0;">require</span> '<span style="color: #008b8b;">saveplace</span>)
+
+(setq-default save-place t)
+(setq save-place-file <span style="color: #8b2252;">"~/.emacs.d/places/"</span>)
+</pre>
+
+
+</div>
+</div>
+
+</div>
+
+<div id="outline-container-12" class="outline-2">
+<h2 id="sec-12"><span class="section-number-2">12</span> Емакс и Хром. &nbsp;&nbsp;&nbsp;<span class="tag"><span class="chrome">chrome</span></span></h2>
+<div class="outline-text-2" id="text-12">
+
+
+<p>
+Для написания текстов в текстовые формы в Хроме вызывается емакс (по
+нажатию A-RET). Для этого используется расширение <a href="https://chrome.google.com/extensions/detail/ljobjlafonikaiipfkggjbhkghgicgoh">Edit with Emacs</a>. Поскольку Хром не может запускать приложения из себя, емакс
+работает в режиме сервера и следит за обращениями на порт 9292. 
+</p>
+<p>
+Для этого в папке <code>~/.emacs.d/plugins</code> сделана ссылка на
+<code>edit-server.el</code>, который идёт в комплекте с расширением. Эта
+библиотека подгружается при запуске и запускается сервер. 
+</p>
+
+
+
+<pre class="src src-emacs-lisp">(<span style="color: #a020f0;">require</span> '<span style="color: #008b8b;">edit-server</span>)
+(edit-server-start)
+</pre>
+
+
+
+<p>
+Несколько хуков для облегчения жизни: типографика, автозаполнение и
+<code>html-mode</code> для быстрой вставки ссылок и картинок. 
+</p>
+
+
+
+<pre class="src src-emacs-lisp">(add-hook 'edit-server-start-hook 'typopunct-mode)
+(add-hook 'edit-server-start-hook 'auto-fill-mode)
+(add-hook 'edit-server-start-hook 'html-mode)
+
+(global-set-key (kbd <span style="color: #8b2252;">"C-c h"</span>) 'html-href-anchor)
+(global-set-key (kbd <span style="color: #8b2252;">"C-c i"</span>) 'html-image)
+</pre>
+
+
+</div>
+
+</div>
+
+<div id="outline-container-13" class="outline-2">
+<h2 id="sec-13"><span class="section-number-2">13</span> Mail-mode и post-mode. </h2>
+<div class="outline-text-2" id="text-13">
+
+
+
+</div>
+
+<div id="outline-container-13_1" class="outline-3">
+<h3 id="sec-13_1"><span class="section-number-3">13.1</span> Mail-mode. </h3>
+<div class="outline-text-3" id="text-13_1">
+
+
+<p>
+Несколько хуков на моду для написания писем.
+</p>
+<p>
+Включается <code>orgstruct++-mode</code> — облегчённая версия <code>org-mode</code>. Также
+устанавливается фиксированная ширина абзаца — 72 символа. 
+</p>
+
+
+
+<pre class="src src-emacs-lisp">(setq mail-mode-hook
+      (quote (orgstruct++-mode
+              (<span style="color: #a020f0;">lambda</span> nil (setq fill-column 72))
+              turn-on-auto-fill)))
+</pre>
+
+
+
+</div>
+</div>
+
+</div>
+
+<div id="outline-container-14" class="outline-2">
+<h2 id="sec-14"><span class="section-number-2">14</span> Web. </h2>
+<div class="outline-text-2" id="text-14">
+
+
+
+
+
+<pre class="src src-emacs-lisp">(setq browse-url-browser-function (quote browse-url-generic))
+(setq browse-url-generic-program <span style="color: #8b2252;">"google-chrome"</span>)
+</pre>
+
+
+
+
+</div>
+</div>
+<div id="postamble">
+<p class="author">Author: Igor Shenderovich</p>
+<p class="mailto:shender.i AT gmail.com">&lt;shender.i AT gmail.com&gt;</p>
+<p class="creator">Org version 7.5 with Emacs version 24</p>
+<a href="http://validator.w3.org/check?uri=referer">Validate XHTML 1.0</a>
+</div>
+</div>
+</body>
+</html>
