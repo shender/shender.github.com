@@ -4,7 +4,7 @@
     color: #000000;
     background-color: #ffffff;
     font:1em serif;
-    max-width: 65%;
+    max-width: 70%;
     margin: auto;
     }
     body #content {
@@ -15,7 +15,7 @@
     body a {
       color: #0000ff; }
     body #content {
-      padding-top: 100px; }
+      padding-top: 0px; }
 
 a:link {
     font-weight: bold;
