@@ -29,7 +29,7 @@
       color: #0000ff; }
     body #content {
       padding-top: 0px; }
-
+#postamble { color: #777777 }
 a:link {
     font-weight: bold;
     text-decoration: none;
@@ -46,5 +46,6 @@ a:hover, a:active {
     text-decoration: none;
     color: #537d7b;
 }
+
 
 }
