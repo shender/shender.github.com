@@ -30,6 +30,11 @@
     body #content {
       padding-top: 0px; }
 #postamble { color: #777777 }
+div#postamble * a {     
+    font-weight: bold;     
+    text-decoration: none; 
+    color: #777777
+} 
 a:link {
     font-weight: bold;
     text-decoration: none;

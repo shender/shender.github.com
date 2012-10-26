@@ -27,6 +27,12 @@
     body #content {
       padding-top: 10px; }
 #postamble { color: #777777 }
+div#postamble * a {     
+    font-weight: bold;     
+    text-decoration: none; 
+    color: #777777
+} 
+
 :link {
     font-weight: bold;
     text-decoration: none;
