@@ -1,0 +1,726 @@
+
+
+\documentclass[a4paper,12pt]{article}
+% math symbols
+\usepackage{amssymb,amsmath}
+\synctex=1
+% for different compilers
+\usepackage{ifpdf}
+% geometry of page
+\usepackage[margin=2.1cm]{geometry}
+
+% if pdflatex, then
+\ifpdf
+\usepackage[russian]{babel}
+\usepackage[utf8]{inputenc}
+\usepackage[unicode]{hyperref}
+\usepackage[pdftex]{graphicx}
+\usepackage{cmlgc}
+% if xelatex, then
+\else
+% math fonts
+\usepackage{fouriernc}
+% xelatex specific packages
+\usepackage[xetex]{hyperref}
+\usepackage{xltxtra}	% \XeLaTeX macro
+\usepackage{xunicode}	% some extra unicode support
+\defaultfontfeatures{Mapping=tex-text}
+\usepackage{polyglossia}	% instead of babel in xelatex
+\usepackage{indentfirst}	% 
+\setdefaultlanguage{russian}
+% fonts
+\newfontfamily\cyrillicfont{SchoolBookC}
+\newfontfamily\cyrillicfontsf{TextBookC}
+\setmonofont{Consolas}
+\fi
+
+% several pictures in one figure
+\usepackage{subfig}
+% calc in TeX expressions
+\usepackage{calc}
+% nice pictures and plots
+\usepackage{pgfplots,tikz,circuitikz}
+% different libraries for pictures
+\usetikzlibrary{%
+  arrows,%
+  calc,%
+  patterns,%
+  decorations.pathreplacing,%
+  decorations.pathmorphing,%
+  decorations.markings,%
+  decorations.text%
+}
+
+\usepackage{tkz-euclide}
+
+\graphicspath{{./pics/}}
+
+% colors of the hyperlinks
+\hypersetup{colorlinks,%
+  citecolor=blue,%
+  urlcolor=blue,%
+  linkcolor=red
+}
+
+\newcommand{\foot}[1]{\mbox{\footnotesize{#1}}}
+
+% счётчик задач
+\newcounter{notask}
+\setcounter{notask}{1}
+
+% условие без картинки
+\newcommand{\task}[1]{
+  \hrule
+  \hbox to \textwidth {%
+    \vrule
+    \parbox[t]{0.04\textwidth}{\smallskip \centering \arabic{notask}}%
+    \vrule%
+    \hfill%
+    \parbox[t]{0.93\textwidth}{\smallskip #1 \smallskip}\hfill%
+    \vrule
+  }
+  \hrule
+  \addtocounter{notask}{1}
+  \pagebreak[2]
+}
+
+\newlength{\h}
+\newsavebox{\taskbox}
+\newlength{\x}
+\newsavebox{\pictbox}
+
+% условие с картинкой (картинка выравнивается по центру)
+\newcommand{\taskpic}[2]{
+  \savebox{\taskbox}{\parbox[t]{0.93\textwidth-4.3cm}{\smallskip #1 \smallskip}}
+  \savebox{\pictbox}{\parbox[t]{4cm}{\smallskip \centering
+      \vspace{0pt} #2 \smallskip}}
+  \h=\ht\taskbox
+  \advance\h\dp\taskbox
+  \x=\ht\pictbox
+  \advance\x\dp\pictbox
+  \hrule
+  \hbox to \textwidth {%
+    \vrule\parbox[t][\maxof{\h}{\x}][t]{0.04\textwidth}{ \smallskip
+      \centering \arabic{notask} }\vrule%
+    \hfill\parbox[t][\maxof{\h}{\x}][t]{0.93\textwidth-4.3cm}{\smallskip #1
+      \smallskip}\hfill\vrule%
+    \hfill\parbox[t][\maxof{\h}{\x}][c]{4cm}{\hfil #2 \hfil}\hfill\vrule
+  }
+  \hrule
+  \addtocounter{notask}{1}
+  \pagebreak[2]
+}
+
+% протокол физбоя
+% ширина протокола, задаётся вручную, по умолчанию равен ширине текста
+% на странице
+\newlength{\pwidth}
+\pwidth=\textwidth
+% высота ячейки
+\newlength{\pheightcell}
+\pheightcell=1.75cm
+% баллы жюри
+\newcounter{jury}
+\setcounter{jury}{12}
+% номер вызова
+\newcounter{nocall}
+\setcounter{nocall}{1}
+% заголовок протокола: названия команд
+\newcommand{\pdtitle}[2]{
+  \draw[thick] (0,0) rectangle (0.1*\pwidth,-\pheightcell) node[midway] {\textbf{№}};
+  \draw[thick] (0.1*\pwidth,0) rectangle (0.46*\pwidth,-\pheightcell)
+  node[midway] {\textbf{#1}};
+  \draw[thick] (0.46*\pwidth,0) rectangle (0.82*\pwidth,-\pheightcell)
+  node[midway] {\textbf{#2}}; 
+  \draw[thick] (0.82*\pwidth,0) rectangle (\pwidth,-\pheightcell)
+  node[midway] {\textbf{Ж}};
+}
+
+% вызов на задачу: порядок вызова, номер задачи, баллы
+% отвечающего и оппонента, инициалы участников
+% условные обозначения для порядка вызова:
+% -> --- команда 1 вызывает команду 2
+% <- --- команда 2 вызывает команду 1
+% ->| --- команда 1 вызывала команду 2, но получила проверку корректности
+% |<- --- команда 2 вызывала команду 1, но получила проверку корректности
+\newcommand{\pdcall}[6]{
+  % определяем местонахождение очередной ячейки
+  \def\pos{\arabic{nocall}*\pheightcell};
+  \def\mid{-\pos-0.5*\pheightcell};
+  % места, где будут стоять баллы
+  \coordinate (bone) at (0.28*\pwidth,\mid);
+  \coordinate (btwo) at (0.64*\pwidth,\mid);
+  % рамка вокруг ячейки
+  \draw[thick] (0,-\pos) rectangle (\pwidth,-\pos-\pheightcell);
+  % номер задачи и рамка
+  \draw[thick] (0,-\pos) rectangle (0.1*\pwidth,-\pos-\pheightcell)
+  node[midway] {#2};
+  % баллы слева направо
+  \node (a) at (bone) {\Large{#3}};
+  \node (b) at (btwo) {\Large{#4}};
+  % инициалы отвечающего и оппонента
+  \node at ([shift={(1.1cm,0.4cm)}]a) {#5};
+  \node at ([shift={(-1.1cm,0.4cm)}]b) {#6};
+  % switch
+  \def\calllr{->}
+  \def\callrl{<-}
+  \def\calllor{->|}
+  \def\callrol{|<-}
+  \begingroup
+  \def\tmp{#1}%
+  \ifx\tmp\calllr
+  \draw[very thick,*->] (a.east) -- (b.west);
+  \else\ifx\tmp\callrl
+  \draw[very thick,<-*] (a.east) -- (b.west);
+  \else\ifx\tmp\calllor
+  \draw[very thick,*->,rounded corners=0.2cm] (a.east) -- (b.west)
+  -- ++(0,-0.4cm) -- ($(a.east)+(0,-0.4cm)$);
+  \else\ifx\tmp\callrol
+  \draw[very thick,*->,rounded corners=0.2cm] (b.west) -- (a.east)
+  -- ++(0,-0.4cm) -- ($(b.west)+(0,-0.4cm)$);
+  \fi\fi\fi\fi
+  \endgroup
+  % баллы жюри и рамка
+  \addtocounter{jury}{-#3}
+  \addtocounter{jury}{-#4}
+  \draw[thick] (0.82*\pwidth,-\pos) rectangle (\pwidth,-\pos-\pheightcell)
+  node[midway] {\Large{\arabic{jury}}};
+  % переход на следующий круг
+  \setcounter{jury}{12}
+  \addtocounter{nocall}{1}
+}
+
+% подведение итогов
+% \psum{баллы команды 1}{баллы команды 2}{баллы жюри}
+\newcommand{\pdsum}[3]{ 
+  \def\pos{\arabic{nocall}*\pheightcell-1cm};
+  % рамка вокруг ячейки
+  \draw[thick] (0,-\pos) rectangle (\pwidth,-\pos-\pheightcell);
+  % "Итог" и рамка
+  \draw[thick] (0,-\pos) rectangle (0.1*\pwidth,-\pos-\pheightcell)
+  node[midway] {Итог:};
+  \draw[thick] (0.1*\pwidth,-\pos) rectangle
+  (0.46*\pwidth,-\pos-\pheightcell) node[midway] {\LARGE{#1}};
+  
+  \draw[thick] (0.46*\pwidth,-\pos) rectangle (0.82*\pwidth,-\pos-\pheightcell)
+  node[midway] {\LARGE{#2}}; 
+  
+  \draw[thick] (0.82*\pwidth,-\pos) rectangle (\pwidth,-\pos-\pheightcell)
+  node[midway] {\LARGE{#3}}; 
+  \setcounter{nocall}{1}
+}
+
+
+% тройной физбой
+% заголовок
+\newcommand{\pttitle}[3]{
+  \draw[thick] (0,0) rectangle (0.1*\pwidth,-\pheightcell) node[midway] {\textbf{№}};
+  \draw[thick] (0.1*\pwidth,0) rectangle
+  ++(0.26*\pwidth,-\pheightcell) node[midway] {\textbf{#1}};
+  \draw[thick] (0.36*\pwidth,0) rectangle ++(0.26*\pwidth,-\pheightcell)
+  node[midway] {\textbf{#2}}; 
+  \draw[thick] (0.62*\pwidth,0) rectangle ++(0.26*\pwidth,-\pheightcell)
+  node[midway] {\textbf{#2}}; 
+  \draw[thick] (0.88*\pwidth,0) rectangle (\pwidth,-\pheightcell)
+  node[midway] {\textbf{Ж}};
+}
+
+% вызов 
+% первый аргумент показывает, есть ли проверка корректности
+% если вызов обычный - аргумент пустой
+% если проверка - можно написать всё, что угодно (например,
+% какую-нибудь букву)
+% \ptcall{#1}{номер
+% задачи}{баллы1}{баллы2}{баллы3}{ф.и.1}{ф.и.2}{ф.и.3}
+\newcommand{\ptcall}[8]{
+  \edef\cl{\arabic{nocall}};
+  % определяем местонахождение очередной ячейки
+  \def\pos{\arabic{nocall}*\pheightcell};
+  \def\mid{-\pos-0.5*\pheightcell};
+  % места, где будут стоять баллы
+  \coordinate (bone) at (0.23*\pwidth,\mid);
+  \coordinate (btwo) at (0.49*\pwidth,\mid);
+  \coordinate (bthree) at (0.75*\pwidth,\mid);
+  % рамка вокруг ячейки
+  \draw[thick] (0,-\pos) rectangle (\pwidth,-\pos-\pheightcell);
+  % номер задачи и рамка
+  \draw[thick] (0,-\pos) rectangle (0.1*\pwidth,-\pos-\pheightcell)
+  node[midway] {#2};
+  % баллы слева направо
+  \node (a) at (bone) {\Large{#3}};
+  \node (b) at (btwo) {\Large{#4}};
+  \node (c) at (bthree) {\Large{#5}};
+  % инициалы слева направо
+  \node at ([shift={(0,0.6cm)}]a) {#6};
+  \node at ([shift={(0,0.6cm)}]b) {#7};
+  \node at ([shift={(0,0.6cm)}]c) {#8};
+  % поскольку порядок вызовов определяется автоматически,
+  % здесь сразу рисуется стрелка вызова в зависимости от номера хода
+  % кроме того, проверяем, есть ли проверка корректности
+  % 1-й ход
+  \ifnumequal{\cl}{1}{
+    \ifblank{#1}
+    {
+      \draw[very thick,*->] (a.east) -- (b.west);
+    }
+    {
+      \draw[very thick,*->,rounded corners=0.2cm]
+      (a.east) -- (b.west) -- ++(0,-0.4) -- ($(a.east)+(0,-0.4cm)$);
+    }
+  }{}
+  % 2-й ход
+  \ifnumequal{\cl}{2}{
+    \ifblank{#1}
+    {
+      \draw[very thick,*->] (b.east) -- (c.west);
+    }
+    {
+      \draw[very thick,*->,rounded corners=0.2cm] (b.east) -- (c.west)
+      -- ++(0,-0.4cm) -- ($(b.east)+(0,-0.4cm)$);
+    }
+  }{}
+  % 3-й ход
+  \ifnumequal{\cl}{3}{
+    \draw[very thick,*-] (c.east) -- (0.88*\pwidth,\mid);
+    \ifblank{#1}
+    {
+      \draw[very thick,->] (0.1*\pwidth,\mid) -- (a.west);
+    }
+    {
+      \draw[very thick,rounded corners=0.2cm] (0.1*\pwidth,\mid) --
+      (a.west) -- ++(0,-0.4cm) -- (0.1*\pwidth,\mid-0.4cm);
+      \draw[very thick,->] (0.88*\pwidth,\mid-0.4cm) -- ($(c.east) +
+      (0,-0.4cm)$);
+    }
+  }{}
+  % 4-й ход
+  \ifnumequal{\cl}{4}{
+    \draw[very thick,-*] (0.1*\pwidth,\mid) -- (a.west);
+    \ifblank{#1}
+    {
+      \draw[very thick,->] (0.88*\pwidth,\mid) -- (c.east);
+    }
+    {
+      \draw[very thick,rounded corners=0.2cm] (0.88*\pwidth,\mid) --
+      (c.east) -- ++(0,-0.4cm) -- (0.88*\pwidth,\mid-0.4cm);
+      \draw[very thick,->] (0.1*\pwidth,\mid-0.4cm) --
+      ($(a.west)+(0,-0.4cm)$); 
+    }
+  }{}
+  % 5-й ход
+  \ifnumequal{\cl}{5}{
+    \ifblank{#1}
+    {
+      \draw[very thick,*->] (c.west) -- (b.east);
+    }
+    {
+      \draw[very thick,rounded corners=0.2cm,*->] (c.west) -- (b.east)
+      -- ++(0,-0.4cm) -- ($(c.west)+(0,-0.4cm)$);
+    }
+  }{}
+  % 6-й ход
+  \ifnumequal{\cl}{6}{
+    \ifblank{#1}
+    {
+      \draw[very thick,*->] (b.west) -- (a.east);
+    }
+    {
+      \draw[very thick,rounded corners=0.2cm,*->] (b.west) -- (a.east)
+      -- ++(0,-0.4cm) -- ($(b.west)+(0,-0.4cm)$) ;
+    }
+  }{}
+  % баллы жюри и рамка
+  \addtocounter{jury}{-#3} 
+  \addtocounter{jury}{-#4} 
+  \addtocounter{jury}{-#5} 
+  \draw[thick] (0.88*\pwidth,-\pos) rectangle
+  (\pwidth,-\pos-\pheightcell) node[midway] {\Large{\arabic{jury}}};
+  % переход на следующий круг
+  \setcounter{jury}{12}
+  \addtocounter{nocall}{1}
+}
+
+% подведение итогов
+\newcommand{\ptsum}[4]{ 
+  \def\pos{\arabic{nocall}*\pheightcell-1cm};
+  % рамка вокруг ячейки
+  \draw[thick] (0,-\pos) rectangle (\pwidth,-\pos-\pheightcell);
+  % "Итог" и рамка
+  \draw[thick] (0,-\pos) rectangle (0.1*\pwidth,-\pos-\pheightcell)
+  node[midway] {Итог:};
+  % баллы
+  \draw[thick] (0.1*\pwidth,-\pos) rectangle
+  (0.36*\pwidth,-\pos-\pheightcell) node[midway] {\LARGE{#1}};
+  
+  \draw[thick] (0.36*\pwidth,-\pos) rectangle (0.62*\pwidth,-\pos-\pheightcell)
+  node[midway] {\LARGE{#2}}; 
+  
+  \draw[thick] (0.62*\pwidth,-\pos) rectangle (0.88*\pwidth,-\pos-\pheightcell)
+  node[midway] {\LARGE{#3}}; 
+  
+  \draw[thick] (0.88*\pwidth,-\pos) rectangle (\pwidth,-\pos-\pheightcell)
+  node[midway] {\LARGE{#4}}; 
+  \setcounter{nocall}{1}
+}
+
+
+\tikzset{>=latex,%
+  interface/.style={postaction={draw,decorate,decoration={border,angle=45,amplitude=0.2cm,segment
+        length=1.4323mm}}},%
+  spring/.style={decorate,decoration={snake,amplitude=1mm, segment
+      length=2mm},thick},%
+  marrow/.style={postaction={draw,decorate,decoration={markings,
+        mark=at position 0.6 with {\arrow{latex}}}}}}
+
+\pgfplotsset{compat=newest}
+\pagestyle{empty}
+
+\begin{document}
+%\parindent=0mm
+
+\begin{center}
+  \LARGE{Работа, псевдоработа и теплота}\\[0.2cm]
+  \large{Игорь Шендерович}\\[0.2cm]
+  \normalsize{\texttt{shender.i@gmail.com}}
+\end{center}
+
+\begin{abstract}
+  В данной заметке рассматривается взаимосвязь между совершённой
+  работой и теплотой. Показано, что обычное интегрирование второго
+  закона Ньютона не даёт описания тепловой стороны механических
+  явлений; для их описания применяется первый закон термодинамики. С
+  его помощью удаётся установить, что работа силы трения в некоторых
+  случаях оказывается отличной от произведения силы трения на
+  перемещение предмета. 
+\end{abstract}
+
+\section{Теорема о движении центра масс и псевдоработа.}
+\label{sec:center_of_mass_energy_work}
+
+Как известно, движение центра масс системы описывается уравнением
+
+\begin{equation}
+  \label{eq:c_o_m_newton}
+  M \vec{a}_{\foot{ц.м.}} = \sum \vec{F}^{\foot{ext}},
+\end{equation}
+где $M$ --- общая масса системы, $\vec{a}_{\foot{ц.м.}}$ --- ускорение
+центра масс, $\sum \vec{F}^{\foot{ext}}$ --- сумма всех
+\textit{внешних} сил, действующих на систему. 
+
+Из этого равенства можно получить что-то похожее на закон сохранения
+энергии. Действительно, домножим правую и левую части на
+$d\vec{r}_{\foot{ц.м.}}$ --- радиус--вектор перемещения центра масс. 
+
+\begin{equation}
+  \label{eq:c_o_m_to_pseudowork_I}
+  M \frac{d \vec{v}_{\foot{ц.м.}}}{dt} d\vec{r}_{\foot{ц.м.}} = \sum
+  \vec{F}^{\foot{ext}} d\vec{r}_{\foot{ц.м.}} \quad
+  \Longleftrightarrow \quad M
+  \vec{v}_{\foot{ц.м.}} d\vec{v}_{\foot{ц.м.}} = \sum
+  \vec{F}^{\foot{ext}} d\vec{r}_{\foot{ц.м.}} 
+\end{equation}
+Проинтегрируем последнее равенство. Слева стоит дифференциал от
+$\vec{v}^2_{\foot{ц.м.}}/2$, поэтому при интегрировании получим
+\begin{equation}
+  \label{eq:c_o_m_to_pseudowork_II}
+  \frac{M \Delta v^2_{\foot{ц.м.}}}{2} = \int \sum \vec{F}^{\foot{ext}} d\vec{r}_{\foot{ц.м.}} 
+\end{equation}
+
+Выглядит действительно как закон сохранения энергии --- слева
+изменение кинетической энергии, справа --- величина, напоминающая
+суммарную работу внешних сил. Однако, это не совсем работа --- как
+можно заметить, здесь сила умножается не на перемещение точки
+приложения силы (как должно быть), а на перемещение центра масс. 
+
+Легко видеть, что это разные величины. Рассмотрим, например, процесс
+сжатия шарика, наполненного газом, с помощью внешних сил. Если мы
+сжимаем шарик равномерно со всех сторон, то его центр масс
+перемещаться не будет (и сумма внешних сил будет равна нулю). При
+этом, как мы знаем из термодинамики, совершённая работа будет даваться
+выражением $A = \int  p dV$, в то время как в правой части формулы
+\eqref{eq:c_o_m_to_pseudowork_II} получается ноль. Будем поэтому
+называть объект в правой части уравнения
+\eqref{eq:c_o_m_to_pseudowork_II} \textit{псевдоработой}. 
+
+Рассмотрим несколько простых примеров.
+
+\begin{figure}[h]
+  \centering
+  \begin{tikzpicture}
+    \draw[interface] (5.2,0) -- (0.2,0);
+    \draw[fill=gray!40,very thick] (2,0) rectangle (4,1);
+    \draw[very thick,blue,->] (4.5,0.5) -- (5,0.5) node[above] {$v_0$};
+    \draw[very thick,blue,->] (2,0) -- (1,0) node[above]
+    {$F_{\foot{тр}}$};
+  \end{tikzpicture}
+  \caption{Останавливающийся брусок. }
+  \label{fig:block_friction_I}
+\end{figure}
+
+Брусок массой $m$ со начальной скоростью $v_0$ въезжает на шероховатый стол,
+коэффициент трения между ним и столом равен $\mu$
+(рис. \ref{fig:block_friction_I}). Какой путь $S$ пройдёт
+брусок перед тем, как остановиться?
+
+Здесь всё очевидно. Изменение кинетической энергии равно $mv_0^2/2$,
+по формуле \eqref{eq:c_o_m_to_pseudowork_II} оно равно произведению
+внешней силы (которая в данном случае одна: сила трения) на
+перемещение центра масс, то есть, на интересующее нас перемещение
+$S$. Получаем
+\begin{equation}
+  \label{eq:problem_1_easy}
+  \frac{mv_0^2}{2} = \mu m g S \quad \Longrightarrow \quad S = \frac{v_0^2}{2\mu g}. 
+\end{equation}
+
+Конечно, этот же ответ можно получить другим способом: поняв, что
+ускорение центра масс бруска постоянно и равно $a_{\foot{ц.м.}} = -\mu
+g$, написать уравнение для скорости $v_{\foot{ц.м.}} = v_0 - \mu g
+t$. Отсюда получается, что время до остановки равно $T = v_0/\mu g$,
+ну а пройденное расстояние, в самом деле, даётся формулой $S = v_0^2/2
+\mu g$. 
+
+Второй пример тоже не отличается сложностью. Представим себе такой же
+брусок, но теперь его тянут по столу с постоянной силой $F$, причём
+тянут так, что он двигается с постоянной скоростью
+(рис. \ref{fig:block_friction_II}). Что в этом случае
+даст нам уравнение \eqref{eq:c_o_m_to_pseudowork_II}?
+
+\begin{figure}[h]
+  \centering
+  \begin{tikzpicture}
+    \draw[interface] (5.2,0) -- (0.2,0);
+    \draw[fill=gray!40,very thick] (2,0) rectangle (4,1);
+    \draw[very thick,blue,->] (4,0.5) -- (5,0.5) node[above] {$F$};
+    \draw[very thick,blue,->] (2,0) -- (1,0) node[above]
+    {$F_{\foot{тр}}$};
+  \end{tikzpicture}
+  \caption{Брусок, двигающийся с постоянной скоростью. }
+  \label{fig:block_friction_II}
+\end{figure}
+
+Изменение кинетической энергии, очевидно, будет равно нулю: скорость
+бруска не меняется. Внешних сил тут уже две: сила $F$, с которой тянут
+брусок, и равная ей по модулю (и противоположная по направлению) сила
+$F_{\foot{тр}}$. Соответственно, суммарная \textit{псевдоработа} этих сил равна
+нулю. Уравнение \eqref{eq:c_o_m_to_pseudowork_II} даёт нам $0=0$.
+
+Всё это вроде бы неплохо, уравнения не противоречат друг другу, но
+есть одна тонкость: все мы знаем, что при движении по шероховатой
+поверхности брусок и стол должны нагреться. Где же в наших уравнениях
+эта выделяющаяся теплота? Она не появляется именно потому, что это не
+совсем закон сохранения энергии, а проинтегрированный второй закон
+Ньютона с псевдоработой в правой части. 
+
+Из-за псевдоработы в правой части уравнение
+\eqref{eq:c_o_m_to_pseudowork_II} иногда ошибочно атрибутируется как
+закон сохранения энергии. Это приводит к непониманию сути некоторых
+физических явлений. В следующих разделах мы постараемся разобраться с
+этим. 
+
+
+\section{Первый закон термодинамики.}
+\label{sec:flt}
+
+Разумеется, справедливость уравнения \eqref{eq:c_o_m_to_pseudowork_II}
+не подвергается сомнению: оно было получено корректными
+математическими процедурами из верного утверждения (второго закона
+Ньютона). Речь идёт о том, что в это уравнение не входят
+термодинамические величины, в частности, поток тепла, входящий или
+выходящий из системы.
+
+Здесь становится критически важным понятие системы, которую мы
+рассматриваем. Проиллюстрируем это на примере из предыдущего раздела.
+
+Рассмотрим опять брусок, который тянут с постоянной силой $F$ по
+шероховатому столу с коэффициентом трения $\mu$. Скорость бруска
+постоянна. Допустим, мы протащили наш брусок на расстояние $d$. Как
+определить, сколько при этом выделилось тепла? 
+
+Уравнение \eqref{eq:c_o_m_to_pseudowork_II} ничего об этом не говорит;
+как мы видели в предыдущем разделе, оно сводится к тривиальности вида
+$0=0$. Попробуем применить к этой ситуации первый закон
+термодинамики. Этот закон говорит нам, что внесённая в систему теплота
+и совершённая над ней работа идут на изменение энергии системы:
+
+\begin{equation}
+  \label{eq:flt}
+  Q^{\foot{ext}} + W^{\foot{ext}} = \Delta E. 
+\end{equation}
+
+\begin{figure}[h]
+  \centering
+  \begin{tikzpicture}
+    \draw[interface] (5.2,0) -- (0.2,0);
+    \draw[fill=gray!40,very thick] (2,0) rectangle (4,1);
+    \draw[very thick,blue,->] (4,0.5) -- (5,0.5) node[above] {$F$};
+    \draw[very thick,blue,->] (2,0) -- (1,0) node[above]
+    {$F_{\foot{\footnotesize{тр}}}$};
+    % \draw[very thick,blue,->] (3,0.5) -- (3,2) node[right] {$N$};
+    % \draw[very thick,blue,->] (3,0.5) -- (3,-1) node[right] {$mg$};
+    % \draw[fill=black] (3,0.5) circle (0.05);
+    %
+    \draw[dashed,red,thick,postaction={decorate,decoration={raise=0.1cm,text
+        along path,text={|\footnotesize\color{red}|брусок + стол}}}] plot [smooth
+    cycle] coordinates {(0.8,-0.2) (0.8,1.2) (4.2,1.2) (4.2,-0.2) };
+  \end{tikzpicture}
+  \caption{Первый закон термодинамики: брусок и стол.}
+  \label{fig:flt_block_and_table}
+\end{figure}
+
+Возьмём в качестве системы брусок и стол
+(см. рис. \ref{fig:flt_block_and_table}). Над этой системой совершает
+работу одна внешняя сила $F$ (сила трения, которая действует со
+стороны стола на брусок, является внутренней). Изменение энергии, как
+мы выяснили, равно нулю, так как скорость не меняется. Таким образом,
+получается, что $Q^{\foot{ext}}<0$ --- то есть, система энергию не
+поглощает, а излучает наружу (как мы и ожидали) в виде теплоты. Эта
+тепловая энергия, выделяющаяся в системе, равна
+
+\begin{equation}
+  \label{eq:flt_apply_I}
+  Q_{\foot{брусок+стол}} = W^{\foot{ext}} = F d.
+\end{equation}
+
+Заметим, что здесь $W^{\foot{ext}}$ означает именно \textit{работу}, в
+отличие от псевдоработы из предыдущего раздела. Работу силы $F$, с
+которой мы тянем брусок, посчитать легко, поскольку про перемещение
+точки приложения нам всё известно --- оно равно $d$. Таким образом,
+вся работа, совершаемая внешней силой $F$, уходит в теплоту,
+выделяющуюся в системе, то есть, за счёт этого нагреваются и стол, и
+брусок.
+
+Можно ли узнать, сколько теплоты досталось непосредственно бруску?
+Здесь нас ждёт небольшой сюрприз. 
+
+\begin{figure}[h]
+  \centering
+  \begin{tikzpicture}
+    \draw[interface] (5.2,0) -- (0.2,0);
+    \draw[fill=gray!40,very thick] (2,0) rectangle (4,1);
+    \draw[very thick,blue,->] (4,0.5) -- (5,0.5) node[above] {$F$};
+    \draw[very thick,blue,->] (2,0) -- (1,0) node[above]
+    {$F_{\foot{тр}}$};
+    % \draw[very thick,blue,->] (3,0.5) -- (3,2) node[right] {$N$};
+    % \draw[very thick,blue,->] (3,0.5) -- (3,-1) node[right] {$mg$};
+    % \draw[fill=black] (3,0.5) circle (0.05);
+    %
+    \draw[dashed,red,thick,postaction={decorate,decoration={raise=0.1cm,text
+        along path,text={|\footnotesize\color{red}|брусок}}}] plot [smooth
+    cycle] coordinates {(1.8,-0.2) (1.8,1.2) (4.2,1.2) (4.2,-0.2) };
+  \end{tikzpicture}
+  \caption{Первый закон термодинамики: брусок.}
+  \label{fig:flt_block}
+\end{figure}
+
+Итак, ограничим систему для рассмотрения одним лишь бруском
+(см. рис. \ref{fig:flt_block}). Для этой системы тоже можно написать
+первый закон термодинамики. На этот раз внешних сил две: сила $F$, с
+которой тянут брусок, и сила трения $F_{\foot{тр}}$ (равная $F$),
+действующая со стороны стола. Изменение внутренней энергии системы
+по-прежнему равно нулю, так как кинетическая энергия бруска не
+меняется. Таким образом, выделившаяся в системе теплота равна
+
+\begin{equation}
+  \label{eq:flt_apply_II}
+  Q_{\foot{брусок}} = W^{\foot{ext}} = Fd + A_{\foot{тр}}.
+\end{equation}
+Скорее всего, $A_{\foot{тр}}<0$, но чему она равна? Если бы она была
+равна $A_{\foot{тр}} = -F_{\foot{тр}} d = - F d$, то получалось бы,
+что тепло не выделяется, и брусок не нагревается, что противоречит
+предыдущим выкладкам и нашему опыту. Таким образом, мы должны сделать
+вывод, что работа силы трения $|A_{\foot{тр}}|$ \textit{меньше} $Fd$.
+
+Почему так вообще может произойти? Работа получается как произведение
+двух множителей: силы и перемещения точки приложения этой силы. Сила
+трения в любом случае равна $F_{\foot{тр}} = F$, иначе наш брусок
+ускорялся бы, вопреки условиям задачи. Значит, всё дело в перемещении
+точки приложения (назовём его $x$). По каким-то причинам $x<d$, и,
+таким образом, выделившаяся теплота в системе, состоящей только лишь
+из бруска, равна
+
+\begin{equation}
+  \label{eq:flt_apply_III}
+  Q_{\foot{брусок}} = Fd - F_{\foot{тр}}\; x = F d - F x = F(d-x).
+\end{equation}
+
+Каковы причины того, что $x<d$? Детальный ответ на этот вопрос можно
+дать, рассматривая микроскопический механизм возникновения
+трения\footnote{См., например, \href{http://db.tt/lXQPSHtM}{Work and heat transfer in the
+    presence of sliding friction}, B.A. Sherwood and W.H. Bernard,
+  \textit{Am. J. Phys}, Vol. \textbf{52}, No. \textbf{11}, November 1984.}. В данной
+заметке этот вопрос не обсуждается.
+
+Разумеется, мы получим похожий результат, если будем рассматривать
+систему, состояющую только из стола. В такой системе внешней силой
+является сила трения со стороны бруска. Кинетическая энергия стола,
+разумеется, не меняется, и мы можем написать
+\begin{equation}
+  \label{eq:flt_apply_IV}
+  Q_{\foot{стол}} = A_{\foot{тр}} = F_{\foot{тр}}\; x = F x. 
+\end{equation}
+Складывая уравнения \eqref{eq:flt_apply_IV} и \eqref{eq:flt_apply_III}
+мы, естественно, получаем уравнение \eqref{eq:flt_apply_I}.
+
+Заметим, что конкретное значение $x$ нельзя вычислить, не зная
+детально параметров бруска и стола: характер контакта бруска со
+столом, теплопроводность и т.д.
+
+Мы можем применить первый закон термодинамики и ко второму примеру,
+рассмотренному в разделе \ref{sec:center_of_mass_energy_work}, а
+именно, к бруску, который постепенно замедляется под действием силы
+трения. Если взять в качестве системы брусок + стол, то внешних сил не
+будет (опять-таки, все силы трения являются в этой системе внутренними
+силами), и, следовательно, теплота будет выделяться за счёт уменьшения
+кинетической энергии:
+
+\begin{equation}
+  \label{eq:flt_apply_V}
+  Q^{\foot{ext}} = \Delta E_{k}. 
+\end{equation}
+Кинетическая энергия уменьшается, так что энергия в системе
+действительно выделяется. Вся кинетическая энергия уходит в нагрев
+бруска и стола:
+\begin{equation}
+  \label{eq:flt_apply_VI}
+  Q_{\foot{стол+брусок}} = \frac{mv_0^2}{2}.
+\end{equation}
+При этом работа силы трения, как и в предыдущем примере, не равна $FS$
+(напомним, что $S$~---~путь, пройденный бруском до остановки).
+
+\section{Заключение.}
+\label{sec:summary}
+
+При вычислении работы надо соблюдать внимательность и не путать
+\textit{работу} с \textit{псевдоработой} --- последняя служит только
+для механического описания процессов и непригодна для обсуждения
+тепловых потоков в системе. Вычисление работы нужно проводить вместе с
+применением первого закона термодинамики, который и является законом
+сохранения энергии в полном смысле.
+
+\section{Литература.}
+\label{sec:ref}
+
+\begin{enumerate}
+\item ``Work and heat transfer in the presence of sliding
+    friction'', B.A. Sherwood and W.H. Bernard, \textit{Am. J. Phys},
+  \textbf{52} (11), November 1984.
+\item ``Physics that Textbook Writers Usually Get Wrong'', Robert
+  P. Bauman, \textit{Phys. Teach.}, \textbf{30}, 353 (1992).
+\item ``Energy and the Confused Student'', John W. Jewett,
+  \textit{Phys. Teach.}, \textbf{46}, 38 (2008).
+\end{enumerate}
+
+\end{document}
+
+
+%%% Local Variables: 
+%%% mode: latex
+%%% TeX-engine:xetex
+%%% TeX-PDF-mode: t
+%%% End: 
+
+%%% Local Variables: 
+%%% mode: latex
+%%% TeX-engine:xetex
+%%% TeX-PDF-mode: t
+%%% End:
