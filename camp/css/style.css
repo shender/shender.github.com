@@ -54,3 +54,10 @@ a:hover, a:active {
 
 
 }
+
+code {
+    background-color: #eeeeee;
+    padding: 1pt;
+    margin-right: 1pt;
+    box-shadow: 1px 1px 1px #aaa;
+}
