@@ -1,0 +1,265 @@
+% Описание протоколов физбоя.
+% оформляется с помощью tikz, так что необходимо указывать
+\usepackage{tikz}
+
+% переменные и счётчики
+
+\newcounter{oldN}
+\setcounter{oldN}{0}
+
+\newcounter{newN}
+\setcounter{newN}{0}
+
+% баллы жюри
+\newcounter{jury}
+\setcounter{jury}{12}
+
+% двойной физбой: заголовок протокола
+% \pdtitle{название команды 1}{название команды 2}
+\newcommand{\pdtitle}[2]{%
+  \tikzset{node distance=0pt,minimum height=1cm,>=angle 90};  
+  \tikzset{call/.style={very thick,black!60,decoration={random
+        steps,segment length=5pt,amplitude=0.5pt},decorate}} 
+  \node[draw,thick, minimum width=0.1\textwidth,
+  rectangle] (n0) {\large{\textbf{№}}}; 
+  \node[draw,thick, minimum width=0.35\textwidth,
+  rectangle, right=of n0] (t1-0) {\large{\textbf{#1}}}; 
+  \node[draw,thick, minimum width=0.35\textwidth,
+  rectangle, right=of t1-0] (t2-0) {\large{\textbf{#2}}}; 
+  \node[draw,thick, minimum width=0.2\textwidth,
+  rectangle, right=of t2-0] (j0) {\large{\textbf{Жюри}}};
+}
+
+% двойной физбой: разбор задачи
+% \pdcall{направление вызова}{номер
+% задачи}{баллы1}{баллы2}{фио1}{фио2};
+% условные обозначения для направления вызова:
+% -> --- команда 1 вызывает команду 2
+% <- --- команда 2 вызывает команду 1
+% ->| --- команда 1 вызывала команду 2, но получила проверку корректности
+% |<- --- команда 2 вызывала команду 1, но получила проверку корректности
+\newcommand{\pdcall}[6]{%
+  \addtocounter{newN}{1};
+  % баллы жюри
+  \addtocounter{jury}{-#3}
+  \addtocounter{jury}{-#4}
+  \def\a{t1-\arabic{newN}};
+  \def\b{t2-\arabic{newN}};
+  \tikzset{minimum width=1cm};
+  % расположение всех баллов
+  \node[below=of n\arabic{oldN},yshift=-0.5cm] (n\arabic{newN}) {#2};
+  \node[below=of t1-\arabic{oldN},yshift=-0.5cm] (\a)
+  {\Large{#3}}; 
+  \node[below=of t2-\arabic{oldN},yshift=-0.5cm] (\b)
+  {\Large{#4}}; 
+  \node[below=of j\arabic{oldN},yshift=-0.5cm] (j\arabic{newN})
+  {\Large{\arabic{jury}}};
+  % инициалы отвечающего и оппонента
+  \node[blue,above=of \a,yshift=-0.4cm] {#5};
+  \node[blue,above=of \b,yshift=-0.4cm] {#6};
+  % рисование стрелки
+  \def\calllr{->}
+  \def\callrl{<-}
+  \def\calllor{->|}
+  \def\callrol{|<-}
+  \begingroup
+  \def\tmp{#1}%
+  \ifx\tmp\calllr
+    \draw[call,*->] (\a.east) -- (\b.west); 
+  \else\ifx\tmp\callrl
+    \draw[call,<-*] (\a.east) -- (\b.west); 
+  \else\ifx\tmp\calllor
+    \draw[call,*->,rounded corners=0.1cm]
+    (\a.20) -- (\b.160) -- (\b.200) -- (\a.340);
+  \else\ifx\tmp\callrol
+    \draw[call,*->,rounded corners=0.1cm]
+    (\b.160) -- (\a.20) -- (\a.340) -- (\b.200);
+  \fi\fi\fi\fi
+  \endgroup
+  \setcounter{jury}{12}
+  \addtocounter{oldN}{1};
+}
+
+% двойной физбой: подведение итогов
+% \pdsum{сумма 1}{сумма 2}{сумма жюри};
+\newcommand{\pdsum}[3]{%
+  % расстановка баллов
+  \node[below=of n\arabic{oldN},yshift=-0.5cm] (sum) {Итог:};
+  \node[below=of t1-\arabic{oldN},yshift=-0.5cm] (t1sum)
+  {\LARGE{#1}}; 
+  \node[below=of t2-\arabic{oldN},yshift=-0.5cm] (t2sum)
+  {\LARGE{#2}}; 
+  \node[below=of j\arabic{oldN},yshift=-0.5cm] (jsum)
+  {#3};
+  % рамка
+  \draw[very thick] (n0.north west) -- (sum.north west -| n0.west) --
+  (sum.north west -| j0.east) -- (j0.north east);
+  \draw[very thick] (n0.north east) -- (n0.north east |- sum.north);
+  \draw[very thick] (j0.north west) -- (j0.north west |- sum.north);
+  % пунктир
+  \draw[gray,loosely dashed] (t1-0.north east) -- (t1-0.east |-
+  t1sum.north);
+  % установка счётчиков в исходное состояние
+  \setcounter{oldN}{0}
+  \setcounter{newN}{0}
+  \setcounter{jury}{12}
+}
+
+\newcommand{\pttitle}[3]{%
+  \tikzset{node distance=0pt,minimum height=1cm,>=angle 90};
+  \node[draw,thick, minimum width=0.1\textwidth,
+  rectangle] (n0) {\large{\textbf{№}}}; 
+  \node[draw,thick, minimum width=0.25\textwidth,
+  rectangle, right=of n0] (t1-0) {\large{\textbf{#1}}}; 
+  \node[draw,thick, minimum width=0.25\textwidth,
+  rectangle, right=of t1-0] (t2-0) {\large{\textbf{#2}}};
+  \node[draw,thick, minimum width=0.25\textwidth,
+  rectangle, right=of t2-0] (t3-0) {\large{\textbf{#3}}}; 
+  \node[draw,thick, minimum width=0.15\textwidth,
+  rectangle, right=of t3-0] (j0) {\large{\textbf{Жюри}}};
+}
+
+% тройной физбой: вызов
+% \ptcall{#1}{номер задачи}{баллы1}{баллы2}{баллы3}{участник 1}{участник 2}{участник 3}
+% здесь уже не надо указывать направление вызова, поскольку в тройном
+% физбое порядок определён после конкурса капитанов
+% первый аргумент (#1) показывает, есть ли проверка корректности
+% если вызов обычный - аргумент пустой
+% если проверка - можно написать всё, что угодно (например,
+% какую-нибудь букву)
+\newcommand{\ptcall}[8]{
+  \tikzset{call/.style={very thick,black!60,decoration={random
+        steps,segment length=5pt,amplitude=0.5pt},decorate}} 
+  \tikzset{minimum width=1cm};
+  \addtocounter{newN}{1};
+  \def\a{t1-\arabic{newN}};
+  \def\b{t2-\arabic{newN}};
+  \def\c{t3-\arabic{newN}};
+  \edef\cl{\arabic{newN}};  
+  % баллы жюри
+  \addtocounter{jury}{-#3}
+  \addtocounter{jury}{-#4}
+  \addtocounter{jury}{-#5} 
+  % расположение всех баллов
+  \node[below=of n\arabic{oldN},yshift=-0.6cm] (n\arabic{newN}) {#2};
+  \node[below=of t1-\arabic{oldN},yshift=-0.6cm] (\a)
+  {\Large{#3}}; 
+  \node[below=of t2-\arabic{oldN},yshift=-0.6cm] (\b)
+  {\Large{#4}};
+  \node[below=of t3-\arabic{oldN},yshift=-0.6cm] (\c)
+  {\Large{#5}}; 
+  \node[below=of j\arabic{oldN},yshift=-0.6cm] (j\arabic{newN})
+  {{\arabic{jury}}};
+  % инициалы слева направо
+  \node[blue,above=of \a,yshift=-0.4cm] {#6};
+  \node[blue,above=of \b,yshift=-0.4cm] {#7};
+  \node[blue,above=of \c,yshift=-0.4cm] {#8};
+  % поскольку порядок вызовов определяется автоматически,
+  % здесь сразу рисуется стрелка вызова в зависимости от номера хода
+  % кроме того, проверяем, есть ли проверка корректности
+  % 1-й ход
+  \ifnumequal{\cl}{1}{
+    \ifblank{#1}
+    {
+      \draw[call,*->] (\a.east) -- (\b.west);
+    }
+    {
+      \draw[call,*->,rounded corners=0.1cm] (\a.20) -- (\b.160) --
+      (\b.200) -- (\a.340); 
+    }
+  }{}
+  % 2-й ход
+  \ifnumequal{\cl}{2}{
+    \ifblank{#1}
+    {
+      \draw[call,*->] (\b.east) -- (\c.west);
+    }
+    {
+      \draw[call,*->,rounded corners=0.1cm] (\b.20) -- (\c.160)
+      -- (\c.200) -- (\b.340);
+    }
+  }{}
+  % 3-й ход
+  \ifnumequal{\cl}{3}{
+    \ifblank{#1}
+    {
+      \draw[call,*-] (\c.east) -- (\c.east -| j0.west);
+      \draw[call,->] (t1-0.west |- \a.west) -- (\a.west); 
+    }
+    {
+      \draw[call,*-] (\c.20) -- (\c.20 -| j0.west);
+      \draw[call,->] (\c.340 -| j0.west) -- (\c.340);
+      \draw[call,rounded corners=0.1cm] (t1-0.west |- \a.160) --
+      (\a.160) -- (\a.200) -- (t1-0.west |- \a.200);
+    }
+  }{}
+  % 4-й ход
+  \ifnumequal{\cl}{4}{
+    \ifblank{#1}
+    {
+      \draw[call,*-] (\a.west) -- (\a.west-| t1-0.west);
+      \draw[call,->] (\c.east -| t3-0.east) -- (\c.east);
+    }
+    {
+      \draw[call,*-] (\a.160) -- (\a.160 -| t1-0.west);
+      \draw[call,->] (\a.200 -| t1-0.west) -- (\a.200);
+      \draw[call,rounded corners=0.1cm] (\c.20 -| j0.west) --
+      (\c.20) -- (\c.340) -- (\c.340 -| j0.west); 
+    }
+  }{}
+  % 5-й ход
+  \ifnumequal{\cl}{5}{
+    \ifblank{#1}
+    {
+      \draw[call,*->] (\c.west) -- (\b.east);
+    }
+    {
+      \draw[call,rounded corners=0.1cm,*->] (\c.160) -- (\b.20)
+      -- (\b.340) -- (\c.200);
+    }
+  }{}
+  % 6-й ход
+  \ifnumequal{\cl}{6}{
+    \ifblank{#1}
+    {
+      \draw[call,*->] (\b.west) -- (\a.east);
+    }
+    {
+      \draw[call,rounded corners=0.1cm,*->] (\b.160) -- (\a.20)
+      -- (\a.340) -- (\b.200);
+    }
+  }{}
+  % переход на следующий круг
+  \setcounter{jury}{12}
+  \addtocounter{oldN}{1}
+}
+
+% тройной физбой: подведение итогов
+% \ptsum{баллы 1}{баллы 2}{баллы 3}{баллы жюри}
+\newcommand{\ptsum}[4]{%
+% основная рамка
+  \draw[very thick] (t1-0.south west) -- (t1-0.south west |-
+  \a.south);
+  \draw[very thick] (t3-0.south east) -- (t3-0.south east |-
+  \a.south);
+  \draw[very thick] (n0.south west |- \a.south) -- (j0.south east |-
+  \a.south);
+  \draw[very thick] (n0.north west) -- (n0.north west |- \a.south);
+  \draw[very thick] (j0.north east) -- (j0.north east |- \a.south); 
+% пунктир
+  \draw[gray,loosely dashed] (t1-0.south east) -- (t1-0.south east |-
+  \a.south); 
+  \draw[gray,loosely dashed] (t2-0.south east) -- (t2-0.south east |-
+  \a.south); 
+% строчка с итоговыми баллами   
+  \node[below=of n\arabic{oldN},yshift=-0.6cm] (n-f) {Итог:};
+  \node[below=of \a,yshift=-0.6cm] (t1-f) {\LARGE{#1}};
+  \node[below=of \b,yshift=-0.6cm] (t2-f) {\LARGE{#2}};
+  \node[below=of \c,yshift=-0.6cm] (t3-f) {\LARGE{#3}};
+  \node[below=of j\arabic{oldN},yshift=-0.6cm] (j-f) {#4};
+% установка счётчиков в исходное состояние
+  \setcounter{oldN}{0}
+  \setcounter{newN}{0}
+  \setcounter{jury}{12}
+}
+
