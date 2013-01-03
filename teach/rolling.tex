@@ -1,1 +1,550 @@
-/home/igor/dc/fizega/notes/rolling.tex
+\documentclass[a4paper,12pt]{article}
+% math symbols
+\usepackage{amssymb,amsmath}
+\synctex=1
+% for different compilers
+\usepackage{ifpdf}
+% geometry of page
+\usepackage[margin=2cm]{geometry}
+
+% if pdflatex, then
+\ifpdf
+\usepackage[russian]{babel}
+\usepackage[utf8]{inputenc}
+\usepackage[unicode]{hyperref}
+\usepackage[pdftex]{graphicx}
+\usepackage{cmlgc}
+% if xelatex, then
+\else
+% math fonts
+\usepackage{fouriernc}
+% xelatex specific packages
+\usepackage[xetex]{hyperref}
+\usepackage{xltxtra}	% \XeLaTeX macro
+\usepackage{xunicode}	% some extra unicode support
+\defaultfontfeatures{Mapping=tex-text}
+\usepackage{polyglossia}	% instead of babel in xelatex
+\usepackage{indentfirst}	% 
+\setdefaultlanguage{russian}
+% fonts
+\newfontfamily\cyrillicfont{SchoolBookC}
+\newfontfamily\cyrillicfontsf{TextBookC}
+\setmonofont{Consolas}
+\fi
+
+% several pictures in one figure
+\usepackage{subfig}
+% calc in TeX expressions
+\usepackage{calc}
+% nice pictures and plots
+\usepackage{pgfplots,tikz,circuitikz}
+% different libraries for pictures
+\usetikzlibrary{%
+  arrows,%
+  calc,%
+  patterns,%
+  decorations.pathreplacing,%
+  decorations.pathmorphing,%
+  decorations.markings,%
+  intersections,%
+  decorations.text%
+}
+
+\usepackage{tkz-euclide}
+
+\graphicspath{{./pics/}}
+
+% colors of the hyperlinks
+\hypersetup{colorlinks,%
+  citecolor=blue,%
+  urlcolor=blue,%
+  linkcolor=red
+}
+
+\newcommand{\foot}[1]{\mbox{\footnotesize{#1}}}
+
+\tikzset{>=latex,%
+  interface/.style={postaction={draw,decorate,decoration={border,angle=45,amplitude=0.2cm,segment
+        length=1mm}}},%
+  spring/.style={thick,decorate,decoration={aspect=0.5, segment
+  length=1.3mm, amplitude=1mm,coil}},%
+  marrow/.style={postaction={draw,decorate,decoration={markings,
+        mark=at position 0.6 with {\arrow{latex}}}}}}
+
+% обозначение угла
+\tikzset{arcnode/.style={
+            decoration={
+                        markings, raise = 3mm,  
+                        mark=at position 0.5 with { 
+                                    \node[inner sep=0] {#1};
+                        }
+            },
+            postaction={decorate}
+      }
+}
+
+% команда для отметки угла: проводит дугу между двумя лучами,
+% проведёнными между точками #2--#3 и #2--#4
+% первый аргумент - необязательный, стиль линии
+% #2,#3,#4 - точки
+% #5 - радиус дуги для обозначения угла
+% #6 - обозначение угла
+\newcommand*\marktheangle[6][]{
+            \draw[thick,arcnode={#6},#1] let \p2=($(#3)-(#2)$),%
+                        \p3=($(#4)-(#2)$),%
+                        \n2 = {atan2(\x2,\y2)},%
+                        \n3 = {atan2(\x3,\y3)}%
+                        in ($(\n2:#5)+(#2)$) arc (\n2:\n3:#5);
+            }
+
+
+\pgfplotsset{compat=newest}
+
+\begin{document}
+%\parindent=0mm
+
+\begin{center}
+  \LARGE{Некоторые аспекты физики вращения}\\[0.2cm]
+  \large{Игорь Шендерович}\\[0.2cm]
+  \normalsize{\texttt{shender.i@gmail.com}}
+\end{center}
+
+\begin{abstract}
+  Выводится уравнение вращательного движения в общем виде,
+  относительно любой точки (не только мгновенного центра
+  вращения). Метод иллюстрируется различными примерами. 
+\end{abstract}
+
+\section{Общее уравнение вращательного движения. }
+\label{sec:general_eom}
+
+\begin{figure}[h]
+  \centering
+  \begin{tikzpicture}
+    \def\r{1.5cm};    
+    \coordinate (a) at (10,0); 
+    \coordinate (O) at (3cm,\r);
+    \coordinate (C) at ($(O) + (110:\r/2)$);
+    \coordinate (P) at (8,0);
+    \coordinate (i) at ($(C) + (-80:\r/1.5)$);
+    \draw[interface,thick] (a) -- (1,0);    
+    \draw[fill=gray!20] (O) circle (\r);
+    \draw[fill=black] (C) circle (0.05cm) node[above,blue] {$C$};
+    \draw[fill=black] (i) circle (0.05cm) node[below,blue] {$i$};
+    
+    \draw[very thick,blue,->] (P) node[above] {$P$} -- (C)
+    node[pos=0.5,above] {$\vec{r}_{C,P}$}; 
+    \draw[very thick,blue,->] (P)  -- (i)
+    node[pos=0.65,below] {$\vec{r}_{i,P}$};
+    \draw[very thick,blue,->] (C) -- (i) node[midway,left]
+    {$\vec{r}_{i,C}$};
+  \end{tikzpicture}
+  \caption{Качение тела по горизонтальной поверхности.}
+  \label{fig:rolling_general}
+\end{figure}
+
+Пусть $C$ --- центр масс катящегося тела, а $P$ --- произвольная точка
+в нашей системе. Обратим внимание, что $P$ может быть не привязана к
+физическим телам. Момент импульса тела относительно оси, проходящей
+через $P$, даётся выражением
+
+\begin{equation}
+  \label{eq:momentum_p_general_1}
+  \vec{L}_{P} = \sum_i m_i \vec{r}_{i,P} \times \vec{v}_{i,P} = \sum_i
+  m_i \left( \vec{r}_{i,C} + \vec{r}_{C,P} \right) \times \left(
+    \vec{v}_{i,C} + \vec{v}_{C,P} \right). 
+\end{equation}
+Раскроем скобки в этом выражении. Одно слагаемое из четырёх не будет
+зависеть от точки $P$, назовём его <<спиновой>> составляющей момента
+импульса:
+
+\begin{equation}
+  \label{eq:L_spin_def}
+  \vec{L}^s \equiv \sum_i m_i \vec{r}_{i,C} \times \vec{v}_{i,C}. 
+\end{equation}
+В случае двумерного движения, как известно, $\vec{L}^s = I_c
+\vec{\omega}$, где $I_C$~---~момент инерции тела относительно оси,
+проходящей через центр масс.
+
+Ещё одно слагаемое не будет зависеть от рассматриваемой точки
+$i$. Назовём его <<орбитальной>> составляющей момента импульса:
+
+\begin{equation}
+  \label{eq:L_orb_def}
+  \vec{L}_P^o \equiv \sum_i m_i \vec{r}_{C,P} \times \vec{v}_{C,P} = M
+  \vec{r}_{C,P} \times \vec{v}_{C,P}.
+\end{equation}
+
+Что с остальными двумя слагаемыми? Посмотрим на одно из них.
+
+\begin{equation}
+  \label{eq:L_trash_1}
+  \sum_i m_i \vec{r}_{i,C} \times \vec{v}_{C,P} = \left( \sum_i m_i
+    \vec{r}_{i,C} \right) \times \vec{v}_{C,P}. 
+\end{equation}
+То, что стоит в скобках --- радиус--вектор центра масс, сосчитанный в
+системе отсчёта центра масс, то есть, ноль. Таким образом, всё
+слагаемое равно нулю. То же самое можем заключить относительно второго
+слагаемого.
+
+Таким образом, полный момент импульса системы относительно точки $P$
+складывается из <<орбитальной>> и <<спиновой>> частей:
+
+\begin{equation}
+  \label{eq:L_full_general}
+  \vec{L}_{P} = \vec{L}_P^o + \vec{L}^s = M \vec{r}_{C,P} \times
+  \vec{v}_{C,P} + I_C \vec{\omega}. 
+\end{equation}
+
+Вычислим теперь производную $L_{P}$ по времени, исходя из определения
+\eqref{eq:momentum_p_general_1}:
+\begin{equation}
+  \label{eq:dL/dt}
+  \frac{d\vec{L}_P}{dt} = \sum_i m_i \vec{v}_{i,P} \times
+  \vec{v}_{i,P} + \sum_i m_i \vec{r}_{i,P} \times \vec{a}_{i,P}. 
+\end{equation}
+Первое слагаемое, очевидно, равно нулю, а второе представляет собой
+векторное произведение из радиус--вектора, проведённого в точку $i$ из
+точки $P$ на силу, действующую на точку $i$, то есть, момент этой силы
+относительно точки $P$.
+
+Таким образом, уравнение движения для вращающегося тела может быть
+записано в следующей форме:
+
+\begin{equation}
+  \label{eq:eom_general}
+  \vec{\tau}_P = \sum_i \vec{r}_{i,P} \times \vec{F}_{i,P} =
+  \frac{d}{dt} \left(M \vec{r}_{C,P} \times \vec{v}_{C,P} + I_C
+    \vec{\omega}  \right) =   \frac{d\vec{L}_P}{dt}. 
+\end{equation}
+Это и есть наиболее общее и корректное уравнение моментов относительно
+произвольной точки $P$. Оно позволяет решать многие задачи не прибегая
+к дополнительным соображениям (мы даже не обсуждали мгновенную ось
+вращения при выводе этих формул). Рассмотрим несколько примеров.
+
+\section{Шар для боулинга: скольжение и качение. }
+\label{sec:bowling_sliding_rolling}
+
+Рассмотрим однородный шар радиуса $R$, запущенный без вращения со
+скоростью $V_0$ вдоль горизонтальной поверхности. Вычислим скорость,
+при которой проскальзываение сменится качением. Отсутствие
+проскальзывания означает, что скорость точки касания шара с полом
+равна нулю.
+
+Применим формулу \eqref{eq:eom_general}. В качестве точки $P$ возьмём
+сначала любую точку на расстоянии $R$ от пола. Моменты сил $N$ и $Mg$
+относительно точки $P$ взаимно сокращаются, и остаётся только момент
+силы трения, равный $\tau_P = \mu M g R$. Теперь надо найти момент
+импульса тела относительно точки $P$.
+
+Сделать это просто: очевидно, орбитальная часть $L_P$ обратится в
+ноль, так что остаётся только спиновая часть. Таким образом, получим,
+что
+
+\begin{equation}
+  \label{eq:ball_eom_1}
+  \mu M g R = \frac{2}{5} MR^2 \dot{\omega}. 
+\end{equation}
+Мы учли, что момент инерции шарика относительно центра масс равен $I_C
+= 2/5 MR^2$. 
+
+Это почти тривиальное утверждение, говорящее, что именно сила трения
+раскручиывает наш шарик (изменяет угловую скорость, создавая
+постоянное угловое ускорение).
+
+Теперь возьмём в качестве точки $P$ какую-нибудь точку на поверхности
+пола. Моменты силы тяжести и силы реакции опять скомпенсированы, но на
+этот раз обнуляется и момент силы трения. Таким образом, суммарный
+момент сил относительно точки $P$ равен нулю, а это означает, что
+момент импульса относительно этой точки сохраняется.
+
+В самом начале движения, когда шарик ещё не крутится, этот момент
+импульса равен $L_0 = R M V_0$. В произвольный момент времени, когда у
+шарика есть угловая скорость $\omega$ и скорость центра масс $V$, этот
+момент импульса равен (по формуле \eqref{eq:L_full_general})  $L_1 =
+RMV + I_C \omega $. Из сохранения момента импульса следует, что
+
+\begin{equation}
+  \label{eq:conservation_L_ball}
+  RMV + I_C \omega = RMV_0. 
+\end{equation}
+
+В тот момент, когда заканчивается проскальзываение, скорость точек на
+поверхности шара становится равной $V = \omega R$. Отсюда получаем,
+что
+
+\begin{equation}
+  \label{eq:conservation_L_ball_V}
+  V = \frac{V_0}{1+ I_C/MR^2} = \frac{5}{7} V_0. 
+\end{equation}
+
+\section{Цилиндр и наклонная плоскость.}
+\label{sec:cylinder_incline}
+
+Усложним немного задачу --- сделаем плоскость наклонной. Итак, пусть
+имеется наклонная шероховатая поверхность с углом $\alpha$ в
+основании. На поверхность ставится полый цилиндр массы $M$ и радиуса
+$R$, вращающийся с угловой скоростью $\omega_0$. Через какое время
+цилиндр достигнет наивысшего положения на наклонной плоскости?
+
+\begin{figure}[h]
+  \centering
+  \begin{tikzpicture}
+    \def\r{0.7cm};
+    \def\angle{20};
+    \def\size{5};
+    \coordinate (a) at (0,0);
+    \coordinate (b) at ($({\size*cos(\angle)},0)$);
+    \coordinate (c) at ($({\size*cos(\angle)},{\size*sin(\angle)})$);
+
+    \draw[thick] (c) -- (a) -- (b);
+    \node[draw,very thick,rotate around={\angle:(a)},circle,inner
+    sep=0cm, minimum size=2*\r] (ball) at (\size/2,\r) {};
+    \draw[very thick,red,->] (ball.center) node[above,blue] {$C$} --
+    ++(0,-1.3cm); 
+
+    \coordinate (P) at ($(a)!(ball.center)!(c)$);
+    \draw[very thick,red,->] (P) node[above,blue] {$P$} --
+    ++(\angle:1.3cm) node[above] {$F_{\mbox{\footnotesize{тр}}}$};
+    
+
+    \marktheangle[blue]{a}{c}{b}{1}{$\alpha$};
+  \end{tikzpicture}
+  \caption{Цилиндр, вкатывающийся на наклонную плоскость.}
+  \label{fig:cylinder_incline}
+\end{figure}
+
+Здесь опять можно применить уравнение \eqref{eq:eom_general}. Запишем
+его относительно точки $P$, показанной на рисунке.
+
+Момент относительно этой точки создаётся силой тяжести. Её плечо
+равно, очевидно, $R \sin \alpha$, и момент, таким образом, равен $\tau
+= -MgR \sin \alpha$.
+
+Момент импульса в каждый момент времени имеет и орбитальную, и
+спиновую часть; благодаря симметричности ситуации, запишем
+
+\begin{equation}
+  \label{eq:L_cylinder_1}
+  L (t) = RM v(t) + I_C \omega (t). 
+\end{equation}
+
+Уравнение движения \eqref{eq:eom_general} даёт
+
+\begin{equation}
+  \label{eq:L_cylinder_2}
+  R M d v(t) + I_C d \omega(t) = -MgR \sin \alpha \cdot dt. 
+\end{equation}
+
+Проинтегрируем это уравнение от начального момента $t=0$ до момента
+достижения высшей точки $t=T$ (напомним, $T$ --- время, которое надо
+найти). 
+
+\begin{equation}
+  \label{eq:L_cylinder_3}
+  RM [ v(T) - v(0)] + I_C [ \omega(T) - \omega(0) ] = - MgR \sin
+  \alpha \cdot T. 
+\end{equation}
+По условию задачи $v(0)=0$ (изначально поступательной скорости у
+цилиндра не было), $\omega(0) = \omega_0$. В наивысшей точке,
+очевидно, $v(T)=\omega(T)=0$, так что получаем
+\begin{equation}
+  \label{eq:L_cylinder_answer}
+  T = \frac{I_C\omega_0}{MgR \sin \alpha} = \frac{\omega_0 R}{g \sin
+    \alpha }. 
+\end{equation}
+
+\section{Качение полукольца. }
+\label{sec:semihoop}
+
+Применим теперь общий подход к задаче о качении полукольца. Пусть
+в вертикальной плоскости имеется полукольцо массы $M$ и радиуса
+$R$. Кольцо может качаться (без проскальзывания) по горизонтальной
+поверхности. Как будет выглядеть уравнение движения этого полукольца?
+
+Попробуем получить уравнение зависимости угла $\theta$ (см. рис.) от
+времени. 
+
+\begin{figure}[h]
+  \centering
+  \begin{tikzpicture}
+    \def\r{3cm};
+    \def\angle{30};
+    % горизонталь
+    \coordinate (a) at (-2,0);
+    % центр полуокружности
+    \coordinate (O) at (5cm-\r,\r);
+    % точка касания с полом
+    \coordinate (P) at ( O |- a);
+    % центр масс
+    \coordinate (C) at ($(O) + (\angle-90:2*\r/3.14)$);
+    \draw[fill=black] (C) circle (0.07cm); 
+    % точка B
+    \coordinate (B) at ($(O)!(C)!(P)$);
+    % пол
+    \draw[interface,thick] (6,0) -- (a);
+    % полуокружность
+    \draw[line width=0.7mm,rotate around={\angle:(O)}] (5cm,\r) arc
+    (0:-180:\r);
+    % геометрия
+    \draw[thin,blue] (O) node[above] {$O$}  -- (C) node[right]
+    {$C$} -- (P) node[below=0.2cm] {$P$} -- (O) node[pos=0.7,left]
+    {$R$};
+    % сила тяжести
+    \draw[red,very thick,->] (C) -- ++(0,-2cm) node[right] {$Mg$};
+    % пунктиры
+    \draw[dashed] (C) -- (B) node[left,blue] {$B$};
+    \draw[dashed,rotate around={\angle:(O)}] (5cm,\r) --
+    ++(-2*\r,0);
+    \marktheangle[blue]{O}{C}{P}{0.6cm}{$\theta$};
+   \end{tikzpicture}
+  \caption{Качающееся полукольцо.}
+  \label{fig:semihoop}
+\end{figure}
+
+Будем рассматривать движение вокруг точки $P$ --- точки касания
+полукольца с горизонтальной поверхностью. К полукольцу приложены три
+силы: сила тяжести, сила реакции опоры и сила трения, но момент вокруг
+точки $P$ создаёт лишь первая из них (остальные две силы приложены в
+точке $P$ и не отмечены для облегчения рисунка). 
+
+Плечо этой силы равно длине отрезка $BC$. Найти её можно из
+прямоугольного треугольника $\triangle OBC$. Известно, что для
+однородного полукольца радиуса $R$ расстояние от геометрического
+центра $O$ до центра масс $C$ равно
+
+\begin{equation}
+  \label{eq:OC}
+  OC = \frac{2R}{\pi},
+\end{equation}
+так что момент силы $Mg$ вокруг точки $P$ равен
+
+\begin{equation}
+  \label{eq:torque_mg}
+  \tau_P = -Mg \cdot BC = -Mg \cdot OC \cdot \sin \theta = -\frac{2MgR \sin
+    \theta}{\pi}.  
+\end{equation}
+
+Для того, чтобы написать уравнение движения, надо найти момент
+импульса относительно точки $P$ согласно общей формуле
+\eqref{eq:eom_general}. Он состоит из <<орбитальной>> и <<спиновой>>
+частей. <<Орбитальная>> часть равна
+
+\begin{equation}
+  \label{eq:l_orb_semihoop_1}
+  \vec{L}_{P}^{o} = \vec{r_{C,P}} \times M \vec{v}_{C,P}. 
+\end{equation}
+
+Будем честно вычислять это векторное произведение. Радиус-вектор точки
+$C$ относительно точки $P$ состоит имеет две компоненты: $BC$ и
+$PB$. Как видно из рисунка,
+\begin{equation}
+  \label{eq:r_c_p}
+  BC = x(\theta) = \frac{2R\sin \theta}{\pi}, \quad PB
+  = y (\theta) = R \left( 1 - \frac{2\cos \theta}{\pi} \right).
+\end{equation}
+
+Отсюда же можно найти скорость центра масс относительно точки
+$P$. Дифференцируя соотношения \eqref{eq:r_c_p} и не забывая, что
+$\theta = \theta (t)$, получим
+
+\begin{equation}
+  \label{eq:v_c_p}
+  \dot {x} = \frac{2R \cos \theta \cdot \dot{\theta} }{\pi}, \quad
+  \dot{y} = \frac{2R \sin \theta \cdot \dot{\theta} }{\pi}.
+\end{equation}
+
+Итак, мы нашли компоненты векторов в векторном произведении
+\eqref{eq:l_orb_semihoop_1}. Отсюда легко найти сам вектор
+орбитального момента импульса. Он будет направлен перпендикулярно
+плоскости рисунка, а его длина равна
+
+\begin{equation}
+  \label{eq:l_orb_semihoop_2}
+  L_P^o = M \left( x(\theta) \dot{y} (\theta) - y(\theta) \dot{x}
+    (\theta)  \right)  = 
+  \frac{4MR^2 \dot{\theta}}{\pi^2} - \frac{2MR^2 \cos \theta
+    \cdot \dot{\theta}}{\pi}. 
+\end{equation}
+
+Спиновая часть вычисляется совсем просто. Она, как мы видели, не
+зависит от точки $P$ и равна 
+
+\begin{equation}
+  \label{eq:l_spin_semihoop_1}
+  L^s = I_C \dot{\theta} = \left( I_O - M \cdot OC^2 \right) \dot
+  {\theta} = \left( MR^2 - \frac{4MR^2}{\pi^2} \right) \dot{\theta} =
+  MR^2 \dot{\theta} - \frac{4MR^2 \dot{\theta}}{\pi^2}. 
+\end{equation}
+Мы использовали здесь теорему Штейнера, а также тот элементарный факт,
+что момент инерции полукольца относительно точки $O$ равен $MR^2$. 
+
+Итак, момент импульса полукольца относительно точки $P$ даётся
+выражением
+\begin{equation}
+  \label{eq:l_full_semihoop}
+  L_P = L_P^o + L^s = MR^2 \dot{\theta} - \frac{2MR^2 \cos \theta
+    \cdot \dot{\theta}}{\pi}.
+\end{equation}
+
+Производная $L_P$ по времени должна быть равна моменту силы тяжести
+$\tau_{P}$. Итак, искомое уравнение движения записывается в виде
+\begin{equation}
+  \label{eq:eom_semihoop}
+  \ddot{\theta} \left( 1- \frac{2 \cos \theta}{\pi} \right) + 2
+  \dot{\theta}^2 \frac{\sin \theta}{\pi} = - \frac{2g \sin \theta}{\pi
+  R}. 
+\end{equation}
+
+Заметим, что при $\theta \ll 1$ получаются обыкновенные гармонические
+колебания: вторым слагаемым в левой части можно пренебречь, скобка в
+первом слагаемом даёт константу, а $\sin \theta$ в правой части
+превращается в $\theta$. 
+
+Разумеется, это уравнение движения можно было получить и из других
+соображений --- например, из закона сохранения энергии. У полукольца
+есть кинетическая энергия вращательного движения и потенциальная
+энергия, связанная с тем, что центр масс меняет свою высоту. При этом
+полная энергия сохраняется, так как сила трения не совершает работу
+(перемещение её точки приложения равно нулю). Вращение происходит
+вокруг мгновенной оси вращения, которая проходит через точку $P$.
+Запишем
+\begin{equation}
+  \label{eq:conserve_energy_semihoop}
+  E = \frac{I_P \dot{\theta}^2}{2} + Mg \frac{2R}{\pi} \left(
+    1- \cos \theta \right). 
+\end{equation}
+
+Момент инерции $I_P$ относительно точки $P$ опять проще всего получить по
+теореме Штейнера:
+
+\begin{equation}
+  \label{eq:steiner_semihoop}
+  I_P (\theta) = I_C + M \cdot CP^2 = I_C + M \left(
+    \frac{4R^2}{\pi^2} + R^2 - \frac{4R^2}{\pi} \cos \theta \right) =
+  2 MR^2 - \frac{4MR^2}{\pi} \cos \theta.
+\end{equation}
+Мы использовали здесь теорему косинусов для $\triangle OCP$. Заметим,
+что момент инерции зависит от угла $\theta$, который, в свою очередь,
+зависит от времени $t$. Это значит, что дифференцируя уравнение
+\eqref{eq:conserve_energy_semihoop} по времени, нам придётся также
+учитывать производную по времени от $I_P$.
+
+Подставляя \eqref{eq:steiner_semihoop} в
+\eqref{eq:conserve_energy_semihoop} и дифференцируя по времени,
+получим уравнение движения \eqref{eq:eom_semihoop}. 
+
+Частая ошибка решения таких задач состоит в том, что упускается из
+виду <<орбитальная>> часть момента импульса, а вместо этого пишется
+$\tau = I_P \ddot{\theta}$. Разумеется, получающиеся таким образом уравнения
+движения неверны, хотя при малых $\theta$ дают такое же приближённое
+решение. 
+
+\end{document}
+
+
+%%% Local Variables: 
+%%% mode: latex
+%%% TeX-engine:xetex
+%%% TeX-PDF-mode: t
+%%% End: 
