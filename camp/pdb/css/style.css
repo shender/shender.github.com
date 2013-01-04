@@ -1,0 +1,56 @@
+@font-face {
+  font-family: 'PT Sans';
+  font-style: normal;
+  font-weight: bold;
+  src: local('PT Sans Bold'), local('PTSans-Bold'), url('http://themes.googleusercontent.com/static/fonts/ptsans/v4/g46X4VH_KHOWAAa-HpnGPhsxEYwM7FgeyaSgU71cLG0.woff') format('woff');
+}
+@font-face {
+  font-family: 'PT Sans';
+  font-style: normal;
+  font-weight: normal;
+  src: local('PT Sans'), local('PTSans-Regular'), url('http://themes.googleusercontent.com/static/fonts/ptsans/v4/yrzXiAvgeQQdopyG8QSg8Q.woff') format('woff');
+}
+
+@media all
+{
+  body {
+    color: #000000;
+    background-color: #ffffff;
+    font-family: 'PT Sans', sans-serif;
+    max-width: 70%;
+    margin: auto;
+    }
+    body #content {
+      padding-top: 45px;
+    }
+    body pre {
+      border: none; }
+    body a {
+      color: #0000ff; }
+    body #content {
+      padding-top: 0px; }
+#postamble { color: #777777 }
+div#postamble * a {     
+    font-weight: bold;     
+    text-decoration: none; 
+    color: #777777
+} 
+a:link {
+    font-weight: bold;
+    text-decoration: none;
+    color: #0000FF;
+}
+
+a:visited {
+    font-weight: normal;
+    text-decoration: none;
+    color: #000099;
+}
+
+a:hover, a:active {
+    text-decoration: none;
+    color: #537d7b;
+}
+
+
+}
