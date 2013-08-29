@@ -1,63 +1,88 @@
 <?xml version="1.0" encoding="utf-8"?>
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
-               "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
 <head>
-<title>Эксперименты–2012: кто, что, когда. </title>
+<title>Эксперименты–2012: кто, что, когда.</title>
+<!-- 2013-08-29 Thu 15:20 -->
 <meta http-equiv="Content-Type" content="text/html;charset=utf-8"/>
-<meta name="title" content="Эксперименты–2012: кто, что, когда. "/>
 <meta name="generator" content="Org-mode"/>
-<meta name="generated" content="2013-08-21T00:45+0900"/>
 <meta name="author" content="Igor Shenderovich"/>
-<meta name="description" content=""/>
-<meta name="keywords" content=""/>
 <style type="text/css">
  <!--/*--><![CDATA[/*><!--*/
-  html { font-family: Times, serif; font-size: 12pt; }
   .title  { text-align: center; }
-  .todo   { color: red; }
+  .todo   { font-family: monospace; color: red; }
   .done   { color: green; }
-  .tag    { background-color: #add8e6; font-weight:normal }
-  .target { }
+  .tag    { background-color: #eee; font-family: monospace;
+            padding: 2px; font-size: 80%; font-weight: normal; }
   .timestamp { color: #bebebe; }
   .timestamp-kwd { color: #5f9ea0; }
-  .right  {margin-left:auto; margin-right:0px;  text-align:right;}
-  .left   {margin-left:0px;  margin-right:auto; text-align:left;}
-  .center {margin-left:auto; margin-right:auto; text-align:center;}
-  p.verse { margin-left: 3% }
+  .right  { margin-left: auto; margin-right: 0px;  text-align: right; }
+  .left   { margin-left: 0px;  margin-right: auto; text-align: left; }
+  .center { margin-left: auto; margin-right: auto; text-align: center; }
+  .underline { text-decoration: underline; }
+  #postamble p, #preamble p { font-size: 90%; margin: .2em; }
+  p.verse { margin-left: 3%; }
   pre {
-	border: 1pt solid #AEBDCC;
-	background-color: #F3F5F7;
-	padding: 5pt;
-	font-family: courier, monospace;
-        font-size: 90%;
-        overflow:auto;
+    border: 1px solid #ccc;
+    box-shadow: 3px 3px 3px #eee;
+    padding: 8pt;
+    font-family: monospace;
+    overflow: auto;
+    margin: 1.2em;
   }
-  table { border-collapse: collapse; }
-  td, th { vertical-align: top;  }
-  th.right  { text-align:center;  }
-  th.left   { text-align:center;   }
-  th.center { text-align:center; }
-  td.right  { text-align:right;  }
-  td.left   { text-align:left;   }
-  td.center { text-align:center; }
+  pre.src {
+    position: relative;
+    overflow: visible;
+    padding-top: 1.2em;
+  }
+  pre.src:before {
+    display: none;
+    position: absolute;
+    background-color: white;
+    top: -10px;
+    right: 10px;
+    padding: 3px;
+    border: 1px solid black;
+  }
+  pre.src:hover:before { display: inline;}
+  pre.src-sh:before    { content: 'sh'; }
+  pre.src-bash:before  { content: 'sh'; }
+  pre.src-emacs-lisp:before { content: 'Emacs Lisp'; }
+  pre.src-R:before     { content: 'R'; }
+  pre.src-perl:before  { content: 'Perl'; }
+  pre.src-java:before  { content: 'Java'; }
+  pre.src-sql:before   { content: 'SQL'; }
+
+  table { border-collapse:collapse; }
+  td, th { vertical-align:top;  }
+  th.right  { text-align: center;  }
+  th.left   { text-align: center;   }
+  th.center { text-align: center; }
+  td.right  { text-align: right;  }
+  td.left   { text-align: left;   }
+  td.center { text-align: center; }
   dt { font-weight: bold; }
-  div.figure { padding: 0.5em; }
-  div.figure p { text-align: center; }
-  div.inlinetask {
-    padding:10px;
-    border:2px solid gray;
-    margin:10px;
+  .footpara:nth-child(2) { display: inline; }
+  .footpara { display: block; }
+  .footdef  { margin-bottom: 1em; }
+  .figure { padding: 1em; }
+  .figure p { text-align: center; }
+  .inlinetask {
+    padding: 10px;
+    border: 2px solid gray;
+    margin: 10px;
     background: #ffffcc;
   }
+  #org-div-home-and-up
+   { text-align: right; font-size: 70%; white-space: nowrap; }
   textarea { overflow-x: auto; }
-  .linenr { font-size:smaller }
-  .code-highlighted {background-color:#ffff00;}
-  .org-info-js_info-navigation { border-style:none; }
-  #org-info-js_console-label { font-size:10px; font-weight:bold;
-                               white-space:nowrap; }
-  .org-info-js_search-highlight {background-color:#ffff00; color:#000000;
-                                 font-weight:bold; }
+  .linenr { font-size: smaller }
+  .code-highlighted { background-color: #ffff00; }
+  .org-info-js_info-navigation { border-style: none; }
+  #org-info-js_console-label
+    { font-size: 10px; font-weight: bold; white-space: nowrap; }
+  .org-info-js_search-highlight
+    { background-color: #ffff00; color: #000000; font-weight: bold; }
   /*]]>*/-->
 </style>
 <link rel="stylesheet" type="text/css" href="../css/style_exp.css" />
@@ -66,7 +91,7 @@
 @licstart  The following is the entire license notice for the
 JavaScript code in this tag.
 
-Copyright (C) 2012-2013 Free Software Foundation, Inc.
+Copyright (C) 2012  Free Software Foundation, Inc.
 
 The JavaScript code in this tag is free software: you can
 redistribute it and/or modify it under the terms of the GNU
@@ -107,91 +132,294 @@ for the JavaScript code in this tag.
  }
 /*]]>*///-->
 </script>
-
 </head>
 <body>
-
-<div id="preamble">
-
-</div>
-
 <div id="content">
-<h1 class="title">Эксперименты–2012: кто, что, когда. </h1>
-
-
+<h1 class="title">Эксперименты–2012: кто, что, когда.</h1>
 <table border="2" cellspacing="0" cellpadding="6" rules="groups" frame="hsides">
-<colgroup><col class="left" /><col class="left" /><col class="left" /><col class="left" /><col class="left" />
+
+
+<colgroup>
+<col class="left"/>
+
+<col class="left"/>
+
+<col class="left"/>
+
+<col class="left"/>
+
+<col class="left"/>
 </colgroup>
 <thead>
-<tr><th scope="col" class="left"></th><th scope="col" class="left">Выпуск 2016 (Болотовский, Люлина)</th><th scope="col" class="left">Выпуск 2015 (Ходунов, Баркарь)</th><th scope="col" class="left">Выпуск 2014 (Беляков, Малышева)</th><th scope="col" class="left">Выпуск 2013 (Серов, Лашкевич)</th></tr>
-<tr><th scope="col" class="left"></th><th scope="col" class="left">Барыгин, Терехов, Борздун, Свирина</th><th scope="col" class="left">Лиознов, Максимишин</th><th scope="col" class="left">Затылкин, Иванов</th><th scope="col" class="left">Атамась</th></tr>
+<tr>
+<th scope="col" class="left">&#xa0;</th>
+<th scope="col" class="left">Выпуск 2016 (Болотовский, Люлина)</th>
+<th scope="col" class="left">Выпуск 2015 (Ходунов, Баркарь)</th>
+<th scope="col" class="left">Выпуск 2014 (Беляков, Малышева)</th>
+<th scope="col" class="left">Выпуск 2013 (Серов, Лашкевич)</th>
+</tr>
+
+<tr>
+<th scope="col" class="left">&#xa0;</th>
+<th scope="col" class="left">&#xa0;</th>
+<th scope="col" class="left">&#xa0;</th>
+<th scope="col" class="left">&#xa0;</th>
+<th scope="col" class="left">&#xa0;</th>
+</tr>
+
+<tr>
+<th scope="col" class="left">&#xa0;</th>
+<th scope="col" class="left">Барыгин, Терехов, Борздун, Свирина</th>
+<th scope="col" class="left">Лиознов, Максимишин</th>
+<th scope="col" class="left">Затылкин, Иванов</th>
+<th scope="col" class="left">Атамась</th>
+</tr>
 </thead>
 <tbody>
-<tr><td class="left"><b>Занятия</b></td><td class="left">1. Общие понятия об эксперименте.</td><td class="left">1. v<sub>до удара</sub> / v<sub>после удара</sub> резинового и пластмассового шарика о деревянную и пластиковую поверхность.</td><td class="left"></td><td class="left">A</td></tr>
-<tr><td class="left"></td><td class="left"></td><td class="left"><i>(теннисный и резиновый шарики, деревянная доска, стол с пластиковым покрытием, линейка)</i></td><td class="left"></td><td class="left"></td></tr>
+<tr>
+<td class="left"><b>Занятия</b></td>
+<td class="left">1. Общие понятия об эксперименте.</td>
+<td class="left">1. v<sub>до удара</sub> / v<sub>после удара</sub> резинового и пластмассового шарика о деревянную и пластиковую поверхность.</td>
+<td class="left">&#xa0;</td>
+<td class="left">A</td>
+</tr>
+
+<tr>
+<td class="left">&#xa0;</td>
+<td class="left">&#xa0;</td>
+<td class="left"><i>(теннисный и резиновый шарики, деревянная доска, стол с пластиковым покрытием, линейка)</i></td>
+<td class="left">&#xa0;</td>
+<td class="left">&#xa0;</td>
+</tr>
 </tbody>
 <tbody>
-<tr><td class="left"></td><td class="left">2. Исследование гуковости резинки.</td><td class="left">2. Исследование гуковости резинки.</td><td class="left"></td><td class="left">R</td></tr>
-<tr><td class="left"></td><td class="left"><i>(резинка, линейка, груз известной массы)</i></td><td class="left"><i>(резинка, линейка, груз известной массы)</i></td><td class="left"></td><td class="left"></td></tr>
+<tr>
+<td class="left">&#xa0;</td>
+<td class="left">2. Исследование гуковости резинки.</td>
+<td class="left">2. Исследование гуковости резинки.</td>
+<td class="left">&#xa0;</td>
+<td class="left">R</td>
+</tr>
+
+<tr>
+<td class="left">&#xa0;</td>
+<td class="left"><i>(резинка, линейка, груз известной массы)</i></td>
+<td class="left"><i>(резинка, линейка, груз известной массы)</i></td>
+<td class="left">&#xa0;</td>
+<td class="left">&#xa0;</td>
+</tr>
 </tbody>
 <tbody>
-<tr><td class="left"></td><td class="left">3. Исследование математического маятника.</td><td class="left">3. Исследование крутильного маятника.</td><td class="left"></td><td class="left">D</td></tr>
-<tr><td class="left"></td><td class="left"><i>(нитка, груз, секундомер, транспортир)</i></td><td class="left"><i>(линейка, нитка, секундомер, грузы, миллиметровка)</i></td><td class="left"></td><td class="left"></td></tr>
+<tr>
+<td class="left">&#xa0;</td>
+<td class="left">3. Исследование математического маятника.</td>
+<td class="left">3. Исследование крутильного маятника.</td>
+<td class="left">&#xa0;</td>
+<td class="left">D</td>
+</tr>
+
+<tr>
+<td class="left">&#xa0;</td>
+<td class="left"><i>(нитка, груз, секундомер, транспортир)</i></td>
+<td class="left"><i>(линейка, нитка, секундомер, грузы, миллиметровка)</i></td>
+<td class="left">&#xa0;</td>
+<td class="left">&#xa0;</td>
+</tr>
 </tbody>
 <tbody>
-<tr><td class="left"></td><td class="left">4. Измерение ускорения свободного падения.</td><td class="left">4. Отношение длин ниток в Y-образном маятнике.</td><td class="left"></td><td class="left">U</td></tr>
-<tr><td class="left"></td><td class="left"><i>(нитка, груз, секундомер)</i></td><td class="left"><i>(нитки, грузики)</i></td><td class="left"></td><td class="left"></td></tr>
+<tr>
+<td class="left">&#xa0;</td>
+<td class="left">4. Измерение ускорения свободного падения.</td>
+<td class="left">4. Отношение длин ниток в Y-образном маятнике.</td>
+<td class="left">&#xa0;</td>
+<td class="left">U</td>
+</tr>
+
+<tr>
+<td class="left">&#xa0;</td>
+<td class="left"><i>(нитка, груз, секундомер)</i></td>
+<td class="left"><i>(нитки, грузики)</i></td>
+<td class="left">&#xa0;</td>
+<td class="left">&#xa0;</td>
+</tr>
 </tbody>
 <tbody>
-<tr><td class="left"></td><td class="left">5. Рычажные весы.</td><td class="left">5. &mu;<sub>пок</sub> бруска о поверхность.</td><td class="left"></td><td class="left">I</td></tr>
-<tr><td class="left"></td><td class="left"><i>(линейка, нитка, груз известной массы, неизвестный груз)</i></td><td class="left"><i>(брусок, нитка, линейка)</i></td><td class="left"></td><td class="left"></td></tr>
+<tr>
+<td class="left">&#xa0;</td>
+<td class="left">5. Рычажные весы.</td>
+<td class="left">5. &mu;<sub>пок</sub> бруска о поверхность.</td>
+<td class="left">&#xa0;</td>
+<td class="left">I</td>
+</tr>
+
+<tr>
+<td class="left">&#xa0;</td>
+<td class="left"><i>(линейка, нитка, груз известной массы, неизвестный груз)</i></td>
+<td class="left"><i>(брусок, нитка, линейка)</i></td>
+<td class="left">&#xa0;</td>
+<td class="left">&#xa0;</td>
+</tr>
 </tbody>
 <tbody>
-<tr><td class="left"></td><td class="left">6. Время реакции экспериментатора.</td><td class="left">6. &mu;<sub>пок</sub> / &mu;<sub>ск</sub> о деревянную линейку.</td><td class="left"></td><td class="left">N</td></tr>
-<tr><td class="left"></td><td class="left"><i>(линейка)</i></td><td class="left"><i>(линейка, 2 карандаша/ручки)</i></td><td class="left"></td><td class="left"></td></tr>
+<tr>
+<td class="left">&#xa0;</td>
+<td class="left">6. Время реакции экспериментатора.</td>
+<td class="left">6. &mu;<sub>пок</sub> / &mu;<sub>ск</sub> о деревянную линейку.</td>
+<td class="left">&#xa0;</td>
+<td class="left">N</td>
+</tr>
+
+<tr>
+<td class="left">&#xa0;</td>
+<td class="left"><i>(линейка)</i></td>
+<td class="left"><i>(линейка, 2 карандаша/ручки)</i></td>
+<td class="left">&#xa0;</td>
+<td class="left">&#xa0;</td>
+</tr>
 </tbody>
 <tbody>
-<tr><td class="left"></td><td class="left">7. Плотность пластилина.</td><td class="left">7. &mu;<sub>ск</sub> деревянной и пластмассовой линеек о поверхность стола.</td><td class="left"></td><td class="left">O</td></tr>
-<tr><td class="left"></td><td class="left"><i>(линейка, нитка, пластилин, вода)</i></td><td class="left"><i>(отвес, деревянная и пластмассовая линейки, стол)</i></td><td class="left"></td><td class="left"></td></tr>
+<tr>
+<td class="left">&#xa0;</td>
+<td class="left">7. Плотность пластилина.</td>
+<td class="left">7. &mu;<sub>ск</sub> деревянной и пластмассовой линеек о поверхность стола.</td>
+<td class="left">&#xa0;</td>
+<td class="left">O</td>
+</tr>
+
+<tr>
+<td class="left">&#xa0;</td>
+<td class="left"><i>(линейка, нитка, пластилин, вода)</i></td>
+<td class="left"><i>(отвес, деревянная и пластмассовая линейки, стол)</i></td>
+<td class="left">&#xa0;</td>
+<td class="left">&#xa0;</td>
+</tr>
 </tbody>
 <tbody>
-<tr><td class="left"><b>ДЭ</b></td><td class="left">1. Толщина листа бумаги.</td><td class="left">1. Разрешающая способность глаза.</td><td class="left">1. Высота облаков.</td><td class="left">1. Высота облаков.</td></tr>
-<tr><td class="left"></td><td class="left"><i>(лист бумаги, линейка)</i></td><td class="left"><i>(линейка)</i></td><td class="left"><i>(линейка)</i></td><td class="left"><i>(линейка)</i></td></tr>
+<tr>
+<td class="left"><b>ДЭ</b></td>
+<td class="left">1. Толщина листа бумаги.</td>
+<td class="left">1. Разрешающая способность глаза.</td>
+<td class="left">1. Высота облаков.</td>
+<td class="left">1. Высота облаков.</td>
+</tr>
+
+<tr>
+<td class="left">&#xa0;</td>
+<td class="left"><i>(лист бумаги, линейка)</i></td>
+<td class="left"><i>(линейка)</i></td>
+<td class="left"><i>(линейка)</i></td>
+<td class="left"><i>(линейка)</i></td>
+</tr>
 </tbody>
 <tbody>
-<tr><td class="left"></td><td class="left">2. Диаметр булавки</td><td class="left">2. Сила сжатия прищепки.</td><td class="left">2. Сила отрыва скотча от мотка.</td><td class="left">2. Потеря энергии при столкновении.</td></tr>
-<tr><td class="left"></td><td class="left"><i>(булавка, миллиметровка)</i></td><td class="left"><i>(груз известной массы, прищепка, нить, линейка)</i></td><td class="left"><i>(скотч, резинка, линейка, монетки)</i></td><td class="left"><i>(миллиметровка, линейка, две монеты)</i></td></tr>
+<tr>
+<td class="left">&#xa0;</td>
+<td class="left">2. Диаметр булавки</td>
+<td class="left">2. Сила сжатия прищепки.</td>
+<td class="left">2. Сила отрыва скотча от мотка.</td>
+<td class="left">2. Потеря энергии при столкновении.</td>
+</tr>
+
+<tr>
+<td class="left">&#xa0;</td>
+<td class="left"><i>(булавка, миллиметровка)</i></td>
+<td class="left"><i>(груз известной массы, прищепка, нить, линейка)</i></td>
+<td class="left"><i>(скотч, резинка, линейка, монетки)</i></td>
+<td class="left"><i>(миллиметровка, линейка, две монеты)</i></td>
+</tr>
 </tbody>
 <tbody>
-<tr><td class="left"></td><td class="left">3. Высота дерева.</td><td class="left">3. Внутренний диаметр иглы шприца.</td><td class="left">3. Угловой размер Солнца.</td><td class="left">3. Отношение радиуса острия булавки к радиусу её головки.</td></tr>
-<tr><td class="left"></td><td class="left"><i>(линейка)</i></td><td class="left"><i>(секундомер, линейка, шприц)</i></td><td class="left"><i>(линейка, бумага, ручка)</i></td><td class="left"><i>(булавка, фольга, миллиметровка)</i></td></tr>
+<tr>
+<td class="left">&#xa0;</td>
+<td class="left">3. Высота дерева.</td>
+<td class="left">3. Внутренний диаметр иглы шприца.</td>
+<td class="left">3. Угловой размер Солнца.</td>
+<td class="left">3. Отношение радиуса острия булавки к радиусу её головки.</td>
+</tr>
+
+<tr>
+<td class="left">&#xa0;</td>
+<td class="left"><i>(линейка)</i></td>
+<td class="left"><i>(секундомер, линейка, шприц)</i></td>
+<td class="left"><i>(линейка, бумага, ручка)</i></td>
+<td class="left"><i>(булавка, фольга, миллиметровка)</i></td>
+</tr>
 </tbody>
 <tbody>
-<tr><td class="left"></td><td class="left">4. Плотность масла.</td><td class="left">4. Масса куска миллиметровки.</td><td class="left">4. Отношение масс двух грузов.</td><td class="left">4. Чёрный ящик (конденсатор и два резистора).</td></tr>
-<tr><td class="left"></td><td class="left"><i>(трубочки, масло, вода, линейка)</i></td><td class="left"><i>(миллиметровка, монета известной массы)</i></td><td class="left"><i>(нитка, линейка, грузы (камни))</i></td><td class="left"><i>(мультиметр, батарейка)</i></td></tr>
+<tr>
+<td class="left">&#xa0;</td>
+<td class="left">4. Плотность масла.</td>
+<td class="left">4. Масса куска миллиметровки.</td>
+<td class="left">4. Отношение масс двух грузов.</td>
+<td class="left">4. Чёрный ящик (конденсатор и два резистора).</td>
+</tr>
+
+<tr>
+<td class="left">&#xa0;</td>
+<td class="left"><i>(трубочки, масло, вода, линейка)</i></td>
+<td class="left"><i>(миллиметровка, монета известной массы)</i></td>
+<td class="left"><i>(нитка, линейка, грузы (камни))</i></td>
+<td class="left"><i>(мультиметр, батарейка)</i></td>
+</tr>
 </tbody>
 <tbody>
-<tr><td class="left"></td><td class="left">5. Скорость вытекания воды из крана.</td><td class="left">5. Теплоёмкость тела.</td><td class="left">5. Момент инерции тела.</td><td class="left">5. Коэффициент трения верёвки о трубу.</td></tr>
-<tr><td class="left"></td><td class="left"><i>(секундомер, линейка, кружка)</i></td><td class="left"><i>(горячая вода, тело, термометр, секундомер)</i></td><td class="left"><i>(линейка, миллиметровка, тело, секундомер, весы)</i></td><td class="left"><i>(верёвка)</i></td></tr>
+<tr>
+<td class="left">&#xa0;</td>
+<td class="left">5. Скорость вытекания воды из крана.</td>
+<td class="left">5. Теплоёмкость тела.</td>
+<td class="left">5. Момент инерции тела.</td>
+<td class="left">5. Коэффициент трения верёвки о трубу.</td>
+</tr>
+
+<tr>
+<td class="left">&#xa0;</td>
+<td class="left"><i>(секундомер, линейка, кружка)</i></td>
+<td class="left"><i>(горячая вода, тело, термометр, секундомер)</i></td>
+<td class="left"><i>(линейка, миллиметровка, тело, секундомер, весы)</i></td>
+<td class="left"><i>(верёвка)</i></td>
+</tr>
 </tbody>
 <tbody>
-<tr><td class="left"></td><td class="left"></td><td class="left"></td><td class="left">6. Чёрный ящик (два резистора и диод).</td><td class="left">6. Отношение ёмкостей конденсаторов.</td></tr>
-<tr><td class="left"></td><td class="left"></td><td class="left"></td><td class="left"><i>(батарейка, мультиметр)</i></td><td class="left"><i>(два конденсатора, мультиметр)</i></td></tr>
+<tr>
+<td class="left">&#xa0;</td>
+<td class="left">&#xa0;</td>
+<td class="left">&#xa0;</td>
+<td class="left">6. Чёрный ящик (два резистора и диод).</td>
+<td class="left">6. Отношение ёмкостей конденсаторов.</td>
+</tr>
+
+<tr>
+<td class="left">&#xa0;</td>
+<td class="left">&#xa0;</td>
+<td class="left">&#xa0;</td>
+<td class="left"><i>(батарейка, мультиметр)</i></td>
+<td class="left"><i>(два конденсатора, мультиметр)</i></td>
+</tr>
 </tbody>
 <tbody>
-<tr><td class="left"><b>ДИ</b></td><td class="left">Устройство, поражающее мишень.</td><td class="left"></td><td class="left">Устройство, выдающее звук заданной частоты.</td><td class="left"></td></tr>
+<tr>
+<td class="left"><b>ДИ</b></td>
+<td class="left">Устройство, поражающее мишень.</td>
+<td class="left">&#xa0;</td>
+<td class="left">Устройство, выдающее звук заданной частоты.</td>
+<td class="left">&#xa0;</td>
+</tr>
 </tbody>
 <tbody>
-<tr><td class="left"><b>БЗ</b></td><td class="left">Исследовать падение листа бумаги.</td><td class="left"></td><td class="left"></td><td class="left"></td></tr>
+<tr>
+<td class="left"><b>БЗ</b></td>
+<td class="left">Исследовать падение листа бумаги.</td>
+<td class="left">&#xa0;</td>
+<td class="left">&#xa0;</td>
+<td class="left">&#xa0;</td>
+</tr>
 </tbody>
 </table>
-
 </div>
-
-<div id="postamble">
+<div id="postamble" class="status">
 <hr>
-<p class="postamble">Last Updated 2013-08-21T00:45+0900.</p>
-<p class="postamble">Created by Igor Shenderovich [<a href="mailto:shender.i@gmail.com">shender.i@gmail.com</a>] with <a href="http://orgmode.org">Org</a> version 7.9.4 with <a href="http://www.gnu.org/software/emacs/">Emacs</a> version 24.</p>
+<p class="date">Last Updated 2013-08-29 Thu 15:20</p>
+<p class="postamble">Created by Igor Shenderovich [<a href="mailto:shender.i@gmail.com">shender.i@gmail.com</a>] with <a href="http://www.gnu.org/software/emacs/">Emacs</a> 24.3.1 (<a href="http://orgmode.org">Org</a> mode 8.0.7)</p>
 </div>
 </body>
 </html>

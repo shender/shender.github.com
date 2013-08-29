@@ -1,63 +1,88 @@
 <?xml version="1.0" encoding="utf-8"?>
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
-               "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
 <head>
-<title>Эксперименты–2010: кто, что, когда. </title>
+<title>Эксперименты–2010: кто, что, когда.</title>
+<!-- 2013-08-29 Thu 15:19 -->
 <meta http-equiv="Content-Type" content="text/html;charset=utf-8"/>
-<meta name="title" content="Эксперименты–2010: кто, что, когда. "/>
 <meta name="generator" content="Org-mode"/>
-<meta name="generated" content="2012-10-27T01:45+0200"/>
 <meta name="author" content="Igor Shenderovich"/>
-<meta name="description" content=""/>
-<meta name="keywords" content=""/>
 <style type="text/css">
  <!--/*--><![CDATA[/*><!--*/
-  html { font-family: Times, serif; font-size: 12pt; }
   .title  { text-align: center; }
-  .todo   { color: red; }
+  .todo   { font-family: monospace; color: red; }
   .done   { color: green; }
-  .tag    { background-color: #add8e6; font-weight:normal }
-  .target { }
+  .tag    { background-color: #eee; font-family: monospace;
+            padding: 2px; font-size: 80%; font-weight: normal; }
   .timestamp { color: #bebebe; }
   .timestamp-kwd { color: #5f9ea0; }
-  .right  {margin-left:auto; margin-right:0px;  text-align:right;}
-  .left   {margin-left:0px;  margin-right:auto; text-align:left;}
-  .center {margin-left:auto; margin-right:auto; text-align:center;}
-  p.verse { margin-left: 3% }
+  .right  { margin-left: auto; margin-right: 0px;  text-align: right; }
+  .left   { margin-left: 0px;  margin-right: auto; text-align: left; }
+  .center { margin-left: auto; margin-right: auto; text-align: center; }
+  .underline { text-decoration: underline; }
+  #postamble p, #preamble p { font-size: 90%; margin: .2em; }
+  p.verse { margin-left: 3%; }
   pre {
-	border: 1pt solid #AEBDCC;
-	background-color: #F3F5F7;
-	padding: 5pt;
-	font-family: courier, monospace;
-        font-size: 90%;
-        overflow:auto;
+    border: 1px solid #ccc;
+    box-shadow: 3px 3px 3px #eee;
+    padding: 8pt;
+    font-family: monospace;
+    overflow: auto;
+    margin: 1.2em;
   }
-  table { border-collapse: collapse; }
-  td, th { vertical-align: top;  }
-  th.right  { text-align:center;  }
-  th.left   { text-align:center;   }
-  th.center { text-align:center; }
-  td.right  { text-align:right;  }
-  td.left   { text-align:left;   }
-  td.center { text-align:center; }
+  pre.src {
+    position: relative;
+    overflow: visible;
+    padding-top: 1.2em;
+  }
+  pre.src:before {
+    display: none;
+    position: absolute;
+    background-color: white;
+    top: -10px;
+    right: 10px;
+    padding: 3px;
+    border: 1px solid black;
+  }
+  pre.src:hover:before { display: inline;}
+  pre.src-sh:before    { content: 'sh'; }
+  pre.src-bash:before  { content: 'sh'; }
+  pre.src-emacs-lisp:before { content: 'Emacs Lisp'; }
+  pre.src-R:before     { content: 'R'; }
+  pre.src-perl:before  { content: 'Perl'; }
+  pre.src-java:before  { content: 'Java'; }
+  pre.src-sql:before   { content: 'SQL'; }
+
+  table { border-collapse:collapse; }
+  td, th { vertical-align:top;  }
+  th.right  { text-align: center;  }
+  th.left   { text-align: center;   }
+  th.center { text-align: center; }
+  td.right  { text-align: right;  }
+  td.left   { text-align: left;   }
+  td.center { text-align: center; }
   dt { font-weight: bold; }
-  div.figure { padding: 0.5em; }
-  div.figure p { text-align: center; }
-  div.inlinetask {
-    padding:10px;
-    border:2px solid gray;
-    margin:10px;
+  .footpara:nth-child(2) { display: inline; }
+  .footpara { display: block; }
+  .footdef  { margin-bottom: 1em; }
+  .figure { padding: 1em; }
+  .figure p { text-align: center; }
+  .inlinetask {
+    padding: 10px;
+    border: 2px solid gray;
+    margin: 10px;
     background: #ffffcc;
   }
+  #org-div-home-and-up
+   { text-align: right; font-size: 70%; white-space: nowrap; }
   textarea { overflow-x: auto; }
-  .linenr { font-size:smaller }
-  .code-highlighted {background-color:#ffff00;}
-  .org-info-js_info-navigation { border-style:none; }
-  #org-info-js_console-label { font-size:10px; font-weight:bold;
-                               white-space:nowrap; }
-  .org-info-js_search-highlight {background-color:#ffff00; color:#000000;
-                                 font-weight:bold; }
+  .linenr { font-size: smaller }
+  .code-highlighted { background-color: #ffff00; }
+  .org-info-js_info-navigation { border-style: none; }
+  #org-info-js_console-label
+    { font-size: 10px; font-weight: bold; white-space: nowrap; }
+  .org-info-js_search-highlight
+    { background-color: #ffff00; color: #000000; font-weight: bold; }
   /*]]>*/-->
 </style>
 <link rel="stylesheet" type="text/css" href="../css/style_exp.css" />
@@ -107,109 +132,362 @@ for the JavaScript code in this tag.
  }
 /*]]>*///-->
 </script>
-
 </head>
 <body>
-
-<div id="preamble">
-
-</div>
-
 <div id="content">
-<h1 class="title">Эксперименты–2010: кто, что, когда. </h1>
-
-
+<h1 class="title">Эксперименты–2010: кто, что, когда.</h1>
 <table border="2" cellspacing="0" cellpadding="6" rules="groups" frame="hsides">
-<colgroup><col class="left" /><col class="left" /><col class="left" /><col class="left" /><col class="left" />
+
+
+<colgroup>
+<col class="left"/>
+
+<col class="left"/>
+
+<col class="left"/>
+
+<col class="left"/>
+
+<col class="left"/>
 </colgroup>
 <thead>
-<tr><th scope="col" class="left"></th><th scope="col" class="left">Выпуск 2014 (Портянкин, Муретова)</th><th scope="col" class="left">Выпуск 2013 (Егоров, Корешкова)</th><th scope="col" class="left">Выпуск 2012 (Терехов, Свирина)</th><th scope="col" class="left">Выпуск 2011 (Ходунов, Максимова)</th></tr>
-<tr><th scope="col" class="left"></th><th scope="col" class="left">Затылкин, Иванов</th><th scope="col" class="left">Лиознова</th><th scope="col" class="left">Кострыгин</th><th scope="col" class="left">Коптелов</th></tr>
+<tr>
+<th scope="col" class="left">&#xa0;</th>
+<th scope="col" class="left">Выпуск 2014 (Портянкин, Муретова)</th>
+<th scope="col" class="left">Выпуск 2013 (Егоров, Корешкова)</th>
+<th scope="col" class="left">Выпуск 2012 (Терехов, Свирина)</th>
+<th scope="col" class="left">Выпуск 2011 (Ходунов, Максимова)</th>
+</tr>
+
+<tr>
+<th scope="col" class="left">&#xa0;</th>
+<th scope="col" class="left">Затылкин, Иванов</th>
+<th scope="col" class="left">Лиознова</th>
+<th scope="col" class="left">Кострыгин</th>
+<th scope="col" class="left">Коптелов</th>
+</tr>
 </thead>
 <tbody>
-<tr><td class="left"><b>Занятия</b></td><td class="left">1. Общий рассказ про погрешности.</td><td class="left">1. Толщина плёнки.</td><td class="left">1. Модуль упругости шарика.</td><td class="left">1. Сила сопротивления от скорости.</td></tr>
-<tr><td class="left"></td><td class="left"></td><td class="left"><i>(шприц, масло, линейка)</i></td><td class="left"><i>(каучуковый шарик, вода, линейка)</i></td><td class="left"><i>(шарики, нитка, линейка)</i></td></tr>
+<tr>
+<td class="left"><b>Занятия</b></td>
+<td class="left">1. Общий рассказ про погрешности.</td>
+<td class="left">1. Толщина плёнки.</td>
+<td class="left">1. Модуль упругости шарика.</td>
+<td class="left">1. Сила сопротивления от скорости.</td>
+</tr>
+
+<tr>
+<td class="left">&#xa0;</td>
+<td class="left">&#xa0;</td>
+<td class="left"><i>(шприц, масло, линейка)</i></td>
+<td class="left"><i>(каучуковый шарик, вода, линейка)</i></td>
+<td class="left"><i>(шарики, нитка, линейка)</i></td>
+</tr>
 </tbody>
 <tbody>
-<tr><td class="left"></td><td class="left">2. Система координат.</td><td class="left">2. Неизвестное сопротивление</td><td class="left">2. Атмосферное давление.</td><td class="left">2. Распределение вероятностей маятника.</td></tr>
-<tr><td class="left"></td><td class="left"></td><td class="left"><i>(вольтметр, батарейка, сопротивление, провода)</i></td><td class="left"><i>(вода, трубочки, линейка)</i></td><td class="left"><i>(нитки, груз)</i></td></tr>
+<tr>
+<td class="left">&#xa0;</td>
+<td class="left">2. Система координат.</td>
+<td class="left">2. Неизвестное сопротивление</td>
+<td class="left">2. Атмосферное давление.</td>
+<td class="left">2. Распределение вероятностей маятника.</td>
+</tr>
+
+<tr>
+<td class="left">&#xa0;</td>
+<td class="left">&#xa0;</td>
+<td class="left"><i>(вольтметр, батарейка, сопротивление, провода)</i></td>
+<td class="left"><i>(вода, трубочки, линейка)</i></td>
+<td class="left"><i>(нитки, груз)</i></td>
+</tr>
 </tbody>
 <tbody>
-<tr><td class="left"></td><td class="left">3. Скорость муравья.</td><td class="left">3. Сила разрыва нити.</td><td class="left">3. Распределение Гаусса.</td><td class="left">3. Толщина масляного пятна.</td></tr>
-<tr><td class="left"></td><td class="left"><i>(секундомер, линейка, муравей)</i></td><td class="left"><i>(нитки, кнопки, грузики)</i></td><td class="left"><i>(монетки)</i></td><td class="left"><i>(масло, вода, линейка)</i></td></tr>
+<tr>
+<td class="left">&#xa0;</td>
+<td class="left">3. Скорость муравья.</td>
+<td class="left">3. Сила разрыва нити.</td>
+<td class="left">3. Распределение Гаусса.</td>
+<td class="left">3. Толщина масляного пятна.</td>
+</tr>
+
+<tr>
+<td class="left">&#xa0;</td>
+<td class="left"><i>(секундомер, линейка, муравей)</i></td>
+<td class="left"><i>(нитки, кнопки, грузики)</i></td>
+<td class="left"><i>(монетки)</i></td>
+<td class="left"><i>(масло, вода, линейка)</i></td>
+</tr>
 </tbody>
 <tbody>
-<tr><td class="left"></td><td class="left">4. Масса капли воды.</td><td class="left">4. Показатель преломления.</td><td class="left">4. Диаметр отверстия шприца.</td><td class="left">4. Масса куска пластилина.</td></tr>
-<tr><td class="left"></td><td class="left"><i>(ведро, стакан, шприц, монетки)</i></td><td class="left"><i>(указка, линейка, бумага, пластиковые стаканы)</i></td><td class="left"><i>(шприц, линейка)</i></td><td class="left"><i>(карандаш, вода, нитка, линейка)</i></td></tr>
+<tr>
+<td class="left">&#xa0;</td>
+<td class="left">4. Масса капли воды.</td>
+<td class="left">4. Показатель преломления.</td>
+<td class="left">4. Диаметр отверстия шприца.</td>
+<td class="left">4. Масса куска пластилина.</td>
+</tr>
+
+<tr>
+<td class="left">&#xa0;</td>
+<td class="left"><i>(ведро, стакан, шприц, монетки)</i></td>
+<td class="left"><i>(указка, линейка, бумага, пластиковые стаканы)</i></td>
+<td class="left"><i>(шприц, линейка)</i></td>
+<td class="left"><i>(карандаш, вода, нитка, линейка)</i></td>
+</tr>
 </tbody>
 <tbody>
-<tr><td class="left"></td><td class="left">5. Центр масс палочки.</td><td class="left">5. &mu; покоя / &mu; скольжения.</td><td class="left">5. Радиус песчинки.</td><td class="left">5. Радиус песчинки.</td></tr>
-<tr><td class="left"></td><td class="left"><i>(линейка, монетки, нитки)</i></td><td class="left"><i>(деревянный брусок, палочка, линейка)</i></td><td class="left"><i>(секундомер, линейка, вода)</i></td><td class="left"><i>(секундомер, линейка, вода)</i></td></tr>
+<tr>
+<td class="left">&#xa0;</td>
+<td class="left">5. Центр масс палочки.</td>
+<td class="left">5. &mu; покоя / &mu; скольжения.</td>
+<td class="left">5. Радиус песчинки.</td>
+<td class="left">5. Радиус песчинки.</td>
+</tr>
+
+<tr>
+<td class="left">&#xa0;</td>
+<td class="left"><i>(линейка, монетки, нитки)</i></td>
+<td class="left"><i>(деревянный брусок, палочка, линейка)</i></td>
+<td class="left"><i>(секундомер, линейка, вода)</i></td>
+<td class="left"><i>(секундомер, линейка, вода)</i></td>
+</tr>
 </tbody>
 <tbody>
-<tr><td class="left"></td><td class="left">6. Проверка гуковости резинки.</td><td class="left">6. Скорость муравья.</td><td class="left">6. Проверка гуковости резинки.</td><td class="left">6. Момент инерции шарика.</td></tr>
-<tr><td class="left"></td><td class="left"><i>(резинка, монетки, линейка)</i></td><td class="left"><i>(секундомер, линейка, муравей)</i></td><td class="left"><i>(миллиметр., резинка, лин., груз)</i></td><td class="left"><i>(шарик, вода, линейка)</i></td></tr>
+<tr>
+<td class="left">&#xa0;</td>
+<td class="left">6. Проверка гуковости резинки.</td>
+<td class="left">6. Скорость муравья.</td>
+<td class="left">6. Проверка гуковости резинки.</td>
+<td class="left">6. Момент инерции шарика.</td>
+</tr>
+
+<tr>
+<td class="left">&#xa0;</td>
+<td class="left"><i>(резинка, монетки, линейка)</i></td>
+<td class="left"><i>(секундомер, линейка, муравей)</i></td>
+<td class="left"><i>(миллиметр., резинка, лин., груз)</i></td>
+<td class="left"><i>(шарик, вода, линейка)</i></td>
+</tr>
 </tbody>
 <tbody>
-<tr><td class="left"></td><td class="left">7. Вращательное движение.</td><td class="left">7. Содержание соли в воде.</td><td class="left">7. Отношение длин нитей маятника.</td><td class="left">7. Дифракция на CD.</td></tr>
-<tr><td class="left"></td><td class="left"><i>(нитки, камни)</i></td><td class="left"><i>(прозр. бут., пластилин, вода с солью, колпачок от ручки)</i></td><td class="left"><i>(нитки, груз)</i></td><td class="left"><i>(диск, указка, линейка)</i></td></tr>
+<tr>
+<td class="left">&#xa0;</td>
+<td class="left">7. Вращательное движение.</td>
+<td class="left">7. Содержание соли в воде.</td>
+<td class="left">7. Отношение длин нитей маятника.</td>
+<td class="left">7. Дифракция на CD.</td>
+</tr>
+
+<tr>
+<td class="left">&#xa0;</td>
+<td class="left"><i>(нитки, камни)</i></td>
+<td class="left"><i>(прозр. бут., пластилин, вода с солью, колпачок от ручки)</i></td>
+<td class="left"><i>(нитки, груз)</i></td>
+<td class="left"><i>(диск, указка, линейка)</i></td>
+</tr>
 </tbody>
 <tbody>
-<tr><td class="left"></td><td class="left"></td><td class="left">8. Плотность металла в пластилине.</td><td class="left">8. Хаусдорфова размерность.</td><td class="left">8. Плотность карандаша.</td></tr>
-<tr><td class="left"></td><td class="left"></td><td class="left"><i>(Разновесы, пластилин с металлом, стакан с водой)</i></td><td class="left"><i>(линейка)</i></td><td class="left"><i>(вода, нитки, линейка, карандаш)</i></td></tr>
+<tr>
+<td class="left">&#xa0;</td>
+<td class="left">&#xa0;</td>
+<td class="left">8. Плотность металла в пластилине.</td>
+<td class="left">8. Хаусдорфова размерность.</td>
+<td class="left">8. Плотность карандаша.</td>
+</tr>
+
+<tr>
+<td class="left">&#xa0;</td>
+<td class="left">&#xa0;</td>
+<td class="left"><i>(Разновесы, пластилин с металлом, стакан с водой)</i></td>
+<td class="left"><i>(линейка)</i></td>
+<td class="left"><i>(вода, нитки, линейка, карандаш)</i></td>
+</tr>
 </tbody>
 <tbody>
-<tr><td class="left"></td><td class="left"></td><td class="left">9. Время падения различных масс.</td><td class="left">9. Скорость вытекания воды.</td><td class="left">9. Исследование мод в двойном маятнике.</td></tr>
-<tr><td class="left"></td><td class="left"></td><td class="left"><i>(грузики, секундомер)</i></td><td class="left"><i>(линейка)</i></td><td class="left"><i>(нитка, грузики)</i></td></tr>
+<tr>
+<td class="left">&#xa0;</td>
+<td class="left">&#xa0;</td>
+<td class="left">9. Время падения различных масс.</td>
+<td class="left">9. Скорость вытекания воды.</td>
+<td class="left">9. Исследование мод в двойном маятнике.</td>
+</tr>
+
+<tr>
+<td class="left">&#xa0;</td>
+<td class="left">&#xa0;</td>
+<td class="left"><i>(грузики, секундомер)</i></td>
+<td class="left"><i>(линейка)</i></td>
+<td class="left"><i>(нитка, грузики)</i></td>
+</tr>
 </tbody>
 <tbody>
-<tr><td class="left"></td><td class="left"></td><td class="left">10. Центр масс неизвестного тела.</td><td class="left">10. Плотность карандаша.</td><td class="left">10. Длина волны лазерной указки.</td></tr>
-<tr><td class="left"></td><td class="left"></td><td class="left"><i>(Линейки, нитки, неизвестное тело (картон))</i></td><td class="left"><i>(вода, нитки, линейка, карандаш)</i></td><td class="left"><i>(фольга, булавки, указка, линейка)</i></td></tr>
+<tr>
+<td class="left">&#xa0;</td>
+<td class="left">&#xa0;</td>
+<td class="left">10. Центр масс неизвестного тела.</td>
+<td class="left">10. Плотность карандаша.</td>
+<td class="left">10. Длина волны лазерной указки.</td>
+</tr>
+
+<tr>
+<td class="left">&#xa0;</td>
+<td class="left">&#xa0;</td>
+<td class="left"><i>(Линейки, нитки, неизвестное тело (картон))</i></td>
+<td class="left"><i>(вода, нитки, линейка, карандаш)</i></td>
+<td class="left"><i>(фольга, булавки, указка, линейка)</i></td>
+</tr>
 </tbody>
 <tbody>
-<tr><td class="left"><b>День Экспериментатора</b></td><td class="left">1. Толщина бумаги.</td><td class="left">1. Высота дерева.</td><td class="left">1. Булавка: r/d.</td><td class="left">1. &mu; верёвки о трубу.</td></tr>
-<tr><td class="left"></td><td class="left"><i>(бумага, линейка)</i></td><td class="left"><i>(линейка)</i></td><td class="left"><i>(булавка, фольга, миллиметровка)</i></td><td class="left"><i>(верёвка)</i></td></tr>
+<tr>
+<td class="left"><b>День Экспериментатора</b></td>
+<td class="left">1. Толщина бумаги.</td>
+<td class="left">1. Высота дерева.</td>
+<td class="left">1. Булавка: r/d.</td>
+<td class="left">1. &mu; верёвки о трубу.</td>
+</tr>
+
+<tr>
+<td class="left">&#xa0;</td>
+<td class="left"><i>(бумага, линейка)</i></td>
+<td class="left"><i>(линейка)</i></td>
+<td class="left"><i>(булавка, фольга, миллиметровка)</i></td>
+<td class="left"><i>(верёвка)</i></td>
+</tr>
 </tbody>
 <tbody>
-<tr><td class="left"></td><td class="left">2. Сила отрыва магнита.</td><td class="left">2. Плотность неизвестной жижи.</td><td class="left">2. Сила отрыва скотча.</td><td class="left">2. Расстояние между витками в лампочке.</td></tr>
-<tr><td class="left"></td><td class="left"><i>(магнит, монетки, резинка)</i></td><td class="left"><i>(вода, линейка, нитки, камни, кружка)</i></td><td class="left"><i>(скотч, резинка, линейка, монетки)</i></td><td class="left"><i>(батарейка, фольга, провода, игла, линейка, бумага, пластилин)</i></td></tr>
+<tr>
+<td class="left">&#xa0;</td>
+<td class="left">2. Сила отрыва магнита.</td>
+<td class="left">2. Плотность неизвестной жижи.</td>
+<td class="left">2. Сила отрыва скотча.</td>
+<td class="left">2. Расстояние между витками в лампочке.</td>
+</tr>
+
+<tr>
+<td class="left">&#xa0;</td>
+<td class="left"><i>(магнит, монетки, резинка)</i></td>
+<td class="left"><i>(вода, линейка, нитки, камни, кружка)</i></td>
+<td class="left"><i>(скотч, резинка, линейка, монетки)</i></td>
+<td class="left"><i>(батарейка, фольга, провода, игла, линейка, бумага, пластилин)</i></td>
+</tr>
 </tbody>
 <tbody>
-<tr><td class="left"></td><td class="left">3. Плотность камня и бруска.</td><td class="left">3. Разрешающая способность глаза.</td><td class="left">3. Длина футбольного поля.</td><td class="left">3. Высота облаков.</td></tr>
-<tr><td class="left"></td><td class="left"><i>(камень, брусок, вода, линейка, нитки)</i></td><td class="left"><i>(линейка)</i></td><td class="left"><i>(линейка)</i></td><td class="left"><i>(линейка)</i></td></tr>
+<tr>
+<td class="left">&#xa0;</td>
+<td class="left">3. Плотность камня и бруска.</td>
+<td class="left">3. Разрешающая способность глаза.</td>
+<td class="left">3. Длина футбольного поля.</td>
+<td class="left">3. Высота облаков.</td>
+</tr>
+
+<tr>
+<td class="left">&#xa0;</td>
+<td class="left"><i>(камень, брусок, вода, линейка, нитки)</i></td>
+<td class="left"><i>(линейка)</i></td>
+<td class="left"><i>(линейка)</i></td>
+<td class="left"><i>(линейка)</i></td>
+</tr>
 </tbody>
 <tbody>
-<tr><td class="left"></td><td class="left">4. Скорость ветра.</td><td class="left">4. Толщина карандашной линии.</td><td class="left">4. Угловой размер Солнца.</td><td class="left">4. Отношение теплопроводностей.</td></tr>
-<tr><td class="left"></td><td class="left"><i>(бумага, скотч, линейка)</i></td><td class="left"><i>(карандаш, бумага, линейка)</i></td><td class="left"><i>(линейка)</i></td><td class="left"><i>(свечка, 2 проволоки, линейка)</i></td></tr>
+<tr>
+<td class="left">&#xa0;</td>
+<td class="left">4. Скорость ветра.</td>
+<td class="left">4. Толщина карандашной линии.</td>
+<td class="left">4. Угловой размер Солнца.</td>
+<td class="left">4. Отношение теплопроводностей.</td>
+</tr>
+
+<tr>
+<td class="left">&#xa0;</td>
+<td class="left"><i>(бумага, скотч, линейка)</i></td>
+<td class="left"><i>(карандаш, бумага, линейка)</i></td>
+<td class="left"><i>(линейка)</i></td>
+<td class="left"><i>(свечка, 2 проволоки, линейка)</i></td>
+</tr>
 </tbody>
 <tbody>
-<tr><td class="left"></td><td class="left">5. Скорость вытекания воды.</td><td class="left">5. Плотность масла.</td><td class="left"></td><td class="left">5. Солёность воды.</td></tr>
-<tr><td class="left"></td><td class="left"><i>(секундомер, бумага, пакет, линейка, камни)</i></td><td class="left"><i>(вода, масло, 2 трубки, линейка)</i></td><td class="left"></td><td class="left"><i>(соль, монетки, линейка, вода, жидкость, два стакана)</i></td></tr>
+<tr>
+<td class="left">&#xa0;</td>
+<td class="left">5. Скорость вытекания воды.</td>
+<td class="left">5. Плотность масла.</td>
+<td class="left">&#xa0;</td>
+<td class="left">5. Солёность воды.</td>
+</tr>
+
+<tr>
+<td class="left">&#xa0;</td>
+<td class="left"><i>(секундомер, бумага, пакет, линейка, камни)</i></td>
+<td class="left"><i>(вода, масло, 2 трубки, линейка)</i></td>
+<td class="left">&#xa0;</td>
+<td class="left"><i>(соль, монетки, линейка, вода, жидкость, два стакана)</i></td>
+</tr>
 </tbody>
 <tbody>
-<tr><td class="left"></td><td class="left"></td><td class="left">6. Амплитуда дрожания рук.</td><td class="left"></td><td class="left">6. Чёрный ящик.</td></tr>
-<tr><td class="left"></td><td class="left"></td><td class="left"><i>(лазерная указка, бумага, карандаш, линейка)</i></td><td class="left"></td><td class="left"><i>(конденсатор + диод + резистор)</i></td></tr>
+<tr>
+<td class="left">&#xa0;</td>
+<td class="left">&#xa0;</td>
+<td class="left">6. Амплитуда дрожания рук.</td>
+<td class="left">&#xa0;</td>
+<td class="left">6. Чёрный ящик.</td>
+</tr>
+
+<tr>
+<td class="left">&#xa0;</td>
+<td class="left">&#xa0;</td>
+<td class="left"><i>(лазерная указка, бумага, карандаш, линейка)</i></td>
+<td class="left">&#xa0;</td>
+<td class="left"><i>(конденсатор + диод + резистор)</i></td>
+</tr>
 </tbody>
 <tbody>
-<tr><td class="left"></td><td class="left"></td><td class="left"></td><td class="left"></td><td class="left">7. Отношение ёмкостей.</td></tr>
-<tr><td class="left"></td><td class="left"></td><td class="left"></td><td class="left"></td><td class="left"><i>(мультиметр)</i></td></tr>
+<tr>
+<td class="left">&#xa0;</td>
+<td class="left">&#xa0;</td>
+<td class="left">&#xa0;</td>
+<td class="left">&#xa0;</td>
+<td class="left">7. Отношение ёмкостей.</td>
+</tr>
+
+<tr>
+<td class="left">&#xa0;</td>
+<td class="left">&#xa0;</td>
+<td class="left">&#xa0;</td>
+<td class="left">&#xa0;</td>
+<td class="left"><i>(мультиметр)</i></td>
+</tr>
 </tbody>
 <tbody>
-<tr><td class="left"><b>День Изобретателя</b></td><td class="left">Реактивное движение</td><td class="left">Реактивное движение</td><td class="left">Источник тока</td><td class="left">Источник тока</td></tr>
+<tr>
+<td class="left"><b>День Изобретателя</b></td>
+<td class="left">Реактивное движение</td>
+<td class="left">Реактивное движение</td>
+<td class="left">Источник тока</td>
+<td class="left">Источник тока</td>
+</tr>
 </tbody>
 <tbody>
-<tr><td class="left"><b>Большая Задача</b></td><td class="left">1. Плотность человека.</td><td class="left">1. Плотность человека.</td><td class="left">Сила сопротивления воды</td><td class="left">Сила сопротивления воды</td></tr>
-<tr><td class="left"></td><td class="left">2. Вытекание воды из сифона.</td><td class="left">2. Вытекание воды из сифона.</td><td class="left"></td><td class="left"></td></tr>
+<tr>
+<td class="left"><b>Большая Задача</b></td>
+<td class="left">1. Плотность человека.</td>
+<td class="left">1. Плотность человека.</td>
+<td class="left">Сила сопротивления воды</td>
+<td class="left">Сила сопротивления воды</td>
+</tr>
+
+<tr>
+<td class="left">&#xa0;</td>
+<td class="left">2. Вытекание воды из сифона.</td>
+<td class="left">2. Вытекание воды из сифона.</td>
+<td class="left">&#xa0;</td>
+<td class="left">&#xa0;</td>
+</tr>
 </tbody>
 </table>
-
-
 </div>
-
-<div id="postamble">
+<div id="postamble" class="status">
 <hr>
-<p class="postamble">Last Updated 2012-10-27T01:45+0200.</p>
-<p class="postamble">Created by Igor Shenderovich [<a href="mailto:shender.i@gmail.com">shender.i@gmail.com</a>] with <a href="http://orgmode.org">Org</a> version 7.9.1 with <a href="http://www.gnu.org/software/emacs/">Emacs</a> version 24.</p>
+<p class="date">Last Updated 2013-08-29 Thu 15:19</p>
+<p class="postamble">Created by Igor Shenderovich [<a href="mailto:shender.i@gmail.com">shender.i@gmail.com</a>] with <a href="http://www.gnu.org/software/emacs/">Emacs</a> 24.3.1 (<a href="http://orgmode.org">Org</a> mode 8.0.7)</p>
 </div>
 </body>
 </html>

@@ -1,72 +1,97 @@
 <?xml version="1.0" encoding="utf-8"?>
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
-               "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
 <head>
 <title>Материалы летнего физического лагеря</title>
+<!-- 2013-08-29 Thu 17:34 -->
 <meta http-equiv="Content-Type" content="text/html;charset=utf-8"/>
-<meta name="title" content="Материалы летнего физического лагеря"/>
 <meta name="generator" content="Org-mode"/>
-<meta name="generated" content="2013-08-21T01:30+0900"/>
 <meta name="author" content="Igor Shenderovich"/>
-<meta name="description" content=""/>
-<meta name="keywords" content=""/>
 <style type="text/css">
  <!--/*--><![CDATA[/*><!--*/
-  html { font-family: Times, serif; font-size: 12pt; }
   .title  { text-align: center; }
-  .todo   { color: red; }
+  .todo   { font-family: monospace; color: red; }
   .done   { color: green; }
-  .tag    { background-color: #add8e6; font-weight:normal }
-  .target { }
+  .tag    { background-color: #eee; font-family: monospace;
+            padding: 2px; font-size: 80%; font-weight: normal; }
   .timestamp { color: #bebebe; }
   .timestamp-kwd { color: #5f9ea0; }
-  .right  {margin-left:auto; margin-right:0px;  text-align:right;}
-  .left   {margin-left:0px;  margin-right:auto; text-align:left;}
-  .center {margin-left:auto; margin-right:auto; text-align:center;}
-  p.verse { margin-left: 3% }
+  .right  { margin-left: auto; margin-right: 0px;  text-align: right; }
+  .left   { margin-left: 0px;  margin-right: auto; text-align: left; }
+  .center { margin-left: auto; margin-right: auto; text-align: center; }
+  .underline { text-decoration: underline; }
+  #postamble p, #preamble p { font-size: 90%; margin: .2em; }
+  p.verse { margin-left: 3%; }
   pre {
-	border: 1pt solid #AEBDCC;
-	background-color: #F3F5F7;
-	padding: 5pt;
-	font-family: courier, monospace;
-        font-size: 90%;
-        overflow:auto;
+    border: 1px solid #ccc;
+    box-shadow: 3px 3px 3px #eee;
+    padding: 8pt;
+    font-family: monospace;
+    overflow: auto;
+    margin: 1.2em;
   }
-  table { border-collapse: collapse; }
-  td, th { vertical-align: top;  }
-  th.right  { text-align:center;  }
-  th.left   { text-align:center;   }
-  th.center { text-align:center; }
-  td.right  { text-align:right;  }
-  td.left   { text-align:left;   }
-  td.center { text-align:center; }
+  pre.src {
+    position: relative;
+    overflow: visible;
+    padding-top: 1.2em;
+  }
+  pre.src:before {
+    display: none;
+    position: absolute;
+    background-color: white;
+    top: -10px;
+    right: 10px;
+    padding: 3px;
+    border: 1px solid black;
+  }
+  pre.src:hover:before { display: inline;}
+  pre.src-sh:before    { content: 'sh'; }
+  pre.src-bash:before  { content: 'sh'; }
+  pre.src-emacs-lisp:before { content: 'Emacs Lisp'; }
+  pre.src-R:before     { content: 'R'; }
+  pre.src-perl:before  { content: 'Perl'; }
+  pre.src-java:before  { content: 'Java'; }
+  pre.src-sql:before   { content: 'SQL'; }
+
+  table { border-collapse:collapse; }
+  td, th { vertical-align:top;  }
+  th.right  { text-align: center;  }
+  th.left   { text-align: center;   }
+  th.center { text-align: center; }
+  td.right  { text-align: right;  }
+  td.left   { text-align: left;   }
+  td.center { text-align: center; }
   dt { font-weight: bold; }
-  div.figure { padding: 0.5em; }
-  div.figure p { text-align: center; }
-  div.inlinetask {
-    padding:10px;
-    border:2px solid gray;
-    margin:10px;
+  .footpara:nth-child(2) { display: inline; }
+  .footpara { display: block; }
+  .footdef  { margin-bottom: 1em; }
+  .figure { padding: 1em; }
+  .figure p { text-align: center; }
+  .inlinetask {
+    padding: 10px;
+    border: 2px solid gray;
+    margin: 10px;
     background: #ffffcc;
   }
+  #org-div-home-and-up
+   { text-align: right; font-size: 70%; white-space: nowrap; }
   textarea { overflow-x: auto; }
-  .linenr { font-size:smaller }
-  .code-highlighted {background-color:#ffff00;}
-  .org-info-js_info-navigation { border-style:none; }
-  #org-info-js_console-label { font-size:10px; font-weight:bold;
-                               white-space:nowrap; }
-  .org-info-js_search-highlight {background-color:#ffff00; color:#000000;
-                                 font-weight:bold; }
+  .linenr { font-size: smaller }
+  .code-highlighted { background-color: #ffff00; }
+  .org-info-js_info-navigation { border-style: none; }
+  #org-info-js_console-label
+    { font-size: 10px; font-weight: bold; white-space: nowrap; }
+  .org-info-js_search-highlight
+    { background-color: #ffff00; color: #000000; font-weight: bold; }
   /*]]>*/-->
 </style>
-<link rel="stylesheet" type="text/css" href="./css/style.css" />
+<link rel="stylesheet" type="text/css" href="css/style.css" />
 <script type="text/javascript">
 /*
 @licstart  The following is the entire license notice for the
 JavaScript code in this tag.
 
-Copyright (C) 2012-2013 Free Software Foundation, Inc.
+Copyright (C) 2012  Free Software Foundation, Inc.
 
 The JavaScript code in this tag is free software: you can
 redistribute it and/or modify it under the terms of the GNU
@@ -107,133 +132,110 @@ for the JavaScript code in this tag.
  }
 /*]]>*///-->
 </script>
-
 </head>
 <body>
-
-<div id="preamble">
-
-</div>
-
 <div id="content">
 <h1 class="title">Материалы летнего физического лагеря</h1>
 
-<p><img src="./logo.png" align="right" alt="./logo.png" />
-</p>
+<div class="figure">
+<p><img src="./logo_flower.png" align="right" alt="logo_flower.png"/></p>
+</div>
 
-<div id="outline-container-1" class="outline-2">
+<div id="outline-container-sec-1" class="outline-2">
 <h2 id="sec-1">Исторические сведения и материалы лагеря.</h2>
 <div class="outline-text-2" id="text-1">
-
-
 <p>
 Им посвящена отдельная <a href="history/history.html">страница</a>. 
 </p>
 </div>
-
 </div>
-
-<div id="outline-container-2" class="outline-2">
+<div id="outline-container-sec-2" class="outline-2">
 <h2 id="sec-2">Ежедневные задачи.</h2>
 <div class="outline-text-2" id="text-2">
-
-
 <p>
 Ежедневные задачи вывешиваются каждый день. Комплект ежедневных задач,
 не меняющийся уже много лет, существует для <a href="2-a-day/2-a-day-07.pdf">самых маленьких</a>, <a href="2-a-day/2-a-day-08.pdf">8 класса</a>,
 <a href="2-a-day/2-a-day-09.pdf">9 класса</a>, <a href="2-a-day/2-a-day-10.pdf">10 класса</a> и <a href="2-a-day/2-a-day-11.pdf">11 класса</a>. 
 </p>
 </div>
-
 </div>
-
-<div id="outline-container-3" class="outline-2">
+<div id="outline-container-sec-3" class="outline-2">
 <h2 id="sec-3">Эксперимент.</h2>
 <div class="outline-text-2" id="text-3">
-
-
 <p>
 В данный момент доступны сводные таблицы с кратким описанием почти
 всех экспериментов, проведённых в лагере в <a href="exp/exp2010.html">2010</a>, <a href="exp/exp2011.html">2011</a>, <a href="exp/exp2012.html">2012</a> и <a href="exp/exp2013.html">2013</a>
 году.
 </p>
+
 <p>
 Несколько книг и брошюр, посвящённых организации эксперимента в
 полевых условиях, находятся <a href="https://www.dropbox.com/sh/h2fu23v7h2j1exq/XJZ25UwBCg">здесь</a>. 
 </p>
+
 <p>
 Особенно рекомендуется книжка Варламова, Зильбермана и Зинковского
 <i>«Экспериментальные задачи на уроках физики и физических олимпиадах»</i>
 — в ней приведено довольно много методических указаний. 
 </p>
+
 <p>
 Также предлагается <a href="exp/coins.html">таблица</a> с массами монет — в экспериментах они часто
 используются как разновесы. 
 </p>
 </div>
-
 </div>
-
-<div id="outline-container-4" class="outline-2">
+<div id="outline-container-sec-4" class="outline-2">
 <h2 id="sec-4">Физические бои и хоккей.</h2>
 <div class="outline-text-2" id="text-4">
-
-
 <p>
 Физические бои устраиваются на две команды (<a href="battle/rules_dual.pdf">правила</a>) или на три
 команды (<a href="battle/rules_triple.pdf">правила</a>).
 </p>
+
 <p>
 Правила и рекомендации по организации физического хоккея можно найти
 <a href="battle/rules_hockey.pdf">здесь</a>. 
 </p>
 </div>
-
 </div>
-
-<div id="outline-container-5" class="outline-2">
+<div id="outline-container-sec-5" class="outline-2">
 <h2 id="sec-5">Задачи.</h2>
 <div class="outline-text-2" id="text-5">
-
-
-
-
 <p>
 Несколько книжек с задачами могут быть найдены <a href="https://www.dropbox.com/sh/pqj6zsj7acyh1yi/uKkbGSJBmW">здесь</a>. Осторожно,
 некоторые книжки весят по 10 Мб и более.
 </p>
+
 <p>
 Кроме того, не следует забывать <a href="http://physolymp.spb.ru/index.php/archive">архив с задачами</a> на нашем олимпиадном
 сайте. 
 </p>
+
 <p>
 Для удобного подбора и поиска задач по ключевым словам я написал
 небольшой скрипт (работает только в Linux), страница которого
 находится <a href="http://shender.github.com/pdb/">тут</a>. Задачи собраны из разных источников. Пока их всего
- <code>264</code>, но количество всё время увеличивается. Также
+<code>264</code>, но количество всё время увеличивается. Также
 приветствуется помощь по добавлению задач в базу.
 </p>
 </div>
-
 </div>
-
-<div id="outline-container-6" class="outline-2">
+<div id="outline-container-sec-6" class="outline-2">
 <h2 id="sec-6">TeX’нические подробности.</h2>
 <div class="outline-text-2" id="text-6">
-
-
 <p>
 Для тех, кто умеет пользоваться TeX’ом, я немного облегчил жизнь с
 помощью ряда шаблонов: для вёрстки задач и протоколов
 физбоёв. Информация об этих шаблонах — на отдельной <a href="tex/tex.html">странице</a>. 
-</p></div>
+</p>
 </div>
 </div>
-
-<div id="postamble">
+</div>
+<div id="postamble" class="status">
 <hr>
-<p class="postamble">Last Updated 2013-08-21T01:30+0900.</p>
-<p class="postamble">Created by Igor Shenderovich [<a href="mailto:shender.i@gmail.com">shender.i@gmail.com</a>] with <a href="http://orgmode.org">Org</a> version 7.9.4 with <a href="http://www.gnu.org/software/emacs/">Emacs</a> version 24.</p>
+<p class="date">Last Updated 2013-08-29 Thu 17:34</p>
+<p class="postamble">Created by Igor Shenderovich [<a href="mailto:shender.i@gmail.com">shender.i@gmail.com</a>] with <a href="http://www.gnu.org/software/emacs/">Emacs</a> 24.3.1 (<a href="http://orgmode.org">Org</a> mode 8.0.7)</p>
 </div>
 </body>
 </html>
