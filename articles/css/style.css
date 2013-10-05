@@ -1,23 +1,11 @@
 @font-face {
-  font-family: 'PT Sans';
-  font-style: normal;
-  font-weight: bold;
-  src: local('PT Sans Bold'), local('PTSans-Bold'), url('http://themes.googleusercontent.com/static/fonts/ptsans/v4/g46X4VH_KHOWAAa-HpnGPhsxEYwM7FgeyaSgU71cLG0.woff') format('woff');
-}
-@font-face {
-  font-family: 'PT Sans';
-  font-style: normal;
-  font-weight: normal;
-  src: local('PT Sans'), local('PTSans-Regular'), url('http://themes.googleusercontent.com/static/fonts/ptsans/v4/yrzXiAvgeQQdopyG8QSg8Q.woff') format('woff');
-}
-@font-face {
     font-family: "JournalC";
     src: url("fonts/journal.ttf")
 }
 
 @font-face {
-    font-family: "JournalSansC";
-    src: url("fonts/journalsans.ttf")
+    font-family: "Helvetica";
+    src: url("fonts/helvetica.ttf")
 }
 
 @media all
@@ -67,7 +55,7 @@ a:hover, a:active {
 
 
 h1,h2,h3,h4 {
-    font-family: 'JournalSansC';
+    font-family: 'Helvetica';
     text-align:center;
 }
 
