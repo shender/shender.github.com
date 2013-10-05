@@ -10,13 +10,23 @@
   font-weight: normal;
   src: local('PT Sans'), local('PTSans-Regular'), url('http://themes.googleusercontent.com/static/fonts/ptsans/v4/yrzXiAvgeQQdopyG8QSg8Q.woff') format('woff');
 }
+@font-face {
+    font-family: "JournalC";
+    src: url("fonts/journal.ttf")
+}
+
+@font-face {
+    font-family: "JournalSansC";
+    src: url("fonts/journalsans.ttf")
+}
 
 @media all
 {
   body {
     color: #000000;
     background-color: #ffffff;
-    font-family: 'PT Sans', sans-serif;
+    font-family: 'JournalC', sans-serif;
+    font-size: 120%;
     max-width: 70%;
     margin: auto;
     }
@@ -54,6 +64,13 @@ a:hover, a:active {
 
 
 }
+
+
+h1,h2,h3,h4 {
+    font-family: 'JournalSansC';
+    text-align:center;
+}
+
 
 code {
     background-color: #eeeeee;
