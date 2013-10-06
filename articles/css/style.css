@@ -1,11 +1,6 @@
-@font-face {
-    font-family: "JournalC";
-    src: url("fonts/journal.ttf")
-}
-
-@font-face {
-    font-family: "Helvetica";
-    src: url("fonts/helvetica.ttf")
+-face {
+    font-family: "Proxima Nova";
+    src: url("fonts/proxima.ttf")
 }
 
 @media all
@@ -13,8 +8,8 @@
   body {
     color: #000000;
     background-color: #ffffff;
-    font-family: 'JournalC', sans-serif;
-    font-size: 120%;
+    font-family: 'Proxima Nova';
+    font-size: 100%;
     max-width: 70%;
     margin: auto;
     }
@@ -55,7 +50,7 @@ a:hover, a:active {
 
 
 h1,h2,h3,h4 {
-    font-family: 'Helvetica';
+    font-family: 'Proxima Nova';
     text-align:center;
 }
 
