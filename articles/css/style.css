@@ -1,19 +1,10 @@
-@font-face {
-    font-family: "Arimo";
-    src: url("fonts/arimo.ttf")
-}
-
-@font-face {
-    font-family: "Proxima Nova";
-    src: url("fonts/proxima.ttf")
-}
 
 @media all
 {
   body {
     color: #000000;
     background-color: #ffffff;
-    font-family: 'Arimo';
+    font-family: 'Arial';
     font-size: 100%;
     max-width: 70%;
     margin: auto;
