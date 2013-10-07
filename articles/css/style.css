@@ -1,4 +1,9 @@
--face {
+@font-face {
+    font-family: "Arimo";
+    src: url("fonts/arimo.ttf")
+}
+
+@font-face {
     font-family: "Proxima Nova";
     src: url("fonts/proxima.ttf")
 }
@@ -8,11 +13,12 @@
   body {
     color: #000000;
     background-color: #ffffff;
-    font-family: 'Proxima Nova';
+    font-family: 'Arimo';
     font-size: 100%;
     max-width: 70%;
     margin: auto;
     }
+
     body #content {
       padding-top: 45px;
     }
@@ -20,36 +26,38 @@
       border: none; }
     body a {
       color: #0000ff; }
+
     body #content {
       padding-top: 0px; }
-#postamble { color: #777777 }
-div#postamble * a {     
-    font-weight: bold;     
-    text-decoration: none; 
-    color: #777777
-} 
-a:link {
-    font-weight: bold;
-    text-decoration: none;
-    color: #0000FF;
+
+    #postamble { color: #777777 }
+
+    div#postamble * a {     
+        font-weight: bold;     
+        text-decoration: none; 
+        color: #777777
+    } 
+
+    a:link {
+        font-weight: bold;
+        text-decoration: none;
+        color: #0000FF;
+    }
+    
+    a:visited {
+        font-weight: normal;
+        text-decoration: none;
+        color: #000099;
+    }
+
+    a:hover, a:active {
+        text-decoration: none;
+        color: #537d7b;
+    }
 }
 
-a:visited {
-    font-weight: normal;
-    text-decoration: none;
-    color: #000099;
-}
 
-a:hover, a:active {
-    text-decoration: none;
-    color: #537d7b;
-}
-
-
-}
-
-
-h1,h2,h3,h4 {
+h1,h2 {
     font-family: 'Proxima Nova';
     text-align:center;
 }
