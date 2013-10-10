@@ -1,18 +1,5 @@
 
 @font-face {
-    font-family: 'arimoregular';
-    src: url('arimo-webfont.eot');
-    src: url('arimo-webfont.eot?#iefix') format('embedded-opentype'),
-         url('arimo-webfont.woff') format('woff'),
-         url('arimo-webfont.ttf') format('truetype'),
-         url('arimo-webfont.svg#arimoregular') format('svg');
-    font-weight: normal;
-    font-style: normal;
-
-}
-
-
-@font-face {
     font-family: 'Nissan';
     src: url('nissan-webfont.eot');
     src: url('nissan-webfont.eot?#iefix') format('embedded-opentype'),
@@ -48,7 +35,8 @@
       padding-top: 0px; }
 
     #postamble { color: #777777;
-                 font-family: 'Arial';
+                 font-family: 'PT Sans';
+                 font-size: 10px;
                }
 
     div#postamble * a {     
@@ -77,7 +65,7 @@
 
 
 h1,h2 {
-    font-family: 'Arial';
+    font-family: 'PT Sans';
     text-align:center;
 }
 
