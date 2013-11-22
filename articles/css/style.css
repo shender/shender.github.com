@@ -11,6 +11,29 @@
 
 }
 
+@font-face {
+    font-family: 'museo_sans_cyrl500';
+    src: url('museo_500-webfont.eot');
+    src: url('museo_500-webfont.eot?#iefix') format('embedded-opentype'),
+         url('museo_500-webfont.woff') format('woff'),
+         url('museo_500-webfont.ttf') format('truetype'),
+         url('museo_500-webfont.svg#museo_sans_cyrl500') format('svg');
+    font-weight: normal;
+    font-style: normal;
+
+}
+
+@font-face {
+    font-family: 'museo_sans_cyrl300';
+    src: url('museo_300-webfont.eot');
+    src: url('museo_300-webfont.eot?#iefix') format('embedded-opentype'),
+         url('museo_300-webfont.woff') format('woff'),
+         url('museo_300-webfont.ttf') format('truetype'),
+         url('museo_300-webfont.svg#museo_sans_cyrl300') format('svg');
+    font-weight: normal;
+    font-style: normal;
+
+}
 
 @media all
 {
@@ -18,7 +41,8 @@
     color: #000000;
     background-color: #ffffff;
     font-family: 'Nissan';
-    font-size: 18px;
+    font-size: 18px; 
+    line-height: 28px;
     max-width: 70%;
     margin: auto;
     }
