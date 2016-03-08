@@ -3,10 +3,10 @@
 "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
 <head>
-<!-- 2016-03-08 Tue 18:21 -->
+<!-- 2016-03-08 Tue 23:24 -->
 <meta  http-equiv="Content-Type" content="text/html;charset=utf-8" />
 <meta  name="viewport" content="width=device-width, initial-scale=1" />
-<title>Классическая электродинамика, весна 2016</title>
+<title>Классическая электродинамика</title>
 <meta  name="generator" content="Org-mode" />
 <meta  name="author" content="Igor Shenderovich" />
 <style type="text/css">
@@ -166,27 +166,82 @@ for the JavaScript code in this tag.
 </head>
 <body>
 <div id="content">
-<h1 class="title">Классическая электродинамика, весна 2016</h1>
+<h1 class="title">Классическая электродинамика
+<br>
+<span class="subtitle">2 курс СПбАУ РАН, весна 2016</span>
+</h1>
+<p>
+Соглашения: \(g_{\mu \nu} = \rm{diag} (+1,-1,-1,-1)\); \(u_{\mu} =
+\frac{dx_{\mu}}{d\tau}\) (таким образом, \(u_{\mu} u^{\mu} = c^2\) и
+\(p_{\mu} = m u_{\mu}\)). 
+</p>
+
 <ol class="org-ol">
-<li>Лагранжиан классического поля. 
+<li><b>Лагранжиан классического поля.</b>
 <ol class="org-ol">
 <li>Теория поля как непрерывный предел. Система из \(N\) грузиков,
-соединённых пружинками. Уравнения движения в виде \(\mu
-      \ddot{\phi} = \kappa \phi''\). Лагранжиан \(\mathcal{L} =
-      \frac{\mu}{2} (\dot{\phi})^2 - \frac{\kappa}{2} (\phi')^2\).</li>
+соединённых пружинками (\(N \to \infty\)). Уравнения движения в
+виде \(\mu \ddot{\phi} = \kappa \phi''\). Лагранжиан \(\mathcal{L}
+      = \frac{\mu}{2} (\dot{\phi})^2 - \frac{\kappa}{2} (\phi')^2\).</li>
 <li>Уравнения Эйлера–Лагранжа для лагранжиана, зависящего от полей:
 \[ \partial_{\mu} \left( \frac{\partial \mathcal{L}}{\partial
       (\partial_{\mu} \phi)}  \right) = \frac{\partial
       \mathcal{L}}{\partial \phi} .\]</li>
 <li>Релятивистски–инвариантный лагранжиан свободной
 частицы. Сохранение 4-объёма, неинвариантность функции Лагранжа
-\(L\), построение инвариантного действия.</li>
+\(L\), построение инвариантного действия в виде \(S = -mc^2 \int d
+      \tau\). Проверка нерелятивистского предела \(v \ll c\) для
+правильного коэффициента перед действием.</li>
+<li>Лагранжиан заряженной частицы. Построение действия как \( S =
+      S_{particle} + S_{int} + S_{field}\). Построение
+релятивистски–инвариантного действия взаимодействия
+\(S_{int}\). Итоговое действие (без полей) в виде \(S_{particle} +
+      S_{int} = \int -mc^2 d\tau - \frac{e}{c} A_{\mu} dx^{\mu}\).</li>
+<li>Уравнения движения заряженной частицы.
+<ul class="org-ul">
+<li>Первый способ: варьирование действия, требование \(\delta S =
+        0\). Уравнения движения в ковариантной форме, т.е.  \[ m
+        \frac{du_{\mu}}{d \tau} = \frac{e}{c} F_{\mu \nu} u^{\nu}, \]
+        где \(F_{\mu \nu} = \partial_{\mu} A_{\nu} - \partial_{\nu}
+        A_{\mu}\) — тензор электромагнитного поля.</li>
+<li><p>
+Второй способ: с помощью уравнений Эйлера–Лагранжа для
+действия в форме \[ S = - \int d\tau \left( mc
+        \sqrt{u_{\mu}u^{\mu}} + \frac{e}{c} u_{\mu}A^{\mu} \right).
+        \] Отмечается репараметризационная инвариантность (\(\rm{Diff}\,
+        M\)), позволяющая снять ограничение по связям (\(u_{\mu}u^{\mu}
+        = c^2\)). Совсем кратко: проблема времени (см., например,
+отличный <a href="http://arxiv.org/pdf/gr-qc/9210011v1.pdf">обзор</a> Chris J. Isham), «слабые связи» по Дираку
+(см. книгу <i>Marc Henneaux &amp; Claudio Teitelboim, “Quantization
+of Gauge Systems”</i>). Уравнения движения получаются точно такие
+же (что неудивительно). 
+</p>
+
+<p>
+Обобщённый импульс в виде \(\Pi^{\alpha} = mu^{\alpha} +
+        \frac{e}{c} A^{\alpha}\). Построение гамильтониана в виде \[
+        \mathcal{H} = \vec{v} \frac{\partial L}{\partial \vec{v}} - L
+        = \frac{mc^2}{\sqrt{1-\frac{v^2}{c^2}}} + e \varphi. \]
+Замечание: \(\mathcal{H} = P^0\). Что будет, если строить
+гамильтониан через \(\Pi^{\alpha}\)?
+</p></li>
+</ul></li>
+<li>Напряжённости электромагнитного поля: \(\vec{E}\) и
+\(\vec{H}\). Компоненты тензора \(F\). Изменение энергии частицы,
+работа магнитного поля.</li>
+<li>Инварианты электромагнитного поля: \(F_{\mu \nu} F^{\mu \nu} = 2
+      \left( E^2 - H^2 \right)\),
+\(\varepsilon_{\mu \nu \delta \gamma} F^{\mu \nu} F^{\delta
+      \gamma} = 2 \vec{E} \cdot \vec{H}\). Пример применения:
+нахождение СО, в которой \(\vec{H}=0\) (в случае скрещенных
+полей). Решение задачи динамики: движение заряженной частицы под
+действием однородного электрического поля.</li>
 </ol></li>
 </ol>
 </div>
 <div id="postamble" class="status">
 <hr>
-<p class="date">Last Updated 2016-03-08 Tue 18:21</p>
+<p class="date">Last Updated 2016-03-08 Tue 23:24</p>
 <p class="postamble">Created by Igor Shenderovich [<a href="mailto:shender.i@gmail.com">shender.i@gmail.com</a>] with <a href="http://www.gnu.org/software/emacs/">Emacs</a> 24.5.1 (<a href="http://orgmode.org">Org</a> mode 8.3.2)</p>
 </div>
 </body>
