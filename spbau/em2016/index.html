@@ -3,7 +3,7 @@
 "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
 <head>
-<!-- 2016-03-08 Tue 23:47 -->
+<!-- 2016-03-11 Fri 20:01 -->
 <meta  http-equiv="Content-Type" content="text/html;charset=utf-8" />
 <meta  name="viewport" content="width=device-width, initial-scale=1" />
 <title>Классическая электродинамика</title>
@@ -204,8 +204,7 @@ for the JavaScript code in this tag.
         \frac{du_{\mu}}{d \tau} = \frac{e}{c} F_{\mu \nu} u^{\nu}, \]
         где \(F_{\mu \nu} = \partial_{\mu} A_{\nu} - \partial_{\nu}
         A_{\mu}\) — тензор электромагнитного поля.</li>
-<li><p>
-Второй способ: с помощью уравнений Эйлера–Лагранжа для
+<li>Второй способ: с помощью уравнений Эйлера–Лагранжа для
 действия в форме \[ S = - \int d\tau \left( mc
         \sqrt{u_{\mu}u^{\mu}} + \frac{e}{c} u_{\mu}A^{\mu} \right).
         \] Отмечается репараметризационная инвариантность (\(\rm{Diff}\,
@@ -214,37 +213,74 @@ for the JavaScript code in this tag.
 отличный <a href="http://arxiv.org/pdf/gr-qc/9210011v1.pdf">обзор</a> Chris J. Isham), «слабые связи» по Дираку
 (см. книгу <i>Marc Henneaux &amp; Claudio Teitelboim, “Quantization
 of Gauge Systems”</i>). Уравнения движения получаются точно такие
-же (что неудивительно). 
+же (что неудивительно).</li>
+</ul></li>
+
+<li><p>
+Напряжённости электромагнитного поля: \(\vec{E}\) и
+\(\vec{H}\). Запись уравнений движения в трёхмерной форме: \[
+      \frac{d\vec{p}}{dt} = e \left( -\frac{1}{c} \frac{\partial
+      \vec{A}}{\partial t} - \nabla \phi \right) + \frac{e}{c} \vec{v}
+      \times \mathrm{rot} \vec{A} = e \vec{E} + \frac{e}{c} \vec{v}
+      \times \vec{H}. \]
 </p>
 
 <p>
-Обобщённый импульс в виде \(\Pi^{\alpha} = mu^{\alpha} +
-        \frac{e}{c} A^{\alpha}\). Построение гамильтониана в виде \[
-        \mathcal{H} = \vec{v} \frac{\partial L}{\partial \vec{v}} - L
-        = \frac{mc^2}{\sqrt{1-\frac{v^2}{c^2}}} + e \varphi. \]
-Замечание: \(\mathcal{H} = P^0\). Что будет, если строить
-гамильтониан через \(\Pi^{\alpha}\)?
-</p></li>
-</ul></li>
-<li>Напряжённости электромагнитного поля: \(\vec{E}\) и
-\(\vec{H}\). Компоненты тензора \(F\): \[ F_{\mu\nu}
-      = \begin{pmatrix} 0 & E_1 & E_2 & E_3 \\ -E_1 & 0 & -H_3 & H_2
-      \\ -E_2 & H_3 & 0 & -H_1 \\ -E_3 & -H_2 & H_1 & 0
-      \end{pmatrix}. \] Изменение энергии частицы, работа магнитного
-поля: \(\frac{d \mathcal{E}}{dt } = e \vec{E} \cdot \vec{v}\).</li>
+Компоненты тензора \(F\): \[ F_{\mu\nu} = \begin{pmatrix} 0 & E_x
+      & E_y & E_z \\ -E_x & 0 & -H_z & H_y \\ -E_y & H_z & 0 & -H_x
+      \\ -E_z & -H_y & H_x & 0 \end{pmatrix}. \] Изменение энергии
+частицы, нулевая работа магнитного поля: \(\frac{d
+      \mathcal{E}}{dt } = e \vec{E} \cdot \vec{v}\).
+</p>
+
+<p>
+<b>NB:</b> Неплохой источник информации о тензорах в целом и об искусстве
+обращения с ними: <a href="http://www.physics.uu.se/digitalAssets/405/405910_3specrel.pdf">брошюра</a> моего коллеги из университета Уппсалы,
+Джо Минахана. Вся брошюра хороша, но можно сразу перейти к
+разделу 3 (который в предыдущих изданиях назывался “Tensors
+without Tears”). Цитата оттуда:
+</p>
+
+<blockquote>
+<p>
+In the fall of 2006 I had been asked by several students if I
+knew a good book to read about tensors. I am sure that they exist, but
+I could not immediately think of any.  So a week before the exam I
+quickly wrote up 8 pages of notes summarizing what was discussed in
+class concerning tensors. I called it Tensors without tears.
+</p>
+</blockquote></li>
+
 <li>Инварианты электромагнитного поля: \(F_{\mu \nu} F^{\mu \nu} = 2
-      \left( E^2 - H^2 \right)\),
+      \left( H^2 - E^2 \right)\),
 \(\varepsilon_{\mu \nu \delta \gamma} F^{\mu \nu} F^{\delta
-      \gamma} = 2 \vec{E} \cdot \vec{H}\). Пример применения:
-нахождение СО, в которой \(\vec{H}=0\) (в случае скрещенных
-полей). Решение задачи динамики: движение заряженной частицы под
-действием однородного электрического поля.</li>
+      \gamma} = 2 \vec{E} \cdot \vec{H}\). Доказательство того, что
+\(\varepsilon_{\mu \nu \delta \gamma }\) не преобразуется при
+переходе из одной системы отсчёта в другую (вспомните
+определение определителя матрицы через перестановки).</li>
+<li>Пример решения уравнений движения в ковариантной форме: движение
+заряда в однородном электрическом поле (гиперболическое
+движение). Ещё один пример: теорема Лармора.</li>
+<li>Калибровочная инвариантность: \(A_{\mu} \to A_{\mu} +
+      \partial_{\mu} \chi\). Замечание о первичности \(A_{\mu}\), а не
+полей \(\vec{E}\), \(\vec{H}\). Важно отметить, что в
+электродинамике 4 переменных, а не 6, как можно было бы
+подумать.</li>
+<li>Гамильтоново описание. Обобщённый импульс в виде \(P_{\alpha} =
+       mu_{\alpha} + \frac{e}{c} A_{\alpha} = p_{\alpha} + \frac{e}{c}
+       A_{\alpha}\) (взаимодействие = удлинение импульса). Построение
+гамильтониана в виде \[ \mathcal{H} = \vec{v} \frac{\partial
+       L}{\partial \vec{v}} - L =
+       \frac{mc^2}{\sqrt{1-\frac{v^2}{c^2}}} + e \varphi. \] Замечание:
+\(\mathcal{H} = P^0\). Что будет, если строить гамильтониан через
+\(P^{\alpha}\)? (физическая интерпретация результата, опять
+проблема времени).</li>
 </ol></li>
 </ol>
 </div>
 <div id="postamble" class="status">
 <hr>
-<p class="date">Last Updated 2016-03-08 Tue 23:47</p>
+<p class="date">Last Updated 2016-03-11 Fri 20:01</p>
 <p class="postamble">Created by Igor Shenderovich [<a href="mailto:shender.i@gmail.com">shender.i@gmail.com</a>] with <a href="http://www.gnu.org/software/emacs/">Emacs</a> 24.5.1 (<a href="http://orgmode.org">Org</a> mode 8.3.2)</p>
 </div>
 </body>
