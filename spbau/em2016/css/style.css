@@ -1,3 +1,41 @@
+/* hide Org-mode's section numbers */
+span.section-number-2 { display: none; }
+span.section-number-3 { display: none; }
+span.section-number-4 { display: none; }
+span.section-number-5 { display: none; }
+span.section-number-6 { display: none; }
+
+/* define counters for the different headline levels */
+h1 { counter-reset: section; }
+h2 { counter-reset: subsection; }
+h3 { counter-reset: subsubsection; }
+h4 { counter-reset: paragraph; }
+h5 { counter-reset: subparagraph; }
+
+/* prepend section numbers before headlines */
+h2::before {
+    content: "§" counter(section) ". ";
+    counter-increment: section;
+}
+h3::before {
+    content: counter(section) "." counter(subsection) ". ";
+    counter-increment: subsection;
+}
+h4::before {
+    content: counter(section) "." counter(subsection) "." counter(subsubsection) ". ";
+    counter-increment: subsubsection;
+}
+h5::before {
+    content: counter(section) "." counter(subsection) "." counter(subsubsection) "." counter(paragraph) " ";
+    counter-increment: paragraph;
+}
+h6::before {
+    content: counter(section) "." counter(subsection) "." counter(subsubsection) "." counter(paragraph) "." counter(subparagraph) " ";
+    counter-increment: subparagraph;
+}
+
+/* suppress numbering for headlines with class="nonumber" */
+.nonumber::before { content: none; }
 
 @font-face {
     font-family: 'Nissan';
@@ -92,13 +130,23 @@
     a:hover, a:active {
         text-decoration: none;
         color: #537d7b;
+             }
+    h1 {
+        font-family: 'PT Sans';
+        text-align:center;
     }
-}
+    h2 {
+        font-family: 'PT Sans';
+        /* text-align:center; */
+        /* text-decoration: underline; */
+        margin-left: 50px;        
+    }
+    h3,h4 {
+        font-family: 'PT Sans';
+        text-align:left;
+        font-size: 18px; 
+    }
 
-
-h1,h2 {
-    font-family: 'PT Sans';
-    text-align:center;
 }
 
 

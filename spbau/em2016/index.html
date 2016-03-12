@@ -3,7 +3,7 @@
 "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
 <head>
-<!-- 2016-03-11 Fri 20:01 -->
+<!-- 2016-03-12 Sat 13:57 -->
 <meta  http-equiv="Content-Type" content="text/html;charset=utf-8" />
 <meta  name="viewport" content="width=device-width, initial-scale=1" />
 <title>Классическая электродинамика</title>
@@ -170,67 +170,149 @@ for the JavaScript code in this tag.
 <br>
 <span class="subtitle">2 курс СПбАУ РАН, весна 2016</span>
 </h1>
+
+<div id="outline-container-orgheadline1" class="outline-2">
+<h2 id="orgheadline1">Лагранжиан классического поля.</h2>
+<div class="outline-text-2" id="text-orgheadline1">
 <p>
 Соглашения: \(g_{\mu \nu} = \rm{diag} (+1,-1,-1,-1)\); \(u_{\mu} =
 \frac{dx_{\mu}}{d\tau}\) (таким образом, \(u_{\mu} u^{\mu} = c^2\) и
 \(p_{\mu} = m u_{\mu}\)). 
 </p>
+</div>
 
-<ol class="org-ol">
-<li><b>Лагранжиан классического поля.</b>
-<ol class="org-ol">
-<li>Теория поля как непрерывный предел. Система из \(N\) грузиков,
-соединённых пружинками (\(N \to \infty\)). Уравнения движения в
-виде \(\mu \ddot{\phi} = \kappa \phi''\). Лагранжиан \(\mathcal{L}
-      = \frac{\mu}{2} (\dot{\phi})^2 - \frac{\kappa}{2} (\phi')^2\).</li>
-<li>Уравнения Эйлера–Лагранжа для лагранжиана, зависящего от полей:
-\[ \partial_{\mu} \left( \frac{\partial \mathcal{L}}{\partial
-      (\partial_{\mu} \phi)}  \right) = \frac{\partial
-      \mathcal{L}}{\partial \phi} .\]</li>
-<li>Релятивистски–инвариантный лагранжиан свободной
-частицы. Сохранение 4-объёма, неинвариантность функции Лагранжа
-\(L\), построение инвариантного действия в виде \(S = -mc^2 \int d
-      \tau\). Проверка нерелятивистского предела \(v \ll c\) для
-правильного коэффициента перед действием.</li>
-<li>Лагранжиан заряженной частицы. Построение действия как \( S =
-      S_{particle} + S_{int} + S_{field}\). Построение
-релятивистски–инвариантного действия взаимодействия
-\(S_{int}\). Итоговое действие (без полей) в виде \(S_{particle} +
-      S_{int} = \int -mc^2 d\tau - \frac{e}{c} A_{\mu} dx^{\mu}\).</li>
-<li>Уравнения движения заряженной частицы.
-<ul class="org-ul">
-<li>Первый способ: варьирование действия, требование \(\delta S =
-        0\). Уравнения движения в ковариантной форме, т.е.  \[ m
-        \frac{du_{\mu}}{d \tau} = \frac{e}{c} F_{\mu \nu} u^{\nu}, \]
-        где \(F_{\mu \nu} = \partial_{\mu} A_{\nu} - \partial_{\nu}
-        A_{\mu}\) — тензор электромагнитного поля.</li>
-<li>Второй способ: с помощью уравнений Эйлера–Лагранжа для
-действия в форме \[ S = - \int d\tau \left( mc
-        \sqrt{u_{\mu}u^{\mu}} + \frac{e}{c} u_{\mu}A^{\mu} \right).
-        \] Отмечается репараметризационная инвариантность (\(\rm{Diff}\,
-        M\)), позволяющая снять ограничение по связям (\(u_{\mu}u^{\mu}
-        = c^2\)). Совсем кратко: проблема времени (см., например,
-отличный <a href="http://arxiv.org/pdf/gr-qc/9210011v1.pdf">обзор</a> Chris J. Isham), «слабые связи» по Дираку
-(см. книгу <i>Marc Henneaux &amp; Claudio Teitelboim, “Quantization
-of Gauge Systems”</i>). Уравнения движения получаются точно такие
-же (что неудивительно).</li>
-</ul></li>
+<div id="outline-container-orgheadline2" class="outline-3">
+<h3 id="orgheadline2">Теория поля как непрерывный предел.</h3>
+<div class="outline-text-3" id="text-orgheadline2">
+<p>
+Система из \(N\) грузиков, соединённых пружинками (\(N \to \infty\)). Если
+\(\phi(x)\) — отклонение от положения равновесия грузика в точке \(x\), то
+уравнения движения запишутся в виде \(\mu \ddot{\phi} = \kappa
+\phi''\). Лагранжиан такой системы (точнее, плотность лагранжиана)
+\(\mathcal{L} = \frac{\mu}{2} (\dot{\phi})^2 - \frac{\kappa}{2}
+(\phi')^2\) — получается предельным переходом из обычной функции
+Лагранжа для \(N\) грузиков. 
+</p>
+</div>
+</div>
 
-<li><p>
-Напряжённости электромагнитного поля: \(\vec{E}\) и
-\(\vec{H}\). Запись уравнений движения в трёхмерной форме: \[
-      \frac{d\vec{p}}{dt} = e \left( -\frac{1}{c} \frac{\partial
-      \vec{A}}{\partial t} - \nabla \phi \right) + \frac{e}{c} \vec{v}
-      \times \mathrm{rot} \vec{A} = e \vec{E} + \frac{e}{c} \vec{v}
-      \times \vec{H}. \]
+<div id="outline-container-orgheadline3" class="outline-3">
+<h3 id="orgheadline3">Уравнения Эйлера–Лагранжа для полевой модели.</h3>
+<div class="outline-text-3" id="text-orgheadline3">
+<p>
+Если лагранжиан \(\mathcal{L}\) зависит от полей и их первых
+производных, т.е. \(\mathcal{L} = \mathcal{L} (\partial_{\mu}
+\phi(x,t),\phi(x,t),t)\), то уравнения движения (уравнения Эйлера-Лагранжа)
+выглядят так:
 </p>
 
+\begin{equation}
+\label{eq:euler-lagrange-fields}
+\partial_{\mu} \left( \frac{\partial
+\mathcal{L}}{\partial (\partial_{\mu} \phi)} \right) = \frac{\partial
+\mathcal{L}}{\partial \phi} .
+\end{equation}
+</div>
+</div>
+
+<div id="outline-container-orgheadline4" class="outline-3">
+<h3 id="orgheadline4">Релятивистски–инвариантный лагранжиан свободной частицы.</h3>
+<div class="outline-text-3" id="text-orgheadline4">
 <p>
-Компоненты тензора \(F\): \[ F_{\mu\nu} = \begin{pmatrix} 0 & E_x
-      & E_y & E_z \\ -E_x & 0 & -H_z & H_y \\ -E_y & H_z & 0 & -H_x
-      \\ -E_z & -H_y & H_x & 0 \end{pmatrix}. \] Изменение энергии
-частицы, нулевая работа магнитного поля: \(\frac{d
-      \mathcal{E}}{dt } = e \vec{E} \cdot \vec{v}\).
+Сохранение 4-объёма, неинвариантность функции Лагранжа \(L\), построение
+инвариантного действия в виде \(S = -mc^2 \int d \tau\). Проверка
+нерелятивистского предела \(v \ll c\) для правильного коэффициента
+перед действием.
+</p>
+</div>
+</div>
+
+<div id="outline-container-orgheadline5" class="outline-3">
+<h3 id="orgheadline5">Лагранжиан заряженной частицы.</h3>
+<div class="outline-text-3" id="text-orgheadline5">
+<p>
+Построение действия как \( S = S_{particle} + S_{int} +
+S_{field}\). Построение релятивистски–инвариантного действия
+взаимодействия \(S_{int}\). Итоговое действие (без полей) в виде
+\(S_{particle} + S_{int} = \int -mc^2 d\tau - \frac{e}{c} A_{\mu}
+dx^{\mu}\).
+</p>
+</div>
+</div>
+
+<div id="outline-container-orgheadline8" class="outline-3">
+<h3 id="orgheadline8">Уравнения движения заряженной частицы.</h3>
+<div class="outline-text-3" id="text-orgheadline8">
+</div><div id="outline-container-orgheadline6" class="outline-4">
+<h4 id="orgheadline6">Первый способ: варьирование действия.</h4>
+<div class="outline-text-4" id="text-orgheadline6">
+<p>
+Требование \(\delta S = 0\). Уравнения движения в ковариантной форме,
+т.е.
+</p>
+\begin{equation}
+\label{eq:eom-particle}
+m \frac{du_{\mu}}{d \tau} = \frac{e}{c} F_{\mu \nu}
+u^{\nu},
+\end{equation}
+<p>
+где \(F_{\mu \nu} = \partial_{\mu} A_{\nu} -
+\partial_{\nu} A_{\mu}\) — тензор электромагнитного поля.
+</p>
+</div>
+</div>
+
+<div id="outline-container-orgheadline7" class="outline-4">
+<h4 id="orgheadline7">Второй способ: с помощью уравнений Эйлера–Лагранжа.</h4>
+<div class="outline-text-4" id="text-orgheadline7">
+<p>
+Действие в форме 
+</p>
+\begin{equation}
+\label{eq:action-without-fields}
+ S = - \int d\tau \left( mc \sqrt{u_{\mu}u^{\mu}} +
+\frac{e}{c} u_{\mu}A^{\mu} \right).  
+\end{equation}
+
+<p>
+Отмечается репараметризационная инвариантность (\(\mathrm{Diff}\, M\)),
+позволяющая снять ограничение по связям (\(u_{\mu}u^{\mu} =
+c^2\)). Совсем кратко: проблема времени (см., например, отличный <a href="http://arxiv.org/pdf/gr-qc/9210011v1.pdf">обзор</a>
+Chris J. Isham), «слабые связи» по Дираку (см. книгу <i>Marc Henneaux &amp;
+Claudio Teitelboim, “Quantization of Gauge Systems”</i>). Уравнения
+движения получаются точно такие же (что неудивительно).
+</p>
+</div>
+</div>
+</div>
+
+<div id="outline-container-orgheadline9" class="outline-3">
+<h3 id="orgheadline9">Напряжённости электромагнитного поля.</h3>
+<div class="outline-text-3" id="text-orgheadline9">
+<p>
+Вектора \(\vec{E}\) (<i>электрическое поле</i>) и \(\vec{H}\) (<i>магнитное
+поле</i>). Запись уравнений движения в трёхмерной форме: 
+</p>
+\begin{equation}
+\label{eq:eom-vect}
+\frac{d\vec{p}}{dt} = e \left( -\frac{1}{c} \frac{\partial
+\vec{A}}{\partial t} - \nabla \phi \right) + \frac{e}{c} \vec{v}
+\times \mathrm{rot} \vec{A} = e \vec{E} + \frac{e}{c} \vec{v} \times
+\vec{H}.
+\end{equation}
+
+<p>
+Компоненты тензора \(F\): 
+</p>
+\begin{equation}
+\label{eq:def-F}
+F_{\mu\nu} = \begin{pmatrix} 0 & E_x
+& E_y & E_z \\ -E_x & 0 & -H_z & H_y \\ -E_y & H_z & 0 & -H_x
+\\ -E_z & -H_y & H_x & 0 \end{pmatrix}.
+\end{equation}
+<p>
+Изменение энергии частицы, нулевая работа магнитного поля: \(\frac{d
+\mathcal{E}}{dt } = e \vec{E} \cdot \vec{v}\).
 </p>
 
 <p>
@@ -249,38 +331,96 @@ I could not immediately think of any.  So a week before the exam I
 quickly wrote up 8 pages of notes summarizing what was discussed in
 class concerning tensors. I called it Tensors without tears.
 </p>
-</blockquote></li>
+</blockquote>
+</div>
+</div>
 
-<li>Инварианты электромагнитного поля: \(F_{\mu \nu} F^{\mu \nu} = 2
-      \left( H^2 - E^2 \right)\),
-\(\varepsilon_{\mu \nu \delta \gamma} F^{\mu \nu} F^{\delta
-      \gamma} = 2 \vec{E} \cdot \vec{H}\). Доказательство того, что
-\(\varepsilon_{\mu \nu \delta \gamma }\) не преобразуется при
-переходе из одной системы отсчёта в другую (вспомните
-определение определителя матрицы через перестановки).</li>
-<li>Пример решения уравнений движения в ковариантной форме: движение
-заряда в однородном электрическом поле (гиперболическое
-движение). Ещё один пример: теорема Лармора.</li>
-<li>Калибровочная инвариантность: \(A_{\mu} \to A_{\mu} +
-      \partial_{\mu} \chi\). Замечание о первичности \(A_{\mu}\), а не
-полей \(\vec{E}\), \(\vec{H}\). Важно отметить, что в
-электродинамике 4 переменных, а не 6, как можно было бы
-подумать.</li>
-<li>Гамильтоново описание. Обобщённый импульс в виде \(P_{\alpha} =
-       mu_{\alpha} + \frac{e}{c} A_{\alpha} = p_{\alpha} + \frac{e}{c}
-       A_{\alpha}\) (взаимодействие = удлинение импульса). Построение
-гамильтониана в виде \[ \mathcal{H} = \vec{v} \frac{\partial
-       L}{\partial \vec{v}} - L =
-       \frac{mc^2}{\sqrt{1-\frac{v^2}{c^2}}} + e \varphi. \] Замечание:
-\(\mathcal{H} = P^0\). Что будет, если строить гамильтониан через
-\(P^{\alpha}\)? (физическая интерпретация результата, опять
-проблема времени).</li>
-</ol></li>
-</ol>
+<div id="outline-container-orgheadline10" class="outline-3">
+<h3 id="orgheadline10">Инварианты электромагнитного поля.</h3>
+<div class="outline-text-3" id="text-orgheadline10">
+<p>
+Доказательство того, что \(\varepsilon_{\mu \nu \delta \gamma }\) не
+преобразуется при переходе из одной системы отсчёта в другую
+(вспомните определение определителя матрицы через перестановки). Как
+можно свернуть тензор \(F\), чтобы получился скаляр (по отношению к
+группе Лоренца)? Вариантов немного.  
+</p>
+
+<p>
+\(F_{\mu \nu} F^{\mu \nu} = 2 \left( H^2 - E^2 \right)\),
+\(\varepsilon_{\mu \nu \delta \gamma} F^{\mu \nu} F^{\delta \gamma} = 2
+\vec{E} \cdot \vec{H}\). Вывод: \(H^2 - E^2 = \mathrm{inv}\), \(\vec{E}
+\cdot \vec{H} = \mathrm{inv}\). 
+</p>
+</div>
+</div>
+
+<div id="outline-container-orgheadline11" class="outline-3">
+<h3 id="orgheadline11">Пример решения уравнений движения.</h3>
+<div class="outline-text-3" id="text-orgheadline11">
+<p>
+Движение заряда в однородном электрическом поле (гиперболическое
+движение). Уравнения движения: 
+</p>
+
+\begin{equation}
+\label{eq:eom-uniform-electric}
+m \frac{du^1}{d\tau} = \frac{e}{c} E u^0, \qquad m \frac{du^0}{d\tau} = \frac{e}{c} E u^1. 
+\end{equation}
+
+<p>
+Ещё один пример: теорема Лармора. Она утверждает, что при наложении
+слабого магнитного поля \(\vec{H}\) на систему нерелятивистских заряженных частиц,
+система приходит во вращение как целое с угловой скоростью (отметьте
+множитель 1/2!)
+</p>
+
+\begin{equation}
+\label{eq:larmor}
+\vec{\Omega} = - \frac{e\vec{H}}{2mc}. 
+\end{equation}
+</div>
+</div>
+
+<div id="outline-container-orgheadline12" class="outline-3">
+<h3 id="orgheadline12">Калибровочная инвариантность.</h3>
+<div class="outline-text-3" id="text-orgheadline12">
+<p>
+Инвариантность уравнений движения \eqref{eq:eom-particle} относительно
+сдвига потенциала на градиент произвольной функции \(\chi\): \(A_{\mu}
+\to A_{\mu} + \partial_{\mu} \chi\). Замечание о первичности \(A_{\mu}\),
+а не полей \(\vec{E}\), \(\vec{H}\). Важно отметить, что в электродинамике
+4 переменных, а не 6, как можно было бы подумать (хотя на самом деле
+ещё меньше, как мы увидим). 
+</p>
+
+<p>
+Различные калибровки: кулоновская калибровка (\(\mathrm{div}
+\vec{A}=0\)), калибровка Лоренца (\(\partial_{\mu} A^{\mu}=0\)). 
+</p>
+</div>
+</div>
+
+<div id="outline-container-orgheadline13" class="outline-3">
+<h3 id="orgheadline13">Гамильтоново описание.</h3>
+<div class="outline-text-3" id="text-orgheadline13">
+<p>
+Обобщённый импульс в виде \(P_{\alpha} = mu_{\alpha} + \frac{e}{c}
+A_{\alpha} = p_{\alpha} + \frac{e}{c} A_{\alpha}\)
+(взаимодействие = удлинение импульса). Построение гамильтониана
+в виде \[ \mathcal{H} = \vec{v} \frac{\partial L}{\partial
+\vec{v}} - L = \frac{mc^2}{\sqrt{1-\frac{v^2}{c^2}}} + e
+\varphi. \] Замечание: \(\mathcal{H} = P_0/c\). Что будет, если
+строить гамильтониан через \(P_{\alpha}\) (физическая
+интерпретация результата, опять проблема времени)? 
+</p>
+</div>
+</div>
+</div>
 </div>
 <div id="postamble" class="status">
 <hr>
-<p class="date">Last Updated 2016-03-11 Fri 20:01</p>
+<p class="date">Last Updated 2016-03-12 Sat 13:57</p>
 <p class="postamble">Created by Igor Shenderovich [<a href="mailto:shender.i@gmail.com">shender.i@gmail.com</a>] with <a href="http://www.gnu.org/software/emacs/">Emacs</a> 24.5.1 (<a href="http://orgmode.org">Org</a> mode 8.3.2)</p>
 </div>
 </body>
