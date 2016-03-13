@@ -3,7 +3,7 @@
 "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
 <head>
-<!-- 2016-03-12 Sat 13:57 -->
+<!-- 2016-03-14 Mon 00:37 -->
 <meta  http-equiv="Content-Type" content="text/html;charset=utf-8" />
 <meta  name="viewport" content="width=device-width, initial-scale=1" />
 <title>Классическая электродинамика</title>
@@ -359,32 +359,68 @@ class concerning tensors. I called it Tensors without tears.
 <h3 id="orgheadline11">Пример решения уравнений движения.</h3>
 <div class="outline-text-3" id="text-orgheadline11">
 <p>
-Движение заряда в однородном электрическом поле (гиперболическое
-движение). Уравнения движения: 
+Переход в СО, где нет магнитного поля, а есть только электрическое, с
+помощью инвариантов. Движение заряда в однородном электрическом
+поле. Уравнения движения:
 </p>
 
 \begin{equation}
 \label{eq:eom-uniform-electric}
-m \frac{du^1}{d\tau} = \frac{e}{c} E u^0, \qquad m \frac{du^0}{d\tau} = \frac{e}{c} E u^1. 
+\frac{du^1}{d\tau} = \frac{e}{c} E u^0, \qquad m \frac{du^0}{d\tau} = \frac{e}{c} E u^1. 
 \end{equation}
 
 <p>
-Ещё один пример: теорема Лармора. Она утверждает, что при наложении
-слабого магнитного поля \(\vec{H}\) на систему нерелятивистских заряженных частиц,
-система приходит во вращение как целое с угловой скоростью (отметьте
-множитель 1/2!)
+Их решение приводит к гиперболическому движению в осях \((x,t)\). 
+</p>
+</div>
+</div>
+
+<div id="outline-container-orgheadline12" class="outline-3">
+<h3 id="orgheadline12">Теорема Лармора.</h3>
+<div class="outline-text-3" id="text-orgheadline12">
+<p>
+Она утверждает, что при наложении слабого магнитного поля \(\vec{H}\) на
+систему нерелятивистских заряженных частиц, система приходит во
+вращение как целое с угловой скоростью (отметьте множитель 1/2!)
 </p>
 
 \begin{equation}
 \label{eq:larmor}
 \vec{\Omega} = - \frac{e\vec{H}}{2mc}. 
 \end{equation}
+
+<p>
+При доказательстве будет использовано полезное соотношение
+\(\varepsilon_{ijk} \varepsilon_{klm} = \delta_{il} \delta_{jm} -
+\delta_{im}\delta_{jl}\). Благодаря ему можно написать двойное
+векторное произведение в таком виде (попробуйте получить это без
+\(\varepsilon\) — это довольно муторно): 
+</p>
+
+\begin{equation}
+\label{eq:atimesbtimesc}
+\vec{\nabla} \times (\vec{A} \times \vec{B}) = (\vec{B} \cdot \vec{\nabla}) \vec{A} + (\vec{\nabla} \cdot \vec{B}) \vec{A} - (\vec{\nabla} \cdot \vec{A}) \vec{B} - (\vec{A} \cdot \vec{\nabla}) \vec{B}.
+\end{equation}
+
+<p>
+А сама теорема Лармора получается, если посмотреть на нерелятивистскую
+функцию Лагранжа с наложенным постоянным магнитным полем (в этом
+случае можно представить векторный потенциал \(\vec{A} = \frac{1}{2}\vec{H}
+\times \vec{r}\)). Эта функция Лагранжа абсолютно эквивалентна функции
+Лагранжа для частиц без магнитного поля, но во вращающейся системе
+отсчёта, что и доказывает теорему Лармора. 
+</p>
+
+<p>
+Осталось выяснить, что в точности означает «слабость» магнитного
+поля. 
+</p>
 </div>
 </div>
 
-<div id="outline-container-orgheadline12" class="outline-3">
-<h3 id="orgheadline12">Калибровочная инвариантность.</h3>
-<div class="outline-text-3" id="text-orgheadline12">
+<div id="outline-container-orgheadline13" class="outline-3">
+<h3 id="orgheadline13">Калибровочная инвариантность.</h3>
+<div class="outline-text-3" id="text-orgheadline13">
 <p>
 Инвариантность уравнений движения \eqref{eq:eom-particle} относительно
 сдвига потенциала на градиент произвольной функции \(\chi\): \(A_{\mu}
@@ -401,9 +437,9 @@ m \frac{du^1}{d\tau} = \frac{e}{c} E u^0, \qquad m \frac{du^0}{d\tau} = \frac{e}
 </div>
 </div>
 
-<div id="outline-container-orgheadline13" class="outline-3">
-<h3 id="orgheadline13">Гамильтоново описание.</h3>
-<div class="outline-text-3" id="text-orgheadline13">
+<div id="outline-container-orgheadline14" class="outline-3">
+<h3 id="orgheadline14">Гамильтоново описание.</h3>
+<div class="outline-text-3" id="text-orgheadline14">
 <p>
 Обобщённый импульс в виде \(P_{\alpha} = mu_{\alpha} + \frac{e}{c}
 A_{\alpha} = p_{\alpha} + \frac{e}{c} A_{\alpha}\)
@@ -420,7 +456,7 @@ A_{\alpha} = p_{\alpha} + \frac{e}{c} A_{\alpha}\)
 </div>
 <div id="postamble" class="status">
 <hr>
-<p class="date">Last Updated 2016-03-12 Sat 13:57</p>
+<p class="date">Last Updated 2016-03-14 Mon 00:37</p>
 <p class="postamble">Created by Igor Shenderovich [<a href="mailto:shender.i@gmail.com">shender.i@gmail.com</a>] with <a href="http://www.gnu.org/software/emacs/">Emacs</a> 24.5.1 (<a href="http://orgmode.org">Org</a> mode 8.3.2)</p>
 </div>
 </body>
