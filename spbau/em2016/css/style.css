@@ -126,7 +126,9 @@ h6::before {
         padding-left: 15px;
         border-left: 3px solid #ccc;
     }
-    
+    .verse {
+        text-align: right;
+    }
     a:hover, a:active {
         text-decoration: none;
         color: #537d7b;

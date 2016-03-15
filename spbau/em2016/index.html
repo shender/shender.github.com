@@ -3,7 +3,7 @@
 "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
 <head>
-<!-- 2016-03-14 Mon 00:37 -->
+<!-- 2016-03-16 Wed 00:50 -->
 <meta  http-equiv="Content-Type" content="text/html;charset=utf-8" />
 <meta  name="viewport" content="width=device-width, initial-scale=1" />
 <title>Классическая электродинамика</title>
@@ -370,7 +370,9 @@ class concerning tensors. I called it Tensors without tears.
 \end{equation}
 
 <p>
-Их решение приводит к гиперболическому движению в осях \((x,t)\). 
+Их решение (\(u^0 = c \cosh \frac{eE}{mc} \tau\), \(u^1 = c
+\sinh \frac{eE}{mc} \tau\)) приводит к гиперболическому
+движению в осях \((x,t)\).
 </p>
 </div>
 </div>
@@ -381,7 +383,8 @@ class concerning tensors. I called it Tensors without tears.
 <p>
 Она утверждает, что при наложении слабого магнитного поля \(\vec{H}\) на
 систему нерелятивистских заряженных частиц, система приходит во
-вращение как целое с угловой скоростью (отметьте множитель 1/2!)
+вращение как целое с угловой скоростью (надо немного порефлексировать
+над знаком)
 </p>
 
 \begin{equation}
@@ -390,11 +393,11 @@ class concerning tensors. I called it Tensors without tears.
 \end{equation}
 
 <p>
-При доказательстве будет использовано полезное соотношение
+При доказательстве использовано полезное соотношение
 \(\varepsilon_{ijk} \varepsilon_{klm} = \delta_{il} \delta_{jm} -
 \delta_{im}\delta_{jl}\). Благодаря ему можно написать двойное
 векторное произведение в таком виде (попробуйте получить это без
-\(\varepsilon\) — это довольно муторно): 
+\(\varepsilon\) — это довольно муторно):
 </p>
 
 \begin{equation}
@@ -419,8 +422,24 @@ class concerning tensors. I called it Tensors without tears.
 </div>
 
 <div id="outline-container-orgheadline13" class="outline-3">
-<h3 id="orgheadline13">Калибровочная инвариантность.</h3>
+<h3 id="orgheadline13">Гамильтоново описание.</h3>
 <div class="outline-text-3" id="text-orgheadline13">
+<p>
+Обобщённый импульс в виде \(P_{\alpha} = mu_{\alpha} + \frac{e}{c}
+A_{\alpha} = p_{\alpha} + \frac{e}{c} A_{\alpha}\)
+(взаимодействие = удлинение импульса). Построение гамильтониана
+в виде \[ \mathcal{H} = \vec{v} \frac{\partial L}{\partial
+\vec{v}} - L = \frac{mc^2}{\sqrt{1-\frac{v^2}{c^2}}} + e
+\varphi. \] Замечание: \(\mathcal{H} /c = P_0\). Что будет, если
+строить гамильтониан через \(P_{\alpha}\) (физическая
+интерпретация результата, опять проблема времени)? 
+</p>
+</div>
+</div>
+
+<div id="outline-container-orgheadline14" class="outline-3">
+<h3 id="orgheadline14">Калибровочная инвариантность.</h3>
+<div class="outline-text-3" id="text-orgheadline14">
 <p>
 Инвариантность уравнений движения \eqref{eq:eom-particle} относительно
 сдвига потенциала на градиент произвольной функции \(\chi\): \(A_{\mu}
@@ -437,26 +456,89 @@ class concerning tensors. I called it Tensors without tears.
 </div>
 </div>
 
-<div id="outline-container-orgheadline14" class="outline-3">
-<h3 id="orgheadline14">Гамильтоново описание.</h3>
-<div class="outline-text-3" id="text-orgheadline14">
+<div id="outline-container-orgheadline15" class="outline-3">
+<h3 id="orgheadline15">4-ток и сохранение заряда.</h3>
+<div class="outline-text-3" id="text-orgheadline15">
 <p>
-Обобщённый импульс в виде \(P_{\alpha} = mu_{\alpha} + \frac{e}{c}
-A_{\alpha} = p_{\alpha} + \frac{e}{c} A_{\alpha}\)
-(взаимодействие = удлинение импульса). Построение гамильтониана
-в виде \[ \mathcal{H} = \vec{v} \frac{\partial L}{\partial
-\vec{v}} - L = \frac{mc^2}{\sqrt{1-\frac{v^2}{c^2}}} + e
-\varphi. \] Замечание: \(\mathcal{H} = P_0/c\). Что будет, если
-строить гамильтониан через \(P_{\alpha}\) (физическая
-интерпретация результата, опять проблема времени)? 
+Определение 4-тока \(j^{\mu} = (c \rho, \vec{j})\), где \(\vec{j} = \rho
+\vec{v}\) — обычная объёмная плотность тока, \(\rho\) — объёмная
+плотность заряда. Равенство \(j^{\mu} = \rho_0 u^{\mu} = \rho
+\frac{dx^{\mu}}{dt}\) (обратите внимание, объёмная плотность заряда —
+не инвариантная величина в силу того, что 3-объём не
+инвариантен). Запись действия взаимодействия с помощью 4-тока: 
+</p>
+
+\begin{equation}
+\label{eq:sint-4-current}
+S_{int} = -\frac{1}{c^2} \int d^4 x j_{\mu}A^{\mu}.
+\end{equation}
+
+<p>
+Обратите внимание на появившийся 4-объём (он инвариантен), и объект
+\(j_{\mu} A^{\mu}\) (он тоже инвариантен, будучи скаляром). 
+</p>
+
+<p>
+Теперь потребуем калибровочной инвариантности от этого действия
+(т.е. при замене \(A_{\mu} \to A_{\mu} + \partial_{\mu} \chi\)). Чтобы
+оно было инвариантно, нужно чтобы 
+</p>
+
+\begin{equation}
+\label{eq:div-4-current}
+\partial_{\mu} j^{\mu} = 0. 
+\end{equation}
+
+<p>
+В трёхмерной форме это уравнение можно переписать как хорошо известное
+<i>уравнение неразрывности</i>
+</p>
+
+\begin{equation}
+\label{eq:cont-cond}
+\frac{\partial \rho}{\partial t} + \mathrm{div} \vec{j} = 0. 
+\end{equation}
+
+<p>
+Это условие в точности эквивалентно условию сохранения заряда \(q =
+\int \rho dV\) (домножим верхнее равенство на объём, проинтегрируем и
+применим теорему Гаусса-Остроградского). 
+</p>
+
+<p>
+Вывод (об устройстве природы): калибровочная инвариантность
+обеспечивает сохранение заряда! Это верно для любой <i>калибровочной
+теории</i> (т.е. такой, в которой есть какие-то калибровочные
+преобразования). Например, та же ситуация будет наблюдаться в
+квантовой хромодинамике (КХД), в теории электрослабого взаимодействия
+и т.д. Только там заряды будут не электрическими, а какими-то другими
+(раньше это называли «изоспином»). 
 </p>
 </div>
+</div>
+
+<div id="outline-container-orgheadline16" class="outline-3">
+<h3 id="orgheadline16">Построение лагранжиана для электромагнитного поля.</h3>
+<div class="outline-text-3" id="text-orgheadline16">
+<p class="verse">
+И, наконец, вдалеке возникает неясный прекрасный мираж:<br  />
+Фата-Моргана, волненье эфира, царевны морской чешуя&#x2026;<br  />
+Ах, эта сладкая небыль! Себе не возьмешь и другим не отдашь&#x2026;<br  />
+Просто — причуда пространства, нелепая шутка, неведомо чья!..<br  />
+<br  />
+<i>Михаил Щербаков, «Вот поднимается ветер»</i><br  />
+</p>
+</div>
+</div>
+
+<div id="outline-container-orgheadline17" class="outline-3">
+<h3 id="orgheadline17">Уравнения движения для поля (уравнения Максвелла).</h3>
 </div>
 </div>
 </div>
 <div id="postamble" class="status">
 <hr>
-<p class="date">Last Updated 2016-03-14 Mon 00:37</p>
+<p class="date">Last Updated 2016-03-16 Wed 00:50</p>
 <p class="postamble">Created by Igor Shenderovich [<a href="mailto:shender.i@gmail.com">shender.i@gmail.com</a>] with <a href="http://www.gnu.org/software/emacs/">Emacs</a> 24.5.1 (<a href="http://orgmode.org">Org</a> mode 8.3.2)</p>
 </div>
 </body>
