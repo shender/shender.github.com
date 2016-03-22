@@ -3,7 +3,7 @@
 "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
 <head>
-<!-- 2016-03-17 Thu 01:11 -->
+<!-- 2016-03-22 Tue 20:22 -->
 <meta  http-equiv="Content-Type" content="text/html;charset=utf-8" />
 <meta  name="viewport" content="width=device-width, initial-scale=1" />
 <title>Классическая электродинамика</title>
@@ -178,6 +178,10 @@ for the JavaScript code in this tag.
 будет сдать в угол аудитории). 
 </p>
 
+<p>
+<span class="underline">Контрольная 1 (23.03.2016)</span>: [ задачи | решения ]
+</p>
+
 <hr  />
 
 <p>
@@ -186,9 +190,9 @@ for the JavaScript code in this tag.
 \(p_{\mu} = m u_{\mu}\)). 
 </p>
 
-<div id="outline-container-orgheadline17" class="outline-2">
-<h2 id="orgheadline17">Лагранжиан классического поля.</h2>
-<div class="outline-text-2" id="text-orgheadline17">
+<div id="outline-container-orgheadline18" class="outline-2">
+<h2 id="orgheadline18">Лагранжиан классического поля.</h2>
+<div class="outline-text-2" id="text-orgheadline18">
 </div><div id="outline-container-orgheadline1" class="outline-3">
 <h3 id="orgheadline1">Теория поля как непрерывный предел.</h3>
 <div class="outline-text-3" id="text-orgheadline1">
@@ -452,8 +456,7 @@ A_{\alpha} = p_{\alpha} + \frac{e}{c} A_{\alpha}\)
 сдвига потенциала на градиент произвольной функции \(\chi\): \(A_{\mu}
 \to A_{\mu} + \partial_{\mu} \chi\). Замечание о первичности \(A_{\mu}\),
 а не полей \(\vec{E}\), \(\vec{H}\). Важно отметить, что в электродинамике
-4 переменных, а не 6, как можно было бы подумать (хотя на самом деле
-ещё меньше, как мы увидим). 
+4 переменных, а не 6, как можно было бы подумать.
 </p>
 
 <p>
@@ -583,18 +586,18 @@ S_{fields} + S_{int} = - \int \left( \frac{1}{16\pi c} F_{\mu\nu} F^{\mu\nu} + \
 \end{equation}
 
 <p>
-Под лагранжианом будем понимать выражение, стоящее в скобках: 
+Под лагранжианом будем понимать выражение
 </p>
 
 \begin{equation}
 \label{eq:def-l-fields}
-\mathcal{L} = \frac{1}{16 \pi c } F_{\mu \nu} F^{\mu \nu} + \frac{1}{c^2} j^{\mu} A_{\mu}. 
+\mathcal{L} = - \frac{1}{16 \pi c } F_{\mu \nu} F^{\mu \nu} - \frac{1}{c^2} j^{\mu} A_{\mu}. 
 \end{equation}
 </div>
 </div>
 
 <div id="outline-container-orgheadline16" class="outline-3">
-<h3 id="orgheadline16">Уравнения движения для поля (уравнения Максвелла).</h3>
+<h3 id="orgheadline16">Уравнения движения для электромагнитного поля (уравнения Максвелла).</h3>
 <div class="outline-text-3" id="text-orgheadline16">
 <p>
 Используем уравнения Эйлера-Лагранжа \eqref{eq:euler-lagrange-fields},
@@ -615,7 +618,7 @@ S_{fields} + S_{int} = - \int \left( \frac{1}{16\pi c} F_{\mu\nu} F^{\mu\nu} + \
 
 \begin{equation}
 \label{eq:lm-pt}
-\frac{\partial x_{\mu}}{\partial x_{\nu}} = \delta^{\nu}_{\mu}, \quad \frac{\partial x^{\mu}}{\partial x_{nu}} = g^{\mu \nu}, \quad \frac{\partial_{\alpha} x_{\beta}}{\partial_{\mu} x_{\nu}} = \delta^{\mu}_{\alpha} \delta^{\nu}_{\beta}. 
+\frac{\partial x_{\mu}}{\partial x_{\nu}} = \delta^{\nu}_{\mu}, \quad \frac{\partial x^{\mu}}{\partial x_{\nu}} = g^{\mu \nu}, \quad \frac{\partial(\partial_{\alpha} x_{\beta})}{\partial(\partial_{\mu} x_{\nu})} = \delta^{\mu}_{\alpha} \delta^{\nu}_{\beta}. 
 \end{equation}
 
 <p>
@@ -657,15 +660,88 @@ S_{fields} + S_{int} = - \int \left( \frac{1}{16\pi c} F_{\mu\nu} F^{\mu\nu} + \
 \end{equation}
 
 <p>
-В этих уравнениях закодирована <i>первая пара уравнений Максвелла</i>. 
+В этих уравнениях закодирована первая пара <i>уравнений
+Максвелла</i>. Всего их, как известно, восемь (два векторных и два
+скалярных), а у нас написано всего 4. Остальные 4 можно найти в таком
+почти очевидном тождестве (в более общем случае это называется
+<i>тождеством Бьянки</i>): 
 </p>
+
+\begin{equation}
+\label{eq:max-final-2}
+\partial_{\lambda} F_{\mu \nu} + \partial_{\mu} F_{\nu \lambda} + \partial_{\nu} F_{\lambda \mu} =0. 
+\end{equation}
+
+<p>
+Легко удостовериться, тут действительно 4 уравнения (все 3 индекса
+должны быть разными, \(\mu \neq \nu \neq \lambda\)). Это — вторая пара
+<i>уравнений Максвелла</i>. 
+</p>
+</div>
+</div>
+
+<div id="outline-container-orgheadline17" class="outline-3">
+<h3 id="orgheadline17">Трёхмерная форма уравнений Максвелла.</h3>
+<div class="outline-text-3" id="text-orgheadline17">
+<p>
+Вспомним то, как тензор \(F\) записывается в компонентах
+\eqref{eq:def-F}. Учитывая это, уравнения Максвелла можно легко
+переписать в трёхмерной форме. Первое уравнение \eqref{eq:max-final-1}
+даёт при \(\nu=0\) просто
+</p>
+
+\begin{equation}
+\label{eq:max-3d-1}
+\mathrm{div} \vec{E} = 4 \pi \rho. 
+\end{equation}
+
+<p>
+При \(\nu=1,2,3\) получается векторное уравнение
+</p>
+
+\begin{equation}
+\label{eq:max-3d-2}
+\mathrm{rot} H = \frac{4\pi}{c} \vec{j} + \frac{1}{c} \frac{\partial \vec{E}}{\partial t}. 
+\end{equation}
+
+<p>
+Теперь обследуем второе уравнение \eqref{eq:max-final-2}. При \(\mu =
+1, \nu = 2, \lambda =3\) получается
+</p>
+
+\begin{equation}
+\label{eq:max-3d-3}
+\mathrm{div} \vec{H} =0. 
+\end{equation}
+
+<p>
+А при \(\lambda =0, \mu = 1, \nu=2\) и т.д. опять получится векторное
+уравнение: 
+</p>
+
+\begin{equation}
+\label{eq:max-3d-4}
+\mathrm{rot} \vec{E} = -\frac{1}{c} \frac{\partial \vec{H}}{\partial t}. 
+\end{equation}
+
+<p>
+Несколько основных свойств: 
+</p>
+
+<ul class="org-ul">
+<li>уравнения Максвелла линейны, следовательно, имеется <i>принцип суперпозиции</i>;</li>
+<li>если поля постоянны, то уравнения Максвелла распадаются на 2 части:
+для \(\vec{E}\) и \(\vec{H}\);</li>
+<li>при \(\rho=0\), \(\vec{j}=0\) возможно ненулевое решение уравнений
+Максвелла (<i>электромагнитные волны</i>).</li>
+</ul>
 </div>
 </div>
 </div>
 </div>
 <div id="postamble" class="status">
 <hr>
-<p class="date">Last Updated 2016-03-17 Thu 01:11</p>
+<p class="date">Last Updated 2016-03-22 Tue 20:22</p>
 <p class="postamble">Created by Igor Shenderovich [<a href="mailto:shender.i@gmail.com">shender.i@gmail.com</a>] with <a href="http://www.gnu.org/software/emacs/">Emacs</a> 24.5.1 (<a href="http://orgmode.org">Org</a> mode 8.3.2)</p>
 </div>
 </body>
