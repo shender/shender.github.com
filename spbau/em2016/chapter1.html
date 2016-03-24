@@ -1,0 +1,739 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
+<head>
+<!-- 2016-03-24 Thu 10:08 -->
+<meta  http-equiv="Content-Type" content="text/html;charset=utf-8" />
+<meta  name="viewport" content="width=device-width, initial-scale=1" />
+<title>Классическая электродинамика</title>
+<meta  name="generator" content="Org-mode" />
+<meta  name="author" content="Igor Shenderovich" />
+<style type="text/css">
+ <!--/*--><![CDATA[/*><!--*/
+  .title  { text-align: center;
+             margin-bottom: .2em; }
+  .subtitle { text-align: center;
+              font-size: medium;
+              font-weight: bold;
+              margin-top:0; }
+  .todo   { font-family: monospace; color: red; }
+  .done   { font-family: monospace; color: green; }
+  .priority { font-family: monospace; color: orange; }
+  .tag    { background-color: #eee; font-family: monospace;
+            padding: 2px; font-size: 80%; font-weight: normal; }
+  .timestamp { color: #bebebe; }
+  .timestamp-kwd { color: #5f9ea0; }
+  .org-right  { margin-left: auto; margin-right: 0px;  text-align: right; }
+  .org-left   { margin-left: 0px;  margin-right: auto; text-align: left; }
+  .org-center { margin-left: auto; margin-right: auto; text-align: center; }
+  .underline { text-decoration: underline; }
+  #postamble p, #preamble p { font-size: 90%; margin: .2em; }
+  p.verse { margin-left: 3%; }
+  pre {
+    border: 1px solid #ccc;
+    box-shadow: 3px 3px 3px #eee;
+    padding: 8pt;
+    font-family: monospace;
+    overflow: auto;
+    margin: 1.2em;
+  }
+  pre.src {
+    position: relative;
+    overflow: visible;
+    padding-top: 1.2em;
+  }
+  pre.src:before {
+    display: none;
+    position: absolute;
+    background-color: white;
+    top: -10px;
+    right: 10px;
+    padding: 3px;
+    border: 1px solid black;
+  }
+  pre.src:hover:before { display: inline;}
+  pre.src-sh:before    { content: 'sh'; }
+  pre.src-bash:before  { content: 'sh'; }
+  pre.src-emacs-lisp:before { content: 'Emacs Lisp'; }
+  pre.src-R:before     { content: 'R'; }
+  pre.src-perl:before  { content: 'Perl'; }
+  pre.src-java:before  { content: 'Java'; }
+  pre.src-sql:before   { content: 'SQL'; }
+
+  table { border-collapse:collapse; }
+  caption.t-above { caption-side: top; }
+  caption.t-bottom { caption-side: bottom; }
+  td, th { vertical-align:top;  }
+  th.org-right  { text-align: center;  }
+  th.org-left   { text-align: center;   }
+  th.org-center { text-align: center; }
+  td.org-right  { text-align: right;  }
+  td.org-left   { text-align: left;   }
+  td.org-center { text-align: center; }
+  dt { font-weight: bold; }
+  .footpara { display: inline; }
+  .footdef  { margin-bottom: 1em; }
+  .figure { padding: 1em; }
+  .figure p { text-align: center; }
+  .inlinetask {
+    padding: 10px;
+    border: 2px solid gray;
+    margin: 10px;
+    background: #ffffcc;
+  }
+  #org-div-home-and-up
+   { text-align: right; font-size: 70%; white-space: nowrap; }
+  textarea { overflow-x: auto; }
+  .linenr { font-size: smaller }
+  .code-highlighted { background-color: #ffff00; }
+  .org-info-js_info-navigation { border-style: none; }
+  #org-info-js_console-label
+    { font-size: 10px; font-weight: bold; white-space: nowrap; }
+  .org-info-js_search-highlight
+    { background-color: #ffff00; color: #000000; font-weight: bold; }
+  /*]]>*/-->
+</style>
+<link rel="stylesheet" type="text/css" href="css/style.css" />
+<script type="text/javascript">
+/*
+@licstart  The following is the entire license notice for the
+JavaScript code in this tag.
+
+Copyright (C) 2012-2013 Free Software Foundation, Inc.
+
+The JavaScript code in this tag is free software: you can
+redistribute it and/or modify it under the terms of the GNU
+General Public License (GNU GPL) as published by the Free Software
+Foundation, either version 3 of the License, or (at your option)
+any later version.  The code is distributed WITHOUT ANY WARRANTY;
+without even the implied warranty of MERCHANTABILITY or FITNESS
+FOR A PARTICULAR PURPOSE.  See the GNU GPL for more details.
+
+As additional permission under GNU GPL version 3 section 7, you
+may distribute non-source (e.g., minimized or compacted) forms of
+that code without the copy of the GNU GPL normally required by
+section 4, provided you include this license notice and a URL
+through which recipients can access the Corresponding Source.
+
+
+@licend  The above is the entire license notice
+for the JavaScript code in this tag.
+*/
+<!--/*--><![CDATA[/*><!--*/
+ function CodeHighlightOn(elem, id)
+ {
+   var target = document.getElementById(id);
+   if(null != target) {
+     elem.cacheClassElem = elem.className;
+     elem.cacheClassTarget = target.className;
+     target.className = "code-highlighted";
+     elem.className   = "code-highlighted";
+   }
+ }
+ function CodeHighlightOff(elem, id)
+ {
+   var target = document.getElementById(id);
+   if(elem.cacheClassElem)
+     elem.className = elem.cacheClassElem;
+   if(elem.cacheClassTarget)
+     target.className = elem.cacheClassTarget;
+ }
+/*]]>*///-->
+</script>
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+        displayAlign: "center",
+        displayIndent: "0em",
+
+        "HTML-CSS": { scale: 100,
+                        linebreaks: { automatic: "false" },
+                        webFont: "TeX"
+                       },
+        SVG: {scale: 100,
+              linebreaks: { automatic: "false" },
+              font: "TeX"},
+        NativeMML: {scale: 100},
+        TeX: { equationNumbers: {autoNumber: "AMS"},
+               MultLineWidth: "85%",
+               TagSide: "right",
+               TagIndent: ".8em"
+             }
+});
+</script>
+<script type="text/javascript"
+        src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS_HTML"></script>
+</head>
+<body>
+<div id="content">
+<h1 class="title">Классическая электродинамика
+<br>
+<span class="subtitle">2 курс СПбАУ РАН, весна 2016</span>
+</h1>
+
+<div id="outline-container-orgheadline19" class="outline-2">
+<h2 id="orgheadline19">Лагранжиан классического поля.</h2>
+<div class="outline-text-2" id="text-orgheadline19">
+</div><div id="outline-container-orgheadline1" class="outline-3">
+<h3 id="orgheadline1">Теория поля как непрерывный предел.</h3>
+<div class="outline-text-3" id="text-orgheadline1">
+<p>
+Система из \(N\) грузиков, соединённых пружинками (\(N \to \infty\)). Если
+\(\phi(x)\) — отклонение от положения равновесия грузика в точке \(x\), то
+уравнения движения запишутся в виде \(\mu \ddot{\phi} = \kappa
+\phi''\). Лагранжиан такой системы (точнее, плотность лагранжиана)
+\(\mathcal{L} = \frac{\mu}{2} (\dot{\phi})^2 - \frac{\kappa}{2}
+(\phi')^2\) — получается предельным переходом из обычной функции
+Лагранжа для \(N\) грузиков. 
+</p>
+</div>
+</div>
+
+<div id="outline-container-orgheadline2" class="outline-3">
+<h3 id="orgheadline2">Уравнения Эйлера–Лагранжа для полевой модели.</h3>
+<div class="outline-text-3" id="text-orgheadline2">
+<p>
+Если лагранжиан \(\mathcal{L}\) зависит от полей и их первых
+производных, т.е. \(\mathcal{L} = \mathcal{L} (\partial_{\mu}
+\phi(x,t),\phi(x,t),t)\), то уравнения движения (уравнения Эйлера-Лагранжа)
+выглядят так:
+</p>
+
+\begin{equation}
+\label{eq:euler-lagrange-fields}
+\partial_{\mu} \left( \frac{\partial
+\mathcal{L}}{\partial (\partial_{\mu} \phi)} \right) = \frac{\partial
+\mathcal{L}}{\partial \phi} .
+\end{equation}
+</div>
+</div>
+
+<div id="outline-container-orgheadline3" class="outline-3">
+<h3 id="orgheadline3">Релятивистски–инвариантный лагранжиан свободной частицы.</h3>
+<div class="outline-text-3" id="text-orgheadline3">
+<p>
+Сохранение 4-объёма, неинвариантность функции Лагранжа \(L\), построение
+инвариантного действия в виде \(S = -mc^2 \int d \tau\). Проверка
+нерелятивистского предела \(v \ll c\) для правильного коэффициента
+перед действием.
+</p>
+</div>
+</div>
+
+<div id="outline-container-orgheadline4" class="outline-3">
+<h3 id="orgheadline4">Лагранжиан заряженной частицы.</h3>
+<div class="outline-text-3" id="text-orgheadline4">
+<p>
+Построение действия как \( S = S_{particle} + S_{int} +
+S_{field}\). Построение релятивистски–инвариантного действия
+взаимодействия \(S_{int}\). Итоговое действие (без полей) в виде
+\(S_{particle} + S_{int} = \int -mc^2 d\tau - \frac{e}{c} A_{\mu}
+dx^{\mu}\).
+</p>
+</div>
+</div>
+
+<div id="outline-container-orgheadline7" class="outline-3">
+<h3 id="orgheadline7">Уравнения движения заряженной частицы.</h3>
+<div class="outline-text-3" id="text-orgheadline7">
+</div><div id="outline-container-orgheadline5" class="outline-4">
+<h4 id="orgheadline5">Первый способ: варьирование действия.</h4>
+<div class="outline-text-4" id="text-orgheadline5">
+<p>
+Требование \(\delta S = 0\). Уравнения движения в ковариантной форме,
+т.е.
+</p>
+\begin{equation}
+\label{eq:eom-particle}
+m \frac{du_{\mu}}{d \tau} = \frac{e}{c} F_{\mu \nu}
+u^{\nu},
+\end{equation}
+<p>
+где \(F_{\mu \nu} = \partial_{\mu} A_{\nu} -
+\partial_{\nu} A_{\mu}\) — <i>тензор электромагнитного поля</i>.
+</p>
+</div>
+</div>
+
+<div id="outline-container-orgheadline6" class="outline-4">
+<h4 id="orgheadline6">Второй способ: с помощью уравнений Эйлера–Лагранжа.</h4>
+<div class="outline-text-4" id="text-orgheadline6">
+<p>
+Действие в форме 
+</p>
+\begin{equation}
+\label{eq:action-without-fields}
+ S = - \int d\tau \left( mc \sqrt{u_{\mu}u^{\mu}} +
+\frac{e}{c} u_{\mu}A^{\mu} \right).  
+\end{equation}
+
+<p>
+Отмечается репараметризационная инвариантность (\(\mathrm{Diff}\, M\)),
+позволяющая снять ограничение по связям (\(u_{\mu}u^{\mu} =
+c^2\)). Совсем кратко: проблема времени (см., например, отличный <a href="http://arxiv.org/pdf/gr-qc/9210011v1.pdf">обзор</a>
+Chris J. Isham), «слабые связи» по Дираку (см. книгу <i>Marc Henneaux &amp;
+Claudio Teitelboim, “Quantization of Gauge Systems”</i>). Уравнения
+движения получаются точно такие же (что неудивительно).
+</p>
+</div>
+</div>
+</div>
+
+<div id="outline-container-orgheadline8" class="outline-3">
+<h3 id="orgheadline8">Напряжённости электромагнитного поля.</h3>
+<div class="outline-text-3" id="text-orgheadline8">
+<p>
+Вектора \(\vec{E}\) (<i>электрическое поле</i>) и \(\vec{H}\) (<i>магнитное
+поле</i>). Запись уравнений движения в трёхмерной форме: 
+</p>
+\begin{equation}
+\label{eq:eom-vect}
+\frac{d\vec{p}}{dt} = e \left( -\frac{1}{c} \frac{\partial
+\vec{A}}{\partial t} - \nabla \phi \right) + \frac{e}{c} \vec{v}
+\times \mathrm{rot} \vec{A} = e \vec{E} + \frac{e}{c} \vec{v} \times
+\vec{H}.
+\end{equation}
+
+<p>
+Компоненты тензора \(F\): 
+</p>
+\begin{equation}
+\label{eq:def-F}
+F_{\mu\nu} = \begin{pmatrix} 0 & E_x
+& E_y & E_z \\ -E_x & 0 & -H_z & H_y \\ -E_y & H_z & 0 & -H_x
+\\ -E_z & -H_y & H_x & 0 \end{pmatrix}.
+\end{equation}
+<p>
+Изменение энергии частицы, нулевая работа магнитного поля: \(\frac{d
+\mathcal{E}}{dt } = e \vec{E} \cdot \vec{v}\).
+</p>
+
+<p>
+<b>NB:</b> Неплохой источник информации о тензорах в целом и об искусстве
+обращения с ними: <a href="http://www.physics.uu.se/digitalAssets/405/405910_3specrel.pdf">брошюра</a> моего коллеги из университета Уппсалы,
+Джо Минахана. Вся брошюра хороша, но можно сразу перейти к
+разделу 3. Цитата оттуда:
+</p>
+
+<blockquote>
+<p>
+In the fall of 2006 I had been asked by several students if I
+knew a good book to read about tensors. I am sure that they exist, but
+I could not immediately think of any.  So a week before the exam I
+quickly wrote up 8 pages of notes summarizing what was discussed in
+class concerning tensors. I called it Tensors without tears.
+</p>
+</blockquote>
+</div>
+</div>
+
+<div id="outline-container-orgheadline9" class="outline-3">
+<h3 id="orgheadline9">Инварианты электромагнитного поля.</h3>
+<div class="outline-text-3" id="text-orgheadline9">
+<p>
+Доказательство того, что \(\varepsilon_{\mu \nu \delta \gamma }\) не
+преобразуется при переходе из одной системы отсчёта в другую
+(вспомните определение определителя матрицы через перестановки). Как
+можно свернуть тензор \(F\), чтобы получился скаляр (по отношению к
+группе Лоренца)? Вариантов немного.  
+</p>
+
+<p>
+\(F_{\mu \nu} F^{\mu \nu} = 2 \left( H^2 - E^2 \right)\),
+\(\varepsilon_{\mu \nu \delta \gamma} F^{\mu \nu} F^{\delta \gamma} = 2
+\vec{E} \cdot \vec{H}\). Вывод: \(H^2 - E^2 = \mathrm{inv}\), \(\vec{E}
+\cdot \vec{H} = \mathrm{inv}\). 
+</p>
+</div>
+</div>
+
+<div id="outline-container-orgheadline10" class="outline-3">
+<h3 id="orgheadline10">Пример решения уравнений движения.</h3>
+<div class="outline-text-3" id="text-orgheadline10">
+<p>
+Переход в СО, где нет магнитного поля, а есть только электрическое, с
+помощью инвариантов. Движение заряда в однородном электрическом
+поле. Уравнения движения:
+</p>
+
+\begin{equation}
+\label{eq:eom-uniform-electric}
+\frac{du^1}{d\tau} = \frac{e}{c} E u^0, \qquad m \frac{du^0}{d\tau} = \frac{e}{c} E u^1. 
+\end{equation}
+
+<p>
+Их решение (\(u^0 = c \cosh \frac{eE}{mc} \tau\), \(u^1 = c
+\sinh \frac{eE}{mc} \tau\)) приводит к гиперболическому
+движению в осях \((x,t)\).
+</p>
+</div>
+</div>
+
+<div id="outline-container-orgheadline11" class="outline-3">
+<h3 id="orgheadline11">Теорема Лармора.</h3>
+<div class="outline-text-3" id="text-orgheadline11">
+<p>
+Она утверждает, что при наложении слабого магнитного поля \(\vec{H}\) на
+систему нерелятивистских заряженных частиц, система приходит во
+вращение как целое с угловой скоростью (надо немного порефлексировать
+над знаком)
+</p>
+
+\begin{equation}
+\label{eq:larmor}
+\vec{\Omega} = - \frac{e\vec{H}}{2mc}. 
+\end{equation}
+
+<p>
+При доказательстве использовано полезное соотношение
+\(\varepsilon_{ijk} \varepsilon_{klm} = \delta_{il} \delta_{jm} -
+\delta_{im}\delta_{jl}\). Благодаря ему можно написать двойное
+векторное произведение в таком виде (попробуйте получить это без
+\(\varepsilon\) — это довольно муторно):
+</p>
+
+\begin{equation}
+\label{eq:atimesbtimesc}
+\vec{\nabla} \times (\vec{A} \times \vec{B}) = (\vec{B} \cdot \vec{\nabla}) \vec{A} + (\vec{\nabla} \cdot \vec{B}) \vec{A} - (\vec{\nabla} \cdot \vec{A}) \vec{B} - (\vec{A} \cdot \vec{\nabla}) \vec{B}.
+\end{equation}
+
+<p>
+А сама теорема Лармора получается, если посмотреть на нерелятивистскую
+функцию Лагранжа с наложенным постоянным магнитным полем (в этом
+случае можно представить векторный потенциал \(\vec{A} = \frac{1}{2}\vec{H}
+\times \vec{r}\)). Эта функция Лагранжа абсолютно эквивалентна функции
+Лагранжа для частиц без магнитного поля, но во вращающейся системе
+отсчёта, что и доказывает теорему Лармора. 
+</p>
+
+<p>
+Осталось выяснить, что в точности означает «слабость» магнитного
+поля. 
+</p>
+</div>
+</div>
+
+<div id="outline-container-orgheadline12" class="outline-3">
+<h3 id="orgheadline12">Гамильтоново описание.</h3>
+<div class="outline-text-3" id="text-orgheadline12">
+<p>
+Обобщённый импульс в виде \(P_{\alpha} = mu_{\alpha} + \frac{e}{c}
+A_{\alpha} = p_{\alpha} + \frac{e}{c} A_{\alpha}\)
+(взаимодействие = удлинение импульса). Построение гамильтониана
+в виде \[ \mathcal{H} = \vec{v} \frac{\partial L}{\partial
+\vec{v}} - L = \frac{mc^2}{\sqrt{1-\frac{v^2}{c^2}}} + e
+\varphi. \] Замечание: \(\mathcal{H} /c = P_0\). Что будет, если
+строить гамильтониан через \(P_{\alpha}\) (физическая
+интерпретация результата, опять проблема времени)? 
+</p>
+</div>
+</div>
+
+<div id="outline-container-orgheadline13" class="outline-3">
+<h3 id="orgheadline13">Калибровочная инвариантность.</h3>
+<div class="outline-text-3" id="text-orgheadline13">
+<p>
+Инвариантность уравнений движения \eqref{eq:eom-particle} относительно
+сдвига потенциала на градиент произвольной функции \(\chi\): \(A_{\mu}
+\to A_{\mu} + \partial_{\mu} \chi\). Замечание о первичности \(A_{\mu}\),
+а не полей \(\vec{E}\), \(\vec{H}\). Важно отметить, что в электродинамике
+4 переменных, а не 6, как можно было бы подумать.
+</p>
+
+<p>
+Различные калибровки: кулоновская калибровка (\(\mathrm{div}
+\vec{A}=0\)), калибровка Лоренца (\(\partial_{\mu} A^{\mu}=0\)). 
+</p>
+</div>
+</div>
+
+<div id="outline-container-orgheadline14" class="outline-3">
+<h3 id="orgheadline14">4-ток и сохранение заряда.</h3>
+<div class="outline-text-3" id="text-orgheadline14">
+<p>
+Определение 4-тока \(j^{\mu} = (c \rho, \vec{j})\), где \(\vec{j} = \rho
+\vec{v}\) — обычная объёмная плотность тока, \(\rho\) — объёмная
+плотность заряда. Равенство \(j^{\mu} = \rho_0 u^{\mu} = \rho
+\frac{dx^{\mu}}{dt}\) (обратите внимание, объёмная плотность заряда —
+не инвариантная величина в силу того, что 3-объём не
+инвариантен). Запись действия взаимодействия с помощью 4-тока: 
+</p>
+
+\begin{equation}
+\label{eq:sint-4-current}
+S_{int} = -\frac{1}{c^2} \int d^4 x j^{\mu}A_{\mu}.
+\end{equation}
+
+<p>
+Обратите внимание на появившийся 4-объём (он инвариантен), и объект
+\(j_{\mu} A^{\mu}\) (он тоже инвариантен, будучи скаляром). 
+</p>
+
+<p>
+Теперь потребуем калибровочной инвариантности от этого действия
+(т.е. при замене \(A_{\mu} \to A_{\mu} + \partial_{\mu} \chi\)). Чтобы
+оно было инвариантно, нужно чтобы 
+</p>
+
+\begin{equation}
+\label{eq:div-4-current}
+\partial_{\mu} j^{\mu} = 0. 
+\end{equation}
+
+<p>
+В трёхмерной форме это уравнение можно переписать как хорошо известное
+<i>уравнение неразрывности</i>
+</p>
+
+\begin{equation}
+\label{eq:cont-cond}
+\frac{\partial \rho}{\partial t} + \mathrm{div} \vec{j} = 0. 
+\end{equation}
+
+<p>
+Это условие в точности эквивалентно условию сохранения заряда \(q =
+\int \rho dV\) (домножим верхнее равенство на объём, проинтегрируем и
+применим теорему Гаусса-Остроградского). 
+</p>
+
+<p>
+<span class="underline">Вывод</span> (об устройстве природы): калибровочная инвариантность
+обеспечивает сохранение заряда! Это верно для любой <i>калибровочной
+теории</i> (т.е. такой, в которой есть какие-то калибровочные
+преобразования). Например, та же ситуация будет наблюдаться в
+квантовой хромодинамике (КХД), в теории электрослабого взаимодействия
+и т.д. Только там заряды будут не электрическими, а какими-то другими
+(раньше это называли «изоспином»). 
+</p>
+</div>
+</div>
+
+<div id="outline-container-orgheadline15" class="outline-3">
+<h3 id="orgheadline15">Действие электромагнитного поля.</h3>
+<div class="outline-text-3" id="text-orgheadline15">
+<p class="verse">
+И, наконец, вдалеке возникает неясный прекрасный мираж:<br  />
+Фата-Моргана, волненье эфира, царевны морской чешуя&#x2026;<br  />
+Ах, эта сладкая небыль! Себе не возьмёшь и другим не отдашь&#x2026;<br  />
+Просто — причуда пространства, нелепая шутка, неведомо чья!..<br  />
+<br  />
+<i><a href="https://ru.wikipedia.org/wiki/%D0%A9%D0%B5%D1%80%D0%B1%D0%B0%D0%BA%D0%BE%D0%B2,_%D0%9C%D0%B8%D1%85%D0%B0%D0%B8%D0%BB_%D0%9A%D0%BE%D0%BD%D1%81%D1%82%D0%B0%D0%BD%D1%82%D0%B8%D0%BD%D0%BE%D0%B2%D0%B8%D1%87">Михаил Щербаков</a>, «<a href="http://mlmusic.d3.gfns.net/snd_/ms05cd/ms05cd09.mp3">Вот поднимается ветер</a>»</i><br  />
+</p>
+
+<p>
+Требования, предъявляемые к действию: 
+</p>
+
+<ul class="org-ul">
+<li>лоренц-инвариантность;</li>
+<li>калибровочная инвариантность;</li>
+<li>действие должно быть квадратичным по производным по \(A_{\mu}\) (чтобы
+выполнялся принцип суперпозиции для напряжённостей).</li>
+</ul>
+
+<p>
+С такими требованиями вариантов немного, их всего два: \(F_{\mu \nu}
+F^{\mu \nu}\) и \(\varepsilon^{\mu \nu \delta \gamma} F_{\mu\nu}
+F_{\delta \gamma}\). Заметим, однако, что второе выражение является
+полной производной (докажите это!): 
+</p>
+
+\begin{equation}
+\label{eq:4-div}
+\varepsilon^{\mu \nu \delta \gamma} F_{\mu\nu}
+F_{\delta \gamma}  = 4 \partial_{\mu} \left( \varepsilon^{\mu \nu \delta \gamma} A_{\nu} \partial_{\delta} A_{\gamma}  \right),
+\end{equation}
+<p>
+так что в действии её можно не учитывать, оно всё равно не даст
+вклада. Итого, в действие может входить только слагаемое \(F_{\mu
+\nu}F^{\mu \nu}\). Грамотно подбирая размерность, получим такое
+выражение (множитель \(-1/16\pi\) выбран, скорее, по историческим
+причинам): 
+</p>
+
+\begin{equation}
+\label{eq:s-fields}
+S_{fields} = - \frac{1}{16 \pi c} \int F_{\mu\nu} F^{\mu\nu} d^4 x. 
+\end{equation}
+
+<p>
+Итого, действие для электромагнитного поля + действие взаимодействие
+описывается следующим выражением:
+</p>
+
+\begin{equation}
+\label{eq:s-fields-int}
+S_{fields} + S_{int} = - \int \left( \frac{1}{16\pi c} F_{\mu\nu} F^{\mu\nu} + \frac{1}{c^2} j^{\mu}A_{\mu} \right) d^4 x. 
+\end{equation}
+
+<p>
+Под лагранжианом будем понимать выражение
+</p>
+
+\begin{equation}
+\label{eq:def-l-fields}
+\mathcal{L} = - \frac{1}{16 \pi c } F_{\mu \nu} F^{\mu \nu} - \frac{1}{c^2} j^{\mu} A_{\mu}. 
+\end{equation}
+</div>
+</div>
+
+<div id="outline-container-orgheadline16" class="outline-3">
+<h3 id="orgheadline16">Уравнения движения для электромагнитного поля (уравнения Максвелла).</h3>
+<div class="outline-text-3" id="text-orgheadline16">
+<p>
+Используем уравнения Эйлера-Лагранжа \eqref{eq:euler-lagrange-fields},
+они как раз были задуманы для этого дела. Применим же их к действию
+\eqref{eq:s-fields-int}. Перепишем их для переменной \(A_{\nu}\) (она
+будет играть роль канонической координаты): 
+</p>
+
+\begin{equation}
+\label{eq:eom-a-nu}
+\partial_{\mu} \frac{\partial \mathcal{L}}{\partial (\partial_{\mu}A_{\nu})} = \frac{\partial \mathcal{L}}{\partial A_{\nu}}. 
+\end{equation}
+
+<p>
+Для начала напишем несколько почти очевидных утверждений (они сформулированы
+для общего случая): 
+</p>
+
+\begin{equation}
+\label{eq:lm-pt}
+\frac{\partial x_{\mu}}{\partial x_{\nu}} = \delta^{\nu}_{\mu}, \quad \frac{\partial x^{\mu}}{\partial x_{\nu}} = g^{\mu \nu}, \quad \frac{\partial(\partial_{\alpha} x_{\beta})}{\partial(\partial_{\mu} x_{\nu})} = \delta^{\mu}_{\alpha} \delta^{\nu}_{\beta}. 
+\end{equation}
+
+<p>
+Вычислим левую часть уравнений Эйлера-Лагранжа. Для этого сосчитаем
+производную 
+</p>
+
+\begin{equation}
+\label{eq:max-1}
+\frac{\partial (F_{\alpha \beta} F^{\alpha \beta })}{\partial (\partial_{\mu} A_{\nu})} = 2 F^{\alpha \beta} \frac{\partial F_{\alpha \beta}}{\partial (\partial_{\mu} A_{\nu})}.
+\end{equation}
+
+<p>
+Теперь воспользуемся определением \(F_{\alpha \beta}\) и  правилами \eqref{eq:lm-pt}: 
+</p>
+
+\begin{equation}
+\label{eq:max-2}
+2 F^{\alpha \beta} \frac{\partial F_{\alpha \beta}}{\partial (\partial_{\mu} A_{\nu})} = 2 F^{\alpha \beta} \left( \frac{\partial (\partial_{\alpha} A_{\beta})}{\partial (\partial_{\mu} A_{\nu})} - \frac{\partial (\partial_{\beta} A_{\alpha})}{\partial (\partial_{\mu} A_{\nu})}  \right) = 2F^{\alpha \beta} \left( \delta^{\mu}_{\alpha} \delta^{\nu}_{\beta} - \delta^{\mu}_{\beta} \delta^{\nu}_{\alpha} \right). 
+\end{equation}
+
+<p>
+Осталось только собрать все индексы и вспомнить, что \(F\)
+антисимметричен, т.е. \(F^{\mu \nu} = -F^{\nu \mu}\): 
+</p>
+
+\begin{equation}
+\label{eq:max-3}
+2F^{\alpha \beta} \left( \delta^{\mu}_{\alpha} \delta^{\nu}_{\beta} - \delta^{\mu}_{\beta} \delta^{\nu}_{\alpha} \right) = 2F^{\mu \nu} - 2F^{\nu \mu} = 4 F^{\mu \nu}. 
+\end{equation}
+
+<p>
+Уравнения Эйлера-Лагранжа дают:
+</p>
+
+\begin{equation}
+\label{eq:max-final-1}
+\partial_{\mu} F^{\mu \nu} = \frac{4\pi}{c} j^{\nu}. 
+\end{equation}
+
+<p>
+В этих уравнениях закодирована первая пара <i>уравнений
+Максвелла</i>. Всего их, как известно, восемь (два векторных и два
+скалярных), а у нас написано всего 4. Остальные 4 можно найти в таком
+почти очевидном тождестве (в более общем случае это называется
+<i>тождеством Бьянки</i>): 
+</p>
+
+\begin{equation}
+\label{eq:max-final-2}
+\partial_{\lambda} F_{\mu \nu} + \partial_{\mu} F_{\nu \lambda} + \partial_{\nu} F_{\lambda \mu} =0. 
+\end{equation}
+
+<p>
+Легко удостовериться, что тут действительно 4 уравнения (все 3 индекса
+должны быть разными, \(\mu \neq \nu \neq \lambda\)). Это — вторая пара
+<i>уравнений Максвелла</i>.
+</p>
+</div>
+</div>
+
+<div id="outline-container-orgheadline17" class="outline-3">
+<h3 id="orgheadline17">Трёхмерная форма уравнений Максвелла.</h3>
+<div class="outline-text-3" id="text-orgheadline17">
+<p>
+Вспомним то, как тензор \(F\) записывается в компонентах
+\eqref{eq:def-F}. Учитывая это, уравнения Максвелла можно легко
+переписать в трёхмерной форме. Первое уравнение \eqref{eq:max-final-1}
+даёт при \(\nu=0\) просто
+</p>
+
+\begin{equation}
+\label{eq:max-3d-1}
+\mathrm{div} \vec{E} = 4 \pi \rho. 
+\end{equation}
+
+<p>
+При \(\nu=1,2,3\) получается векторное уравнение
+</p>
+
+\begin{equation}
+\label{eq:max-3d-2}
+\mathrm{rot} \vec{H} = \frac{4\pi}{c} \vec{j} + \frac{1}{c} \frac{\partial \vec{E}}{\partial t}. 
+\end{equation}
+
+<p>
+Теперь обследуем второе уравнение \eqref{eq:max-final-2}. При \(\mu =
+1, \nu = 2, \lambda =3\) получается
+</p>
+
+\begin{equation}
+\label{eq:max-3d-3}
+\mathrm{div} \vec{H} =0. 
+\end{equation}
+
+<p>
+А при \(\lambda =0, \mu = 1, \nu=2\) и т.д. опять получится векторное
+уравнение: 
+</p>
+
+\begin{equation}
+\label{eq:max-3d-4}
+\mathrm{rot} \vec{E} = -\frac{1}{c} \frac{\partial \vec{H}}{\partial t}. 
+\end{equation}
+
+<p>
+Несколько основных свойств: 
+</p>
+
+<ul class="org-ul">
+<li>уравнения Максвелла линейны, следовательно, имеется <i>принцип суперпозиции</i>;</li>
+<li>если поля постоянны, то уравнения Максвелла распадаются на 2 части:
+для \(\vec{E}\) и \(\vec{H}\);</li>
+<li>при \(\rho=0\), \(\vec{j}=0\) возможно ненулевое решение уравнений
+Максвелла (<i>электромагнитные волны</i>).</li>
+</ul>
+</div>
+</div>
+
+<div id="outline-container-orgheadline18" class="outline-3">
+<h3 id="orgheadline18">Тензор энергии–импульса. Вектор Пойнтинга.</h3>
+<div class="outline-text-3" id="text-orgheadline18">
+<p>
+Напоминание о теореме Нётер. Частный случай: лагранжиан, который явно
+не зависит от времени, обеспечивает сохранение энергии. 
+</p>
+</div>
+</div>
+</div>
+</div>
+<div id="postamble" class="status">
+<hr>
+<p class="date">Last Updated 2016-03-24 Thu 10:08</p>
+<p class="postamble">Created by Igor Shenderovich [<a href="mailto:shender.i@gmail.com">shender.i@gmail.com</a>] with <a href="http://www.gnu.org/software/emacs/">Emacs</a> 24.5.1 (<a href="http://orgmode.org">Org</a> mode 8.3.2)</p>
+</div>
+</body>
+</html>
