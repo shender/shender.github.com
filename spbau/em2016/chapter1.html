@@ -3,7 +3,7 @@
 "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
 <head>
-<!-- 2016-03-24 Thu 10:08 -->
+<!-- 2016-03-29 Tue 00:19 -->
 <meta  http-equiv="Content-Type" content="text/html;charset=utf-8" />
 <meta  name="viewport" content="width=device-width, initial-scale=1" />
 <title>Классическая электродинамика</title>
@@ -170,10 +170,26 @@ for the JavaScript code in this tag.
 <br>
 <span class="subtitle">2 курс СПбАУ РАН, весна 2016</span>
 </h1>
+<p>
+Литература: 
+</p>
 
-<div id="outline-container-orgheadline19" class="outline-2">
-<h2 id="orgheadline19">Лагранжиан классического поля.</h2>
-<div class="outline-text-2" id="text-orgheadline19">
+<ol class="org-ol">
+<li>Бредов М.М., Румянцев В.В., Топтыгин И.Н., «Классическая
+электродинамика», 1985 (главы 1, 2, 3).</li>
+<li>А.Н. Васильев, «Классическая электродинамика. Краткий курс
+лекций», 2010 (глава 2).</li>
+<li>F.E. Low, “Classical Field Theory: Electromagnetism and
+Gravitation”, 2004 (главы 6 и 7).</li>
+<li>B. Zwiebach, “A First Course in String Theory”, 2004 (главы 2 и 3)
+[обратите внимание: в этой книге выбрана другая метрика,
+отличающаяся знаком от нашей — обычно так поступают в книжках по
+общей теории относительности и теории струн].</li>
+</ol>
+
+<div id="outline-container-orgheadline20" class="outline-2">
+<h2 id="orgheadline20">Лагранжиан классического поля.</h2>
+<div class="outline-text-2" id="text-orgheadline20">
 </div><div id="outline-container-orgheadline1" class="outline-3">
 <h3 id="orgheadline1">Теория поля как непрерывный предел.</h3>
 <div class="outline-text-3" id="text-orgheadline1">
@@ -724,7 +740,99 @@ S_{fields} + S_{int} = - \int \left( \frac{1}{16\pi c} F_{\mu\nu} F^{\mu\nu} + \
 <div class="outline-text-3" id="text-orgheadline18">
 <p>
 Напоминание о теореме Нётер. Частный случай: лагранжиан, который явно
-не зависит от времени, обеспечивает сохранение энергии. 
+не зависит от времени, обеспечивает сохранение энергии. В случае
+теории поля: 
+</p>
+
+\begin{equation}
+\label{eq:tmunu}
+\partial_{\mu} T^{\mu}_{\alpha}=0, 
+\end{equation}
+<p>
+где \(T^{\mu}_{\alpha}\) — <i>тензор энергии-импульса</i>, в общем случае
+равный
+</p>
+
+\begin{equation}
+\label{eq:def-tmunu}
+T^{\mu}_{\alpha} = \partial_{\alpha} A_{\nu} \frac{\partial \mathcal{L}}{\partial (\partial_{\mu} A_{\nu})} - \delta^{\mu}_{\alpha} \mathcal{L}. 
+\end{equation}
+
+<p>
+Почему это закон сохранения? По аналогии с уравнением непрерывности
+\eqref{eq:div-4-current}, которое приводит к сохранению заряда, можно
+посмотреть на уравнение \eqref{eq:tmunu} так: 
+</p>
+
+\begin{equation}
+\label{eq:cons-tmunu}
+\partial_0 T^{00} + \partial_i T^{0i} =0
+\end{equation}
+<p>
+и т.д. Таким образом, например, \(T^{00}\) — плотность некоторой
+сохраняющейся величины. Сравнивая выражение для \(T^{00}\) с обычной
+энергией в классической механике
+</p>
+
+\begin{equation}
+\label{eq:def-energy-class-mech}
+\mathcal{E} = \frac{\partial L}{\partial \dot{q}} \dot{q} - L,
+\end{equation}
+<p>
+поймём, что \(T^{00}\) — <i>плотность энергии поля</i> (с точностью до
+константы \(c\), чтобы сходилась размерность). 
+</p>
+
+<p>
+Теперь симметризуем тензор \(T^{\mu}_{\alpha}\). Это всегда можно
+сделать с помощью добавки \(\Delta T^{\mu}_{\alpha}\), такой, что
+\(\partial_{\mu} \Delta T^{\mu}_{\alpha}=0\). В итоге кропотливого
+подбора получим, что симметризованный тензор энергии-импульса имеет
+вид: 
+</p>
+
+\begin{equation}
+\label{eq:symm-stress-energy}
+\bar{T}^{\alpha \beta} = - \frac{1}{4\pi c}F^{\alpha \mu} g_{\mu \lambda} F^{\beta \lambda} - g^{\alpha \beta}\mathcal{L}. 
+\end{equation}
+
+<p>
+Явное вычисление компонент даёт: 
+</p>
+
+\begin{equation}
+\label{eq:tmunu-comp}
+\bar{T}^{00} = \frac{E^2+H^2}{8 \pi c}, \quad \bar{T}^{0i} = \frac{(\vec{E} \times \vec{H})_i}{4\pi c}. 
+\end{equation}
+
+<p>
+Переходя к размерным величинам (плотности энергии \(W\) и плотности потока
+энергии — <i>вектору Пойнтинга</i> \(\vec{S}\)), напишем так: 
+</p>
+
+\begin{equation}
+\label{eq:densities}
+W = \frac{E^2+H^2}{8 \pi}, \quad \vec{S} = \frac{c}{4\pi} \vec{E} \times \vec{H}. 
+\end{equation}
+</div>
+</div>
+
+<div id="outline-container-orgheadline19" class="outline-3">
+<h3 id="orgheadline19">Заключение.</h3>
+<div class="outline-text-3" id="text-orgheadline19">
+<p>
+Полное действие классической электродинамики с частицами и полями: 
+</p>
+
+\begin{align}
+\label{eq:full-action}
+S &= S_{particles} + S_{int} + S_{fields} =  \\
+&= - \sum_{particles} mc \int ds - \frac{1}{c^2} \int A_{\mu} j^{\mu} d^4 x - \frac{1}{16 \pi c} \int F_{\mu \nu} F^{\mu \nu} d^4 x. 
+\end{align}
+
+<p>
+Из него следует абсолютно <span class="underline">всё</span>, что вам нужно от классической
+электродинамики в вакууме. 
 </p>
 </div>
 </div>
@@ -732,7 +840,7 @@ S_{fields} + S_{int} = - \int \left( \frac{1}{16\pi c} F_{\mu\nu} F^{\mu\nu} + \
 </div>
 <div id="postamble" class="status">
 <hr>
-<p class="date">Last Updated 2016-03-24 Thu 10:08</p>
+<p class="date">Last Updated 2016-03-29 Tue 00:19</p>
 <p class="postamble">Created by Igor Shenderovich [<a href="mailto:shender.i@gmail.com">shender.i@gmail.com</a>] with <a href="http://www.gnu.org/software/emacs/">Emacs</a> 24.5.1 (<a href="http://orgmode.org">Org</a> mode 8.3.2)</p>
 </div>
 </body>
