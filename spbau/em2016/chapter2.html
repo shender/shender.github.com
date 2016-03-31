@@ -3,7 +3,7 @@
 "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
 <head>
-<!-- 2016-03-28 Mon 23:47 -->
+<!-- 2016-04-01 Fri 00:09 -->
 <meta  http-equiv="Content-Type" content="text/html;charset=utf-8" />
 <meta  name="viewport" content="width=device-width, initial-scale=1" />
 <title>Классическая электродинамика</title>
@@ -142,6 +142,28 @@ for the JavaScript code in this tag.
  }
 /*]]>*///-->
 </script>
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+        displayAlign: "center",
+        displayIndent: "0em",
+
+        "HTML-CSS": { scale: 100,
+                        linebreaks: { automatic: "false" },
+                        webFont: "TeX"
+                       },
+        SVG: {scale: 100,
+              linebreaks: { automatic: "false" },
+              font: "TeX"},
+        NativeMML: {scale: 100},
+        TeX: { equationNumbers: {autoNumber: "AMS"},
+               MultLineWidth: "85%",
+               TagSide: "right",
+               TagIndent: ".8em"
+             }
+});
+</script>
+<script type="text/javascript"
+        src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS_HTML"></script>
 </head>
 <body>
 <div id="content">
@@ -155,12 +177,109 @@ for the JavaScript code in this tag.
 <div class="outline-text-2" id="text-orgheadline9">
 </div><div id="outline-container-orgheadline1" class="outline-3">
 <h3 id="orgheadline1">Постановка задачи.</h3>
+<div class="outline-text-3" id="text-orgheadline1">
+<p>
+Частный случай электродинамики: поля не зависят от времени. 
+</p>
+
+<p>
+Уравнения Максвелла в терминах потенциалов (<i>уравнение Пуассона</i>): 
+</p>
+
+\begin{equation}
+\label{eq:static-phi-A}
+\Delta \varphi = -4 \pi \rho, \quad \Delta \vec{A} = -\frac{4\pi}{c} \vec{j}. 
+\end{equation}
+
+<p>
+Последнее равенство написано с учётом калибровки \(\mathrm{div}
+\vec{A}=0\) (в статике калибровка Кулона и Лоренца совпадают). 
+</p>
+
+<p>
+Уравнения очень похожи, поэтому можно решать что-нибудь одно (мы будем
+решать уравнения Пуассона для потенциала \(\varphi\)). 
+</p>
 </div>
-<div id="outline-container-orgheadline2" class="outline-3">
-<h3 id="orgheadline2">Точечные заряды и дельта-функция.</h3>
+
+<div id="outline-container-orgheadline2" class="outline-4">
+<h4 id="orgheadline2">Отступление: точечные заряды и дельта-функция.</h4>
+<div class="outline-text-4" id="text-orgheadline2">
+<p>
+Как быть с точечными зарядами? Для описания их плотности нам нужна
+<i>дельта-функция</i> \(\delta(x)\): 
+</p>
+
+\begin{equation}
+\label{eq:def-delta}
+\delta (x) =0 \text{ если } x \neq 0, \quad \int_{-\infty}^{\infty} \delta(x) dx = 1. 
+\end{equation}
+
+<p>
+Мы будем считать, что \(\delta(\vec{r}) = \delta(x) \delta (y)
+\delta(z)\). Тогда плотность заряда \(e\), сидящего в точке с координатами
+\(\vec{r}'\), описывается так: \(\rho(\vec{r}) = e \delta (\vec{r} -
+\vec{r}')\). 
+</p>
+
+<p>
+Попробуем теперь решить уравнение Пуассона, если в правой части стоит
+дельта-функция: \(\Delta \varphi = -4\pi \delta(\vec{r} - \vec{r}')\)
+(считаем заряд единичным). Учитывая сферическую симметрию, это
+несложно сделать, ответ такой: 
+</p>
+
+\begin{equation}
+\label{eq:green-point-free-space}
+\Delta \left( \frac{1}{|\vec{r} - \vec{r}'|} \right) = -4\pi \delta (\vec{r}-\vec{r}'). 
+\end{equation}
+
+<p>
+Константа интегрирования зануляется в силу условия \(\varphi(r) \to 0,
+r \to \infty\).
+</p>
+
+<p>
+Определение функции Грина: решение уравнения 
+</p>
+
+\begin{equation}
+\label{eq:def-green}
+\Delta G(\vec{r}, \vec{r}') = -4 \pi \delta (\vec{r} - \vec{r}'). 
+\end{equation}
+
+<p>
+Физический смысл: если есть заряженное тело в пустоте, а мы хотим
+найти потенциал в точке \(\vec{r}\), то это делается по формуле
+</p>
+
+\begin{equation}
+\label{eq:charged-body}
+\varphi (\vec{r}) = \int \frac{\rho (\vec{r}') dV'}{|\vec{r} - \vec{r}'|} = \int G (\vec{r}, \vec{r}') \rho (\vec{r}') dV'. 
+\end{equation}
+
+<p>
+Последнее выражение — <i>свёртка</i> функции Грина с плотностью (очень
+напоминает суммирование по повторяющемуся «индексу» \(\vec{r}'\)). 
+</p>
+
+<p>
+Общая формулировка задачи: найти потенциал \(\varphi\), удовлетворяющий
+уравнению Пуассона с граничными условиями. Достаточно найти функцию
+Грина, потому что с ней всё получится. 
+</p>
+
+<p>
+Общая идея: как обычно, искать общее решение однородного уравнения +
+частное решение неоднородного. При этом общее решение однородного
+отвечает и за удовлетворение гран. условиям. 
+</p>
 </div>
+</div>
+</div>
+
 <div id="outline-container-orgheadline3" class="outline-3">
-<h3 id="orgheadline3">Функция Грина.</h3>
+<h3 id="orgheadline3">Метод функции Грина.</h3>
 </div>
 <div id="outline-container-orgheadline4" class="outline-3">
 <h3 id="orgheadline4">Разделение переменных: идея метода.</h3>
@@ -181,7 +300,7 @@ for the JavaScript code in this tag.
 </div>
 <div id="postamble" class="status">
 <hr>
-<p class="date">Last Updated 2016-03-28 Mon 23:47</p>
+<p class="date">Last Updated 2016-04-01 Fri 00:09</p>
 <p class="postamble">Created by Igor Shenderovich [<a href="mailto:shender.i@gmail.com">shender.i@gmail.com</a>] with <a href="http://www.gnu.org/software/emacs/">Emacs</a> 24.5.1 (<a href="http://orgmode.org">Org</a> mode 8.3.2)</p>
 </div>
 </body>
