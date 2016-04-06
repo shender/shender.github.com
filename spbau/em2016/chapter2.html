@@ -3,7 +3,7 @@
 "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
 <head>
-<!-- 2016-04-01 Fri 00:09 -->
+<!-- 2016-04-06 Wed 20:27 -->
 <meta  http-equiv="Content-Type" content="text/html;charset=utf-8" />
 <meta  name="viewport" content="width=device-width, initial-scale=1" />
 <title>Классическая электродинамика</title>
@@ -172,9 +172,9 @@ for the JavaScript code in this tag.
 <span class="subtitle">2 курс СПбАУ РАН, весна 2016</span>
 </h1>
 
-<div id="outline-container-orgheadline9" class="outline-2">
-<h2 id="orgheadline9">Статика.</h2>
-<div class="outline-text-2" id="text-orgheadline9">
+<div id="outline-container-orgheadline13" class="outline-2">
+<h2 id="orgheadline13">Статика.</h2>
+<div class="outline-text-2" id="text-orgheadline13">
 </div><div id="outline-container-orgheadline1" class="outline-3">
 <h3 id="orgheadline1">Постановка задачи.</h3>
 <div class="outline-text-3" id="text-orgheadline1">
@@ -205,6 +205,13 @@ for the JavaScript code in this tag.
 <div id="outline-container-orgheadline2" class="outline-4">
 <h4 id="orgheadline2">Отступление: точечные заряды и дельта-функция.</h4>
 <div class="outline-text-4" id="text-orgheadline2">
+<p class="verse">
+Жизнь возникла как привычка<br  />
+раньше куры и яичка.<br  />
+<br  />
+<i>Иосиф Бродский, «Представление»</i><br  />
+</p>
+
 <p>
 Как быть с точечными зарядами? Для описания их плотности нам нужна
 <i>дельта-функция</i> \(\delta(x)\): 
@@ -278,29 +285,251 @@ r \to \infty\).
 </div>
 </div>
 
-<div id="outline-container-orgheadline3" class="outline-3">
-<h3 id="orgheadline3">Метод функции Грина.</h3>
-</div>
-<div id="outline-container-orgheadline4" class="outline-3">
-<h3 id="orgheadline4">Разделение переменных: идея метода.</h3>
-</div>
-<div id="outline-container-orgheadline5" class="outline-3">
-<h3 id="orgheadline5">Разделение переменных: декартовы координаты.</h3>
-</div>
-<div id="outline-container-orgheadline6" class="outline-3">
-<h3 id="orgheadline6">Разделение переменных: сферические координаты.</h3>
-</div>
 <div id="outline-container-orgheadline7" class="outline-3">
-<h3 id="orgheadline7">Разделение переменных: цилиндрические координаты.</h3>
+<h3 id="orgheadline7">Решение уравнения Пуассона с помощью функции Грина.</h3>
+<div class="outline-text-3" id="text-orgheadline7">
+</div><div id="outline-container-orgheadline3" class="outline-4">
+<h4 id="orgheadline3">Разминка: заряженная сфера.</h4>
+<div class="outline-text-4" id="text-orgheadline3">
+<p>
+Задача для разминки: потенциал от заряженной сферы. Сфера радиусом \(R\)
+с зарядом \(q\). Потенциал на расстоянии \(r\) от центра сферы: \(\varphi =
+q/r\). Его можно записать двумя способами: 
+</p>
+
+<ol class="org-ol">
+<li><p>
+если задать потенциал на поверхности \(\varphi_S\), то потенциал во
+всём объёме \(r>R\): 
+</p>
+\begin{equation} \label{eq:sphere-dirichlet} \varphi (r) = \frac{R}{r}
+\varphi_S.  \end{equation}</li>
+
+<li><p>
+если задать производную потенциала по нормали на всей поверхности:
+</p>
+\begin{equation}
+\label{eq:sphere-neumann}
+\varphi (r) = \oint \frac{\sigma (\vec{r}') dS'}{|\vec{r} - \vec{r}'|} = \frac{1}{4\pi} \oint \frac{1}{|\vec{r} - \vec{r}'|} \frac{\partial \varphi}{\partial n'} dS',
+\end{equation}
+<p>
+где \(n\) — нормаль к поверхности, направленная <i>внутрь</i>. Это можно
+написать, так как мы знаем, что поверхностная плотность заряда
+\(\sigma\) может быть записана так:
+</p>
+\begin{equation}
+\label{eq:sigma-phi-norm}
+4 \pi \sigma = \left. \frac{\partial \varphi}{\partial n} \right|_{S}. 
+\end{equation}</li>
+</ol>
+
+<p>
+Выражения \eqref{eq:sphere-dirichlet} и \eqref{eq:sphere-neumann}
+должны, естественно, совпадать. Замечание: выражение \(1/|\vec{r} -
+\vec{r}'|\) в формуле \eqref{eq:sphere-neumann} — это, конечно, функция
+Грина для данной задачи. 
+</p>
+
+<p>
+Мораль этого упражнения: для того, чтобы найти потенциал во всём
+объёме \(V\), достаточно знать либо потенциал на поверхности проводника,
+либо производную потенциала нормали на той же поверхности. 
+</p>
 </div>
+</div>
+
+<div id="outline-container-orgheadline4" class="outline-4">
+<h4 id="orgheadline4">Общий случай.</h4>
+<div class="outline-text-4" id="text-orgheadline4">
+<p>
+Формула Грина: 
+</p>
+
+\begin{equation}
+\label{eq:greens-identity}
+\int \left( \phi \Delta \psi - \psi \Delta \phi \right) dV' = \oint \left( \phi \frac{\partial \psi}{\partial n} - \psi \frac{\partial \varphi}{ \partial n} \ \right) dS'.
+\end{equation}
+
+<p>
+Первое следствие: пусть \(\varphi = 1\), \(\psi = G(\vec{r}, \vec{r}')\),
+тогда 
+</p>
+
+\begin{equation}
+\label{eq:derivative-green-function}
+\oint \frac{\partial G (\vec{r}, \vec{r}')}{\partial n'} dS' = - 4\pi. 
+\end{equation}
+
+<p>
+Запомним эту формулу!
+</p>
+
+<p>
+Второе следствие: пусть теперь \(\varphi\) — искомый потенциал, а \(\psi
+= G (\vec{r}, \vec{r}')\). Вспомним, что \(\Delta \varphi = - 4 \pi
+\rho\), тогда примение формулы Грина даёт
+</p>
+
+\begin{equation}
+\label{eq:general-greens-formulae}
+\varphi (\vec{r} \in V) = \int G(\vec{r}, \vec{r}') \rho (\vec{r}') dV' - \frac{1}{4\pi} \oint \left( \varphi \frac{\partial G}{\partial n'} -G \frac{\partial \varphi }{ \partial n'} \right) dS'.
+\end{equation}
+
+<p>
+Это общая формула, но толку от неё немного: неизвестный потенциал
+\(\varphi\) входит и в левую, и в правую части. Что происходит с точки
+зрения геометрии? Имеется объём \(V\), в котором мы хотим определить
+потенциал. Проводники (если они есть) не входят в наш объём; таким
+образом, их поверхность \(S\) представляет собой границу нашего объёма
+\(V\). Нормаль к этой границе, стало быть, торчит внутрь проводника
+(наружу объёма \(V\)). 
+</p>
+
+<p>
+Теперь пришло время для того, чтобы как-то упростить полученное общее
+выражение. Для этого воспользуемся <i>граничными условиями</i>. 
+</p>
+
+<p>
+Дело вот в чём: решения уравнения \eqref{eq:green-point-free-space}
+для нашей задачи строятся как частное решение неоднородного + общее
+решение однородного. Пользуясь тем, что последнее можно выбирать
+по-разному, подберём гран. условия для \(G\). 
+</p>
+</div>
+</div>
+
+<div id="outline-container-orgheadline5" class="outline-4">
+<h4 id="orgheadline5">Граничное условие типа Дирихле.</h4>
+<div class="outline-text-4" id="text-orgheadline5">
+<p>
+Наложим на \(G\) граничное условие: пусть \(G=0\) на поверхности \(S\)
+(обозначим такую функцию как \(G_D\) в честь <i>Дирихле</i>), тогда общее
+решение \eqref{eq:general-greens-formulae} упрощается:
+</p>
+
+\begin{equation}
+\label{eq:dirichlet-solution}
+\varphi(\vec{r} \in V) = \int_{V} G_D (\vec{r}, \vec{r}') \rho (\vec{r}') dV' - \frac{1}{4\pi} \oint_S \varphi \frac{\partial G_D}{\partial n'} dS'. 
+\end{equation}
+
+<p>
+Заметим, что это уже явное решение: если нам заданы потенциалы на
+поверхностях проводников, а также распределение зарядов в объёме \(V\)
+(то есть задана функция плотности \(\rho(\vec{r})\)), то задача об
+определении потенциала \(\varphi\) сводится просто к интегрированию. 
+</p>
+</div>
+</div>
+
+<div id="outline-container-orgheadline6" class="outline-4">
+<h4 id="orgheadline6">Граничное условие типа Неймана.</h4>
+<div class="outline-text-4" id="text-orgheadline6">
+<p>
+Граничное условие на производную \(G\) надо накладывать аккуратно, чтобы
+не попасть впросак с выполнением условия
+\eqref{eq:derivative-green-function}: например, нельзя сказать, что
+производная \(G\) по нормали равна нулю. Но можно задать гран. условие,
+например, так: 
+</p>
+
+\begin{equation}
+\label{eq:bc-neumann}
+\frac{\partial G_N}{\partial n'} = - \frac{4\pi}{S}, \quad \vec{r}' \in S. 
+\end{equation}
+
+<p>
+Функция \(G_N\), удовлетворяющая этому условию (вместе, конечно, с
+уравнением \(\Delta G_N = -4 \pi \delta (\vec{r} - \vec{r}')\))
+называется функцией Грина для условий типа Неймана (поэтому у неё в
+индексе стоит буква \(N\)). 
+</p>
+
+<p>
+Конкретные типы гран. условий выбираются из нужд конкретной
+задачи. Осталось только понять, как именно строить функцию Грина
+\(G\). Для этого сначала решим однородную задачу (т.е. научимся решать
+уравнение Лапласа с гран. условиями). 
+</p>
+</div>
+</div>
+</div>
+
 <div id="outline-container-orgheadline8" class="outline-3">
-<h3 id="orgheadline8">Разложение по мультиполям.</h3>
+<h3 id="orgheadline8">Разделение переменных: декартовы координаты.</h3>
+<div class="outline-text-3" id="text-orgheadline8">
+<p>
+Решим такую задачу: пусть есть кубик размерами \(a \times b \times c\),
+на нижней грани (т.е., при \(z=0\)) задан потенциал \(V(x,y)\), на
+остальных гранях потенциал равен нулю. Требуется найти потенциал
+внутри кубика.
+</p>
+
+<p>
+Эта задача (и подобные ей) уже обсуждались на матфизике, так что
+кратко обозначим основные шаги: 
+</p>
+
+<ol class="org-ol">
+<li>Разделим переменные, т.е. напишем решение в виде \(\varphi(x,y,z) =
+   X(x) Y(y) Z(z)\).</li>
+<li>Будем попадать в граничные условия по \(x\) и по \(y\), это даст синусы
+типа \(\sin \pi n x /a\), \(\sin \pi m y/b\).</li>
+<li>После этого останется попасть только в гран. условия по \(z\): при
+\(z=c\) и при \(z=0\), это даст гиперболические функции.</li>
+<li>Дальше можно использовать ортогональность синусов, чтобы получить
+оставшиеся коэффициенты.</li>
+</ol>
+
+<p>
+В итоге полное решение выглядит так: 
+</p>
+
+\begin{equation}
+\label{eq:sol-cube}
+\varphi(x,y,z) = \sum_{n=1}^{\infty} \sum_{m=1}^{\infty} V_{mn} \sin \frac{\pi n x }{a} \sin \frac{\pi m y}{b} \frac{\sinh (c-z) \gamma_{mn}}{\sinh c \gamma_{mn}},
+\end{equation}
+<p>
+где 
+</p>
+
+\begin{equation}
+\label{eq:def-vmn}
+V_{mn} = \frac{4}{ab} \int_0^a \int_0^b dx dy\, V(x,y) \sin \frac{\pi n x}{a} \sin \frac{\pi m y}{b}
+\end{equation}
+<p>
+и
+</p>
+\begin{equation}
+\label{eq:def-gamma}
+\gamma_{mn} = \left( \frac{\pi n}{a} \right)^2 + \left( \frac{\pi m}{b} \right)^2. 
+\end{equation}
+</div>
+</div>
+
+<div id="outline-container-orgheadline9" class="outline-3">
+<h3 id="orgheadline9">Функция Грина для куба (условия Дирихле).</h3>
+<div class="outline-text-3" id="text-orgheadline9">
+<p>
+Собственные функции: что это такое и зачем они нужны. 
+</p>
+</div>
+</div>
+
+<div id="outline-container-orgheadline10" class="outline-3">
+<h3 id="orgheadline10">Разделение переменных: сферические координаты.</h3>
+</div>
+<div id="outline-container-orgheadline11" class="outline-3">
+<h3 id="orgheadline11">Разделение переменных: цилиндрические координаты.</h3>
+</div>
+<div id="outline-container-orgheadline12" class="outline-3">
+<h3 id="orgheadline12">Разложение по мультиполям.</h3>
 </div>
 </div>
 </div>
 <div id="postamble" class="status">
 <hr>
-<p class="date">Last Updated 2016-04-01 Fri 00:09</p>
+<p class="date">Last Updated 2016-04-06 Wed 20:26</p>
 <p class="postamble">Created by Igor Shenderovich [<a href="mailto:shender.i@gmail.com">shender.i@gmail.com</a>] with <a href="http://www.gnu.org/software/emacs/">Emacs</a> 24.5.1 (<a href="http://orgmode.org">Org</a> mode 8.3.2)</p>
 </div>
 </body>
