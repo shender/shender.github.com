@@ -3,7 +3,7 @@
 "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
 <head>
-<!-- 2016-04-06 Wed 23:50 -->
+<!-- 2016-04-07 Thu 17:09 -->
 <meta  http-equiv="Content-Type" content="text/html;charset=utf-8" />
 <meta  name="viewport" content="width=device-width, initial-scale=1" />
 <title>Классическая электродинамика</title>
@@ -511,7 +511,63 @@ V_{mn} = \frac{4}{ab} \int_0^a \int_0^b dx dy\, V(x,y) \sin \frac{\pi n x}{a} \s
 <h3 id="orgheadline9">Функция Грина для куба (условия Дирихле).</h3>
 <div class="outline-text-3" id="text-orgheadline9">
 <p>
-Собственные функции: что это такое и зачем они нужны. 
+Как же всё-таки искать функцию Грина? Рассмотрим т.н. <i>собственные
+функции</i> \(\psi_n (\vec{r})\) оператора Лапласа в постановке Дирихле (на
+нашей поверхности \(S\) собственные функции обращаются в ноль): 
+</p>
+
+\begin{equation}
+\label{eq:def-eigenfunctions}
+- \Delta \psi_n (\vec{r}) = \lambda_n \psi_n (\vec{r}), \vec{r} \in V,  \qquad \psi_n (\vec{r})=0, \vec{r} \in S. 
+\end{equation}
+
+<p>
+Такие собственные функции обладают свойством полноты, т.е. 
+</p>
+
+\begin{equation}
+\label{eq:eigen-completeness}
+\sum_n \psi_n (\vec{r}) \psi_n^{\ast} (\vec{r}') = \delta (\vec{r} - \vec{r}'). 
+\end{equation}
+
+<p>
+Тогда функция Грина для задачи Дирихле может быть записана так: 
+</p>
+
+\begin{equation}
+\label{eq:green-dirichlet-eigenfunctions}
+G_D (\vec{r}, \vec{r}') = 4\pi \sum_n \frac{\psi_n (\vec{r}) \psi_n^{\ast} (\vec{r}')}{\lambda_n}. 
+\end{equation}
+
+<p>
+То, что построенная таким образом функция Грина \(G_D\) удовлетворяет
+уравнению \( \Delta G_D (\vec{r}, \vec{r}') = - 4\pi \delta (\vec{r} -
+\vec{r}')\) — проверяется почти элементарно, то же самое касается
+гран. условий. 
+</p>
+
+<p>
+Обратимся теперь к частному случаю поверхности \(S\), когда она
+представляет собой прямоугольный параллелипипед разерами \(a \times b
+\times c\). Тогда собственными функциями, как мы догадываемся из
+предыдущего параграфа, будут всякие синусы, т.е. 
+</p>
+
+\begin{equation}
+\label{eq:green-function-cube}
+G(x,y,z; x',y',z') = 4 \pi \sum_{n,m,l=1}^{\infty} \frac{\sin \frac{\pi n x}{a} \sin \frac{\pi m y}{a} \sin \frac{\pi l z}{a} \sin \frac{\pi n x'}{a} \sin \frac{\pi m y'}{a} \sin \frac{\pi l z'}{a} }{\lambda_{nml}},
+\end{equation}
+<p>
+где 
+</p>
+\begin{equation}
+\label{eq:lambda-cube}
+\lambda_{nml} = \left( \frac{\pi n }{a} \right)^2 + \left( \frac{\pi m}{a} \right)^2 + \left( \frac{\pi l}{a} \right)^2. 
+\end{equation}
+
+<p>
+Функция Грина для кубика с граничными условиями типа Дирихле, таким
+образом, построена. 
 </p>
 </div>
 </div>
@@ -529,7 +585,7 @@ V_{mn} = \frac{4}{ab} \int_0^a \int_0^b dx dy\, V(x,y) \sin \frac{\pi n x}{a} \s
 </div>
 <div id="postamble" class="status">
 <hr>
-<p class="date">Last Updated 2016-04-06 Wed 23:50</p>
+<p class="date">Last Updated 2016-04-07 Thu 17:09</p>
 <p class="postamble">Created by Igor Shenderovich [<a href="mailto:shender.i@gmail.com">shender.i@gmail.com</a>] with <a href="http://www.gnu.org/software/emacs/">Emacs</a> 24.5.1 (<a href="http://orgmode.org">Org</a> mode 8.3.2)</p>
 </div>
 </body>
