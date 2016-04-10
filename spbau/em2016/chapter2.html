@@ -3,7 +3,7 @@
 "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
 <head>
-<!-- 2016-04-10 Sun 23:24 -->
+<!-- 2016-04-11 Mon 00:31 -->
 <meta  http-equiv="Content-Type" content="text/html;charset=utf-8" />
 <meta  name="viewport" content="width=device-width, initial-scale=1" />
 <title>Классическая электродинамика</title>
@@ -551,12 +551,21 @@ G_D (\vec{r}, \vec{r}') = 4\pi \sum_n \frac{\psi_n (\vec{r}) \psi_n^{\ast} (\vec
 представляет собой прямоугольный параллелипипед разерами \(a \times b
 \times c\). Тогда собственными функциями, как мы догадываемся из
 предыдущего параграфа, будут всякие синусы (с точностью до константы,
-чтобы выполнялось условие нормировки), т.е. (спасибо Никите Белоусову за исправление опечатки)
+чтобы выполнялось условие нормировки):
+</p>
+
+\begin{equation}
+\label{eq:psi-nml}
+\psi_{nml} (x) = \sqrt{\frac{8}{abc}} \sin \frac{\pi n x}{a} \sin \frac{\pi m y}{b} \sin \frac{\pi l z}{c}. 
+\end{equation}
+
+<p>
+А функция Грина, тем самым (спасибо Никите Белоусову за исправление опечатки):
 </p>
 
 \begin{equation}
 \label{eq:green-function-cube}
-G(x,y,z; x',y',z') \sim 4 \pi \sum_{n,m,l=1}^{\infty} \frac{\sin \frac{\pi n x}{a} \sin \frac{\pi m y}{b} \sin \frac{\pi l z}{c} \sin \frac{\pi n x'}{a} \sin \frac{\pi m y'}{b} \sin \frac{\pi l z'}{c} }{\lambda_{nml}},
+G(x,y,z; x',y',z') =  4 \pi \frac{8}{abc} \sum_{n,m,l=1}^{\infty} \frac{\sin \frac{\pi n x}{a} \sin \frac{\pi m y}{b} \sin \frac{\pi l z}{c} \sin \frac{\pi n x'}{a} \sin \frac{\pi m y'}{b} \sin \frac{\pi l z'}{c} }{\lambda_{nml}},
 \end{equation}
 <p>
 где 
@@ -568,8 +577,7 @@ G(x,y,z; x',y',z') \sim 4 \pi \sum_{n,m,l=1}^{\infty} \frac{\sin \frac{\pi n x}{
 
 <p>
 Функция Грина для кубика с граничными условиями типа Дирихле, таким
-образом, построена (с точностью до константы, которую, впрочем, легко
-найти). 
+образом, построена. 
 </p>
 </div>
 </div>
@@ -599,7 +607,7 @@ G(x,y,z; x',y',z') \sim 4 \pi \sum_{n,m,l=1}^{\infty} \frac{\sin \frac{\pi n x}{
 </div>
 <div id="postamble" class="status">
 <hr>
-<p class="date">Last Updated 2016-04-10 Sun 23:24</p>
+<p class="date">Last Updated 2016-04-11 Mon 00:31</p>
 <p class="postamble">Created by Igor Shenderovich [<a href="mailto:shender.i@gmail.com">shender.i@gmail.com</a>] with <a href="http://www.gnu.org/software/emacs/">Emacs</a> 24.5.1 (<a href="http://orgmode.org">Org</a> mode 8.3.2)</p>
 </div>
 </body>
