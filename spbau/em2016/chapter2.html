@@ -3,7 +3,7 @@
 "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
 <head>
-<!-- 2016-04-11 Mon 00:31 -->
+<!-- 2016-04-18 Mon 20:42 -->
 <meta  http-equiv="Content-Type" content="text/html;charset=utf-8" />
 <meta  name="viewport" content="width=device-width, initial-scale=1" />
 <title>Классическая электродинамика</title>
@@ -172,9 +172,9 @@ for the JavaScript code in this tag.
 <span class="subtitle">2 курс СПбАУ РАН, весна 2016</span>
 </h1>
 
-<div id="outline-container-orgheadline13" class="outline-2">
-<h2 id="orgheadline13">Статика.</h2>
-<div class="outline-text-2" id="text-orgheadline13">
+<div id="outline-container-orgheadline15" class="outline-2">
+<h2 id="orgheadline15">Статика.</h2>
+<div class="outline-text-2" id="text-orgheadline15">
 </div><div id="outline-container-orgheadline1" class="outline-3">
 <h3 id="orgheadline1">Постановка задачи.</h3>
 <div class="outline-text-3" id="text-orgheadline1">
@@ -455,9 +455,12 @@ q/r\). Его можно записать двумя способами:
 </div>
 </div>
 
-<div id="outline-container-orgheadline8" class="outline-3">
-<h3 id="orgheadline8">Разделение переменных: декартовы координаты.</h3>
-<div class="outline-text-3" id="text-orgheadline8">
+<div id="outline-container-orgheadline10" class="outline-3">
+<h3 id="orgheadline10">Функция Грина для куба.</h3>
+<div class="outline-text-3" id="text-orgheadline10">
+</div><div id="outline-container-orgheadline8" class="outline-4">
+<h4 id="orgheadline8">Разделение переменных в декартовых координатах.</h4>
+<div class="outline-text-4" id="text-orgheadline8">
 <p>
 Решим такую задачу: пусть есть кубик размерами \(a \times b \times c\),
 на нижней грани (т.е., при \(z=0\)) задан потенциал \(V(x,y)\), на
@@ -507,9 +510,9 @@ V_{mn} = \frac{4}{ab} \int_0^a \int_0^b dx dy\, V(x,y) \sin \frac{\pi n x}{a} \s
 </div>
 </div>
 
-<div id="outline-container-orgheadline9" class="outline-3">
-<h3 id="orgheadline9">Функция Грина для куба (условия Дирихле).</h3>
-<div class="outline-text-3" id="text-orgheadline9">
+<div id="outline-container-orgheadline9" class="outline-4">
+<h4 id="orgheadline9">Построение функции Грина.</h4>
+<div class="outline-text-4" id="text-orgheadline9">
 <p>
 Как же всё-таки искать функцию Грина? Рассмотрим т.н. <i>собственные
 функции</i> \(\psi_n (\vec{r})\) оператора Лапласа в постановке Дирихле (на
@@ -581,33 +584,119 @@ G(x,y,z; x',y',z') =  4 \pi \frac{8}{abc} \sum_{n,m,l=1}^{\infty} \frac{\sin \fr
 </p>
 </div>
 </div>
-
-<div id="outline-container-orgheadline10" class="outline-3">
-<h3 id="orgheadline10">Разделение переменных: цилиндрические координаты.</h3>
-<div class="outline-text-3" id="text-orgheadline10">
-<p>
-Функции Бесселя et al. 
-</p>
-</div>
 </div>
 
 <div id="outline-container-orgheadline11" class="outline-3">
-<h3 id="orgheadline11">Разделение переменных: сферические координаты.</h3>
+<h3 id="orgheadline11">Разложение по плоским волнам.</h3>
 <div class="outline-text-3" id="text-orgheadline11">
+<p>
+Дельта-образная последовательность: 
+</p>
+
+\begin{equation}
+\label{eq:delta-seq}
+\delta_{\varepsilon} (x-x') = \frac{1}{\pi} \frac{\varepsilon}{(x-x')^2 + \varepsilon^2} = \mathrm{Re} \frac{1}{\pi} \frac{i}{x-x' + i \varepsilon}
+\end{equation}
+
+<p>
+Или (запись в виде интеграла): 
+</p>
+
+\begin{equation}
+\label{eq:plane-waves-lim}
+\delta_{\varepsilon} (x-x') = \int\limits_{-\infty}^{\infty} \frac{dk}{2\pi} e^{ik(x-x')} e^{-\varepsilon |k|}. 
+\end{equation}
+
+<p>
+Предел \(\varepsilon \to 0\): 
+</p>
+
+\begin{equation}
+\label{eq:plane-waves}
+\delta (x-x') = \lim_{\varepsilon \to 0} \delta_{\varepsilon} (x-x') = \int\limits_{-\infty}^{\infty} \frac{dk}{2\pi} e^{ik (x-x')}. 
+\end{equation}
+
+<p>
+Это и есть разложение по плоским волнам. В трёхмерном случае: 
+</p>
+
+\begin{equation}
+\label{eq:plane-waves-3d}
+\delta (\vec{r} - \vec{r}') = \int \frac{d\vec{k}}{2\pi} e^{i\vec{k} (\vec{r} - \vec{r}')}. 
+\end{equation}
+
+<p>
+Тогда функцию Грина в пустоте можно записать в таком виде: 
+</p>
+
+\begin{equation}
+\label{eq:green-plane-waves}
+G (\vec{r}, \vec{r}') = 4\pi \int \frac{d\vec{k}}{(2\pi)^3} \frac{e^{i\vec{k} (\vec{r} - \vec{r}')}}{k^2}. 
+\end{equation}
+
+<p>
+Можно проверить, что (как и должно быть): 
+</p>
+
+\begin{equation}
+\label{eq:green-plane-waves-std-form}
+G (\vec{r}, \vec{r}') = 4\pi \int \frac{d\vec{k}}{(2\pi)^3} \frac{e^{i\vec{k} (\vec{r} - \vec{r}')}}{k^2} = \frac{1}{|\vec{r} - \vec{r}'|}. 
+\end{equation}
+</div>
+</div>
+
+<div id="outline-container-orgheadline12" class="outline-3">
+<h3 id="orgheadline12">(2+1) измерение.</h3>
+<div class="outline-text-3" id="text-orgheadline12">
+<p>
+Разделим наши три измерения на одно выделенное (это ось \(z\)) и два
+перпендикулярных ему (будем обозначать его \(\perp\)). Функция Грина
+перепишется в виде
+</p>
+
+\begin{equation}
+\label{eq:green-2-1}
+G (\vec{r}, \vec{r}') = 4\pi \int \frac{d\vec{k}_{\perp}}{(2\pi)^2} e^{i \vec{k}_{\perp} (\vec{r}-\vec{r}')_{\perp}} \int\limits_{-\infty}^{\infty} \frac{dk_z}{2\pi} \frac{e^{ik_z(z-z')}}{k_{\perp}^2 + k_z^2}. 
+\end{equation}
+
+<p>
+Вычислим по вычетам второй интеграл. Надо аккуратно замыкать контур в
+зависимости от знака \((z-z')\). Если всё сделать, то получится
+</p>
+
+\begin{equation}
+\label{eq:reduced-green}
+\int\limits_{-\infty}^{\infty} \frac{dk_z}{2\pi} \frac{e^{ik_z(z-z')}}{k_{\perp}^2 + k_z^2} = \frac{1}{2k_{\perp}} e^{-k_{\perp} |z-z'|}. 
+\end{equation}
+
+<p>
+А функция Грина в итоге выглядит так: 
+</p>
+
+\begin{equation}
+\label{eq:green-2-1-final}
+G(\vec{r}, \vec{r}') = 4\pi \int \frac{d\vec{k}_{\perp}}{(2\pi)^2} e^{i \vec{k}_{\perp} (\vec{r} - \vec{r}')_{\perp}} \frac{1}{2k_{\perp}} e^{-k_{\perp} |z-z'|}. 
+\end{equation}
+</div>
+</div>
+
+<div id="outline-container-orgheadline13" class="outline-3">
+<h3 id="orgheadline13">Разделение переменных: сферические координаты.</h3>
+<div class="outline-text-3" id="text-orgheadline13">
 <p>
 Сферические функции et al. 
 </p>
 </div>
 </div>
 
-<div id="outline-container-orgheadline12" class="outline-3">
-<h3 id="orgheadline12">Разложение по мультиполям.</h3>
+<div id="outline-container-orgheadline14" class="outline-3">
+<h3 id="orgheadline14">Разложение по мультиполям.</h3>
 </div>
 </div>
 </div>
 <div id="postamble" class="status">
 <hr>
-<p class="date">Last Updated 2016-04-11 Mon 00:31</p>
+<p class="date">Last Updated 2016-04-18 Mon 20:42</p>
 <p class="postamble">Created by Igor Shenderovich [<a href="mailto:shender.i@gmail.com">shender.i@gmail.com</a>] with <a href="http://www.gnu.org/software/emacs/">Emacs</a> 24.5.1 (<a href="http://orgmode.org">Org</a> mode 8.3.2)</p>
 </div>
 </body>
