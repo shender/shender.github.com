@@ -3,7 +3,7 @@
 "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
 <head>
-<!-- 2016-04-18 Mon 20:42 -->
+<!-- 2016-04-22 Fri 20:28 -->
 <meta  http-equiv="Content-Type" content="text/html;charset=utf-8" />
 <meta  name="viewport" content="width=device-width, initial-scale=1" />
 <title>Классическая электродинамика</title>
@@ -171,6 +171,16 @@ for the JavaScript code in this tag.
 <br>
 <span class="subtitle">2 курс СПбАУ РАН, весна 2016</span>
 </h1>
+<p>
+<span class="underline">Литература:</span> 
+</p>
+
+<ol class="org-ol">
+<li>Бредов М.М., Румянцев В.В., Топтыгин И.Н., «Классическая
+электродинамика», 1985 (глава 4).</li>
+<li>Дж. Джексон, «Классическая электродинамика», 1965 (главы 2 и 3).</li>
+<li>В. Смайт, «Электростатика и электродинамика», 1954 (глава 5).</li>
+</ol>
 
 <div id="outline-container-orgheadline15" class="outline-2">
 <h2 id="orgheadline15">Статика.</h2>
@@ -677,26 +687,154 @@ G (\vec{r}, \vec{r}') = 4\pi \int \frac{d\vec{k}_{\perp}}{(2\pi)^2} e^{i \vec{k}
 \label{eq:green-2-1-final}
 G(\vec{r}, \vec{r}') = 4\pi \int \frac{d\vec{k}_{\perp}}{(2\pi)^2} e^{i \vec{k}_{\perp} (\vec{r} - \vec{r}')_{\perp}} \frac{1}{2k_{\perp}} e^{-k_{\perp} |z-z'|}. 
 \end{equation}
-</div>
-</div>
 
-<div id="outline-container-orgheadline13" class="outline-3">
-<h3 id="orgheadline13">Разделение переменных: сферические координаты.</h3>
-<div class="outline-text-3" id="text-orgheadline13">
 <p>
-Сферические функции et al. 
+Первый интеграл тоже можно сосчитать, перейдя к полярным
+координатам. Это приводит к появлению функции Бесселя \(J_0 (k \rho)\): 
+</p>
+
+\begin{equation}
+\label{eq:green-bessel}
+\frac{1}{|r-r'|} = \frac{1}{\sqrt{(r-r')_{\perp}^2 + (z-z')^2}} = \int\limits_0^{\infty} dk_{\perp} J_0 (k_{\perp} |r-r'|_{\perp}) e^{-k_{\perp} |z-z'|}. 
+\end{equation}
+
+<p>
+Это и есть функция Грина в пустоте. 
+</p>
+
+<p>
+Кстати, можно проверить, что \(\Delta \left( J_0 (k\rho) e^{-kz}
+\right) =0\) при \(z>0\). 
 </p>
 </div>
 </div>
 
+<div id="outline-container-orgheadline13" class="outline-3">
+<h3 id="orgheadline13">Функции Бесселя и общее решение уравнения \(\Delta \varphi=0\).</h3>
+<div class="outline-text-3" id="text-orgheadline13">
+<p>
+Введём обозначения \(k \equiv k_{\perp}\), \(\rho
+\equiv |r-r'|_{\perp}\), \(u = e^{i \varphi}\), \(t = k\rho\). Тогда можно
+записать такое разложение: 
+</p>
+
+\begin{equation}
+\label{eq:generating-function-bessel}
+e^{i k \rho \cos \varphi} = e^{\frac{t}{2} (u-1/u)} = \sum_{m=-\infty}^{\infty} u^m J_m (t). 
+\end{equation}
+
+<p>
+Это можно считать определением функции Бесселя \(J_m(t)\). Из него
+следуют сразу несколько вещей. Во-первых, есть представление \(J_m(t)\)
+в виде ряда: 
+</p>
+
+\begin{equation}
+\label{eq:bessel-series}
+J_{m} (t) = \sum_{n=0}^{\infty} (-1)^n \frac{(t/2)^{m+2n}}{(m+n)! n!}. 
+\end{equation}
+
+<p>
+Во-вторых, есть интегральное представление: 
+</p>
+
+\begin{equation}
+\label{eq:bessel-int}
+i^m J_m(t) = \int_0^{2\pi} \frac{d\varphi}{2\pi} e^{i (t\cos \varphi -m\varphi)}. 
+\end{equation}
+
+<p>
+Можно проверить непосредственно, что функции вида \(e^{im\varphi} J_m
+(k \rho) e^{-k z}\) — решения уравнения \(\Delta \varphi=0\) в
+цилиндрических координатах. В этих координатах оператор Лапласа
+выглядит так:
+</p>
+
+\begin{equation}
+\label{eq:laplace-cylinder}
+\Delta = \left( \frac{1}{\rho} \frac{\partial}{\partial\rho} \left( \rho \frac{\partial}{\partial\rho} \right) \right) + \frac{1}{\rho^2} \frac{\partial^2}{\partial \varphi^2} + \frac{\partial^2}{\partial z^2}. 
+\end{equation}
+</div>
+</div>
+
 <div id="outline-container-orgheadline14" class="outline-3">
-<h3 id="orgheadline14">Разложение по мультиполям.</h3>
+<h3 id="orgheadline14">Функции Бесселя и полнота.</h3>
+<div class="outline-text-3" id="text-orgheadline14">
+<p>
+Дельта-функция в цилиндрических координатах:
+</p>
+
+\begin{equation}
+\label{eq:delta-cylinder}
+\delta (\vec{r} - \vec{r}') = \frac{1}{\rho} \delta (\rho - \rho') \delta (\varphi -  \varphi') \delta (z-z'),
+\end{equation}
+<p>
+где введены цилиндрические координаты \(\vec{r} = (\rho, \varphi,z)\),
+\(\vec{r}' = (\rho',\varphi',z')\). 
+</p>
+
+<p>
+Разложение по плоским волнам в одномерном пространстве (т.е. на
+прямой): 
+</p>
+
+\begin{equation}
+\label{eq:plane-waves-1d}
+f(x) = \int\limits_{-\infty}^{\infty} \frac{dk}{2\pi} e^{ikx} \left[ \int\limits_{-\infty}^{\infty} dx' e^{-ikx'} f(x') \right]. 
+\end{equation}
+
+<p>
+Найдём аналогичное в полярных координатах (про ось \(z\) можно не
+думать, там всё просто). Запишем
+</p>
+
+\begin{equation}
+\label{eq:green-2d-1}
+\int \frac{d\vec{k}_{\perp}}{(2\pi)^2} e^{i \vec{k}_{\perp} (\vec{r}-\vec{r}')_{\perp}} = \delta ((\vec{r} - \vec{r}')_{\perp}) = \frac{1}{\rho} \delta (\rho - \rho') \delta (\varphi -  \varphi'). 
+\end{equation}
+
+<p>
+Перейдём к полярным координатам в этой плоскости, будем обозначать их
+\((k,\alpha)\): 
+</p>
+
+\begin{equation}
+\label{eq:green-2d-2}
+\int\limits_0^{\infty} \frac{k\,dk}{2\pi} \int\limits_0^{2\pi} \frac{d\alpha}{2\pi} e^{ik\rho \cos (\varphi-\alpha)} e^{-ik\rho'\cos(\phi'-\alpha)} = \frac{1}{\rho} \delta (\rho - \rho') \delta (\varphi -  \varphi'). 
+\end{equation}
+
+<p>
+Каждая из экспонент является производящей функцией для функций Бесселя
+(см. \eqref{eq:generating-function-bessel}), так что можно написать
+(после некоторых вычислений):
+</p>
+
+\begin{equation}
+\label{eq:green-2d-3}
+\int\limits_0^{\infty} \frac{k\, dk}{2\pi } \sum_{m=-\infty}^{\infty} e^{im\varphi} J_m (k \rho) e^{-im\varphi'} J_m (k \rho') = \frac{1}{\rho} \delta (\rho-\rho') \delta (\varphi - \varphi'). 
+\end{equation}
+
+<p>
+Это доказывает полноту системы функций \(e^{im \varphi} J_m (k
+\rho)\). Отдельно можно получить, что 
+</p>
+
+\begin{equation}
+\label{eq:bessel-orth}
+\int\limits_0^{\infty} k\, dk\, J_m (k \rho) J_m (k \rho') = \frac{1}{\rho} \delta (\rho - \rho'). 
+\end{equation}
+
+\begin{equation}
+\label{eq:orth-circle}
+\sum_{m=-\infty}^{\infty} \frac{1}{2\pi} e^{im(\varphi - \varphi')} = \delta (\varphi - \varphi'). 
+\end{equation}
+</div>
 </div>
 </div>
 </div>
 <div id="postamble" class="status">
 <hr>
-<p class="date">Last Updated 2016-04-18 Mon 20:42</p>
+<p class="date">Last Updated 2016-04-22 Fri 20:28</p>
 <p class="postamble">Created by Igor Shenderovich [<a href="mailto:shender.i@gmail.com">shender.i@gmail.com</a>] with <a href="http://www.gnu.org/software/emacs/">Emacs</a> 24.5.1 (<a href="http://orgmode.org">Org</a> mode 8.3.2)</p>
 </div>
 </body>
