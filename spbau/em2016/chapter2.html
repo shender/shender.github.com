@@ -3,7 +3,7 @@
 "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
 <head>
-<!-- 2016-04-22 Fri 20:28 -->
+<!-- 2016-04-25 Mon 20:37 -->
 <meta  http-equiv="Content-Type" content="text/html;charset=utf-8" />
 <meta  name="viewport" content="width=device-width, initial-scale=1" />
 <title>Классическая электродинамика</title>
@@ -180,11 +180,13 @@ for the JavaScript code in this tag.
 электродинамика», 1985 (глава 4).</li>
 <li>Дж. Джексон, «Классическая электродинамика», 1965 (главы 2 и 3).</li>
 <li>В. Смайт, «Электростатика и электродинамика», 1954 (глава 5).</li>
+<li>И.С. Градштейн, И.М. Рыжик, «Таблицы интегралов, сумм, рядов и
+произведений», 1963.</li>
 </ol>
 
-<div id="outline-container-orgheadline15" class="outline-2">
-<h2 id="orgheadline15">Статика.</h2>
-<div class="outline-text-2" id="text-orgheadline15">
+<div id="outline-container-orgheadline19" class="outline-2">
+<h2 id="orgheadline19">Статика.</h2>
+<div class="outline-text-2" id="text-orgheadline19">
 </div><div id="outline-container-orgheadline1" class="outline-3">
 <h3 id="orgheadline1">Постановка задачи.</h3>
 <div class="outline-text-3" id="text-orgheadline1">
@@ -343,7 +345,7 @@ q/r\). Его можно записать двумя способами:
 <p>
 Мораль этого упражнения: для того, чтобы найти потенциал во всём
 объёме \(V\), достаточно знать либо потенциал на поверхности проводника,
-либо производную потенциала нормали на той же поверхности. 
+либо производную потенциала по нормали на той же поверхности. 
 </p>
 </div>
 </div>
@@ -830,11 +832,122 @@ f(x) = \int\limits_{-\infty}^{\infty} \frac{dk}{2\pi} e^{ikx} \left[ \int\limits
 \end{equation}
 </div>
 </div>
+
+<div id="outline-container-orgheadline15" class="outline-3">
+<h3 id="orgheadline15">Пример: функция Грина для двух плоскостей.</h3>
+<div class="outline-text-3" id="text-orgheadline15">
+<p class="verse">
+Лямбда! Я назову его Лямбда.<br  />
+<br  />
+<i>Михаил Щербаков, «<a href="https://www.youtube.com/watch?v=VcLQ0AR6svU">Австралия</a>»</i><br  />
+</p>
+
+
+<p>
+Рассмотрим две проводящие плоскости \(z=0\) и \(z=d\). Найдём функцию Грина
+для такой системы. Её можно искать в виде (2+1): 
+</p>
+
+\begin{equation}
+\label{eq:green-capacitor-1}
+G (\vec{r}, \vec{r}') = 4\pi \int \frac{d\vec{k}_{\perp}}{(2\pi)^2} e^{i\vec{k}_{\perp} (\vec{r} - \vec{r}')_{\perp}} g(z,z',k_{\perp}). 
+\end{equation}
+
+<p>
+Отсюда видно, что 
+</p>
+
+\begin{equation}
+\label{eq:green-capacitor-2}
+(k_{\perp}^2 - \frac{\partial^2}{\partial z^2}) g(z,z',k_{\perp}) = \delta (z-z').
+\end{equation}
+
+<p>
+Кроме того, функция \(g(z,z',k_{\perp})\) должна отвечать за выполнение
+гран. условий по \(z\), т.е. \(g\) должна обращаться в ноль при \(z=0\),
+\(z=d\). Но мы уже видели такое в задаче с коробкой размерами \(a \times
+b \times c\). Там функции Грина (по каждой из осей) выглядели так: 
+</p>
+
+\begin{equation}
+\label{eq:green-capacitor-3}
+g (z,z,k_{\perp}) = \frac{2}{d} \sum \frac{\sin \left( \frac{\pi n z}{a} \right) \sin \left( \frac{\pi n z'}{a} \right)  }{\left( \frac{\pi n }{a} \right)^2}. 
+\end{equation}
+
+<p>
+В данном случае у нас есть ещё \(k_{\perp}^2\) в левой части. Значит,
+функцию Грина надо подрихтовать, а ответ получается такой: 
+</p>
+
+\begin{equation}
+\label{eq:green-capacitor-4}
+g(z,z',k_{\perp}) = \frac{2}{d} \sum \frac{\sin \left( \frac{\pi n z}{d} \right) \sin \left( \frac{\pi n z'}{d} \right)  }{k_{\perp}^2  + \left(  \frac{\pi n }{d} \right)^2}. 
+\end{equation}
+
+<p>
+Теперь вспомним, что для оставшейся части функции Грина у нас уже есть
+представление в виде функции Бесселя \(J_0 (k \rho)\). Итого, собирая
+всё вместе, получим: 
+</p>
+
+\begin{equation}
+\label{eq:green-capacitor-5}
+G(\vec{r}, \vec{r}') = \frac{4}{d} \int_0^{\infty} dk\, k J_0 (k |\vec{r} - \vec{r}'|_{\perp}) \sum \frac{\sin \left( \frac{\pi n z}{d} \right) \sin \left( \frac{\pi n z'}{d} \right)  }{k_{\perp}^2  + \left(  \frac{\pi n }{a} \right)^2}. 
+\end{equation}
+
+<p>
+Если ввести специальную функцию \(K_0(x)\) — <i>модифицированную функцию
+Бесселя второго рода</i> — согласно определению 
+</p>
+
+\begin{equation}
+\label{eq:def-besselk}
+K_0 (\lambda P) \equiv \int_0^{\infty} dk \, k \frac{J_0(kP)}{k^2 + \lambda^2},
+\end{equation}
+<p>
+то функция Грина перепишется в виде ряда
+</p>
+
+\begin{equation}
+\label{eq:green-capacitor-6}
+G(\vec{r}, \vec{r}') = \frac{4}{d} \sum_{n=1}^{\infty} \sin \left( \frac{\pi n z}{d} \right) \sin \left( \frac{\pi n z'}{d} \right) K_0 \left( \frac{\pi n}{d} P \right), 
+\end{equation}
+<p>
+где \(P = |\vec{r} - \vec{r}'|_{\perp} = \sqrt{ \rho^2 + \rho'^2 - 2
+\rho \rho' \cos (\varphi - \varphi')}\) (здесь введены обозначения
+\(\vec{r} = (\rho, \varphi)\), \(\vec{r}' = (\rho',\varphi')\)). 
+</p>
+
+<p>
+Асимптотика функции \(K_0(x)\) при больших \(x\): \(K_0 (x) \sim x^{-1/2}
+e^{-x}\), а значит, потенциал очень быстро убывает по мере удаления от
+точечного заряда, который находится в точке \(\vec{r}'\) (таким образом,
+заземлённые пластины очень эффективно экранируют точечный заряд). 
+</p>
+</div>
+</div>
+
+<div id="outline-container-orgheadline16" class="outline-3">
+<h3 id="orgheadline16">Пример: функция Грина для пивной банки.</h3>
+</div>
+
+<div id="outline-container-orgheadline17" class="outline-3">
+<h3 id="orgheadline17">Разделение переменных: сферические координаты.</h3>
+<div class="outline-text-3" id="text-orgheadline17">
+<p>
+Сферические функции et al. 
+</p>
+</div>
+</div>
+
+<div id="outline-container-orgheadline18" class="outline-3">
+<h3 id="orgheadline18">Разложение по мультиполям.</h3>
+</div>
 </div>
 </div>
 <div id="postamble" class="status">
 <hr>
-<p class="date">Last Updated 2016-04-22 Fri 20:28</p>
+<p class="date">Last Updated 2016-04-25 Mon 20:37</p>
 <p class="postamble">Created by Igor Shenderovich [<a href="mailto:shender.i@gmail.com">shender.i@gmail.com</a>] with <a href="http://www.gnu.org/software/emacs/">Emacs</a> 24.5.1 (<a href="http://orgmode.org">Org</a> mode 8.3.2)</p>
 </div>
 </body>
