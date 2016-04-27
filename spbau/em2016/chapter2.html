@@ -3,7 +3,7 @@
 "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
 <head>
-<!-- 2016-04-25 Mon 20:37 -->
+<!-- 2016-04-27 Wed 21:36 -->
 <meta  http-equiv="Content-Type" content="text/html;charset=utf-8" />
 <meta  name="viewport" content="width=device-width, initial-scale=1" />
 <title>Классическая электродинамика</title>
@@ -886,7 +886,7 @@ g(z,z',k_{\perp}) = \frac{2}{d} \sum \frac{\sin \left( \frac{\pi n z}{d} \right)
 
 <p>
 Теперь вспомним, что для оставшейся части функции Грина у нас уже есть
-представление в виде функции Бесселя \(J_0 (k \rho)\). Итого, собирая
+представление в виде функции Бесселя \(J_0 (k |\vec{r} - \vec{r}'|_{\perp})\). Итого, собирая
 всё вместе, получим: 
 </p>
 
@@ -929,6 +929,70 @@ e^{-x}\), а значит, потенциал очень быстро убыва
 
 <div id="outline-container-orgheadline16" class="outline-3">
 <h3 id="orgheadline16">Пример: функция Грина для пивной банки.</h3>
+<div class="outline-text-3" id="text-orgheadline16">
+<p>
+Для начала — полезное тождество. 
+</p>
+
+\begin{equation}
+\label{eq:identity-xmin-xmax}
+\frac{2}{a} \sum_{l=1}^{\infty} \frac{\sin \left( \pi l x/a \right) \sin \left( \pi l x'/a \right)}{\left( \pi l /a \right)^2 + k^2} = \frac{\sinh kx_{<} \sinh k(a-x>)}{k \sinh ka},
+\end{equation}
+<p>
+где \(x_{<} = \min (x,x')\), \(x_{>} = \max (x,x')\). Доказательство
+получается разложением правой части в ряд по синусам на интервале от
+\([0, a]\). 
+</p>
+
+<p>
+Теперь попробуем поискать функцию Грина для внутренности цилиндра
+радиуса \(a\) и высоты \(L\). Сделаем это с помощью технологии, описанной
+в формуле \eqref{eq:green-dirichlet-eigenfunctions}. Для этого построим
+собственные функции оператора Лапласа в цилиндрических
+координатах. При этом собственные функции должны обращаться в ноль на
+поверхности цилиндра (это условие на функцию Грина). Таким образом,
+получаем
+</p>
+
+\begin{equation}
+\label{eq:eigenfunctions-cylinder}
+\psi_{nml} = J_m (\gamma_{mn} \rho) e^{i m \varphi} \sin \frac{\pi l z}{L}. 
+\end{equation}
+
+<p>
+А собственные числа \(\lambda_{nml} = \left( \pi l /L \right)^2 + \left(
+\gamma_{mn} /a \right)^2\). Здесь \(\gamma_{mn}\) — n-й корень функции
+Бесселя \(J_m\). Ещё надо не забыть про нормировку собственных функций,
+и единственный нетривиальный момент здесь — нормировка Бесселей. Здесь
+оказывается полезным такое равенство: 
+</p>
+
+\begin{equation}
+\label{eq:norm-bessels}
+\int_0^a J_m (\gamma_{mn} \rho /a) J_m (\gamma_{mp} \rho /a) \rho d \rho = \frac{a^2}{2} J_{m+1} (\gamma_{mn}) \delta_{np}. 
+\end{equation}
+
+<p>
+Заметим, что это равенство позволяет разложить любую функцию \(f(\rho)\)
+в ряд по функции Бесселя, точно так же ряд Фурье раскладывает функцию
+в ряд по синусам. 
+</p>
+
+<p>
+Собирая все нормировочные коэффициенты вместе, найдём
+</p>
+
+\begin{equation}
+\label{eq:green-beer-can}
+G(\vec{r},\vec{r}') = \frac{8}{L} \sum_n \sum_m \sum_l \frac{J_m (\gamma_{mn} \rho/a) J_m (\gamma_{mn} \rho'/a) e^{im (\varphi - \varphi')} \sin \left(  \frac{\pi l z}{L} \right) \sin \left(  \frac{\pi l z'}{L} \right)}{ J_{m+1}^2 (\gamma_{mn}) \left( \gamma_{mn}^2 + \left( \pi l a / L \right)^2 \right)}.  
+\end{equation}
+
+<p>
+Предельный переход к бесконечному цилиндру (\(L \to \infty\)) удобно
+осуществлять с помощью полезного тождества
+\eqref{eq:identity-xmin-xmax}. 
+</p>
+</div>
 </div>
 
 <div id="outline-container-orgheadline17" class="outline-3">
@@ -947,7 +1011,7 @@ e^{-x}\), а значит, потенциал очень быстро убыва
 </div>
 <div id="postamble" class="status">
 <hr>
-<p class="date">Last Updated 2016-04-25 Mon 20:37</p>
+<p class="date">Last Updated 2016-04-27 Wed 21:36</p>
 <p class="postamble">Created by Igor Shenderovich [<a href="mailto:shender.i@gmail.com">shender.i@gmail.com</a>] with <a href="http://www.gnu.org/software/emacs/">Emacs</a> 24.5.1 (<a href="http://orgmode.org">Org</a> mode 8.3.2)</p>
 </div>
 </body>
