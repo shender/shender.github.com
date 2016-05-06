@@ -3,7 +3,7 @@
 "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
 <head>
-<!-- 2016-04-30 Sat 15:08 -->
+<!-- 2016-05-06 Fri 10:54 -->
 <meta  http-equiv="Content-Type" content="text/html;charset=utf-8" />
 <meta  name="viewport" content="width=device-width, initial-scale=1" />
 <title>Классическая электродинамика</title>
@@ -184,9 +184,9 @@ for the JavaScript code in this tag.
 произведений», 1963.</li>
 </ol>
 
-<div id="outline-container-orgheadline19" class="outline-2">
-<h2 id="orgheadline19">Статика.</h2>
-<div class="outline-text-2" id="text-orgheadline19">
+<div id="outline-container-orgheadline18" class="outline-2">
+<h2 id="orgheadline18">Статика.</h2>
+<div class="outline-text-2" id="text-orgheadline18">
 </div><div id="outline-container-orgheadline1" class="outline-3">
 <h3 id="orgheadline1">Постановка задачи.</h3>
 <div class="outline-text-3" id="text-orgheadline1">
@@ -996,22 +996,184 @@ G(\vec{r},\vec{r}') = \frac{8}{L} \sum_n \sum_m \sum_l \frac{J_m (\gamma_{mn} \r
 </div>
 
 <div id="outline-container-orgheadline17" class="outline-3">
-<h3 id="orgheadline17">Разделение переменных: сферические координаты.</h3>
+<h3 id="orgheadline17">Мультипольное разложение и сферическая математика.</h3>
 <div class="outline-text-3" id="text-orgheadline17">
 <p>
-Сферические функции et al. 
+Задача: написать разложение для потенциала \(\varphi(\vec{r})\) вдали от
+заряженного тела: 
+</p>
+
+\begin{equation}
+\label{eq:phi-multipoles-1}
+\varphi (\vec{r}) = \int \frac{\rho (\vec{r}') dV'}{|\vec{r} - \vec{r}'|}.
+\end{equation}
+
+<p>
+Разложим это выражение в ряд, считая \(r' \ll r\), получим (с точностью
+до второго порядка): 
+</p>
+
+\begin{equation}
+\label{eq:phi-multipoles-2}
+\varphi(\vec{r}) = \frac{1}{r} \int \rho(\vec{r}') dV' + \frac{1}{r^3} \vec{r} \cdot \int \vec{r}' \rho(\vec{r}') dV' + \frac{1}{2r^5} \int \left( 3 (\vec{r} \cdot \vec{r}')^2 - r^2 r'^2 \right) \rho (\vec{r}') dV'. 
+\end{equation}
+<p>
+Здесь можно пронаблюдать появление дипольного и <i>квадрупольного</i>
+момента. Последнее слагаемое можно записать так: 
+</p>
+
+\begin{equation}
+\label{eq:quadropole}
+\frac{1}{2r^5} Q_{\alpha \beta} x_{\alpha}x_{\beta},
+\end{equation}
+<p>
+где \(Q_{\alpha \beta} = \int \rho (\vec{r}') \left( 3 x'_{\alpha}
+x'_{\beta} - r'^2 \delta_{\alpha \beta} \right) dV'\). Это — так
+называемый <i>тензор квадрупольного момента</i>. Некоторые его свойства
+очевидны: он симметричный (\(Q_{\alpha \beta} = Q_{\beta \alpha}\)) и
+бесследовый (\(Q_{\alpha \alpha}=0\)). Из этого можно заключить, что у
+него 5 независимых компонент. 
+</p>
+
+<p>
+Разложение вида \eqref{eq:phi-multipoles-2} тяжело производить
+систематически, поэтому вводится производящая функция <i>полиномов
+Лежандра</i> \(P_l (x)\):
+</p>
+
+\begin{equation}
+\label{eq:gen-function-legendre}
+\frac{1}{\sqrt{1-2xt + t^2}} = \sum_{l=0}^{\infty} t^l P_l (x), \quad |x| \leq 1 , \quad 0 < t <1 . 
+\end{equation}
+<p>
+Выделим несколько характерных свойств полиномов Лежандра: 
+</p>
+
+<ol class="org-ol">
+<li>\(\int\limits_{-1}^1 dx P_l (x) P_l (x') = \frac{2}{2l+1}
+   \delta_{ll'}\).</li>
+<li>\(\sum_l \frac{2l+1}{2} P_l (x) P_l (x') = \delta (x-x')\).</li>
+<li>\(P_0 (x) =1\), \(P_1 (x) = x\), \(P_2 (x) = (3x^2 - 1)/2\).</li>
+</ol>
+
+
+<p>
+В наших обозначениях можно написать так:
+</p>
+
+\begin{equation}
+\label{eq:multipoles-legendre-cos-gamma}
+\frac{1}{|\vec{r} - \vec{r}'|} = \frac{1}{r} \sum_{l=0}^{\infty} \left( \frac{r'}{r} \right)^{l} P_l (\cos \gamma),
+\end{equation}
+<p>
+где \(\gamma\) — угол между векторами \(\vec{r}\) и \(\vec{r}'\). 
+</p>
+
+<p>
+Теорема сложения: 
+</p>
+
+\begin{equation}
+\label{eq:legendre-sum}
+P_l (\cos \gamma )=  \frac{4\pi}{2l+1} \sum_{m=-l}^l Y^*_{lm} (\theta', \phi') Y_{lm} (\theta, \phi). 
+\end{equation}
+<p>
+Здесь \(Y_{lm} (\theta, \phi)\) — <i>сферическая функция</i>. Эта функция —
+решение уравнения Лапласа в сферических координатах (вернее, его
+угловой части). Выпишем оператор Лапласа: 
+</p>
+
+\begin{equation}
+\label{eq:laplace-spherical}
+\Delta \varphi = \frac{1}{r^2} \frac{\partial}{\partial r} \left( r^2 \frac{\partial}{\partial r} \right) + \frac{1}{r^2 \sin \theta} \frac{\partial }{\partial \theta} \left( \sin \theta \frac{\partial}{\partial \theta} \right) + \frac{1}{r^2 \sin^2 \theta} \frac{\partial^2}{\partial \phi^2}. 
+\end{equation}
+
+<p>
+Чтобы решить уравнение \(\Delta \varphi=0\), надо разделить переменные,
+т.е. представить \(\varphi\) в виде \(\varphi (r, \theta, \phi) = R(r)
+\Theta (\theta) \Phi (\phi) = R(r) Y(\theta, \phi)\). Угловая часть
+будет в таком случае представляться в виде
+</p>
+
+\begin{equation}
+\label{eq:def-ylm}
+Y_{lm} (\theta, \phi) = \sqrt{\frac{2l+1}{4\pi} \frac{(l-m)!}{(l+m)!}} P_l^m (\cos \theta) e^{i m \phi}, \quad m \geq 0,
+\end{equation}
+<p>
+где \(P_l^m\) — <i>присоединённые полиномы Лежандра</i>, определяемые
+соотношением
+</p>
+
+\begin{equation}
+\label{eq:def-associated-legendre}
+P_l^m (x) = (-1)^m (1-x^2)^{m/2} \frac{d^m}{dx^m} P_l(x). 
+\end{equation}
+
+<p>
+Обозначим за \(\Omega = (\theta, \phi)\), \(\Omega' = (\theta',
+\phi')\). Тогда можно показать, что сферические функции удовлетворяют
+условию ортогональности: 
+</p>
+
+\begin{equation}
+\label{eq:ylm-ortogonality}
+\int d \Omega Y^{*}_{lm} (\Omega) Y_{l'm'} (\Omega) = \delta_{ll'} \delta_{mm'},
+\end{equation}
+<p>
+что будет неоднократно использоваться в различных задачах. Выпишем для
+наглядности несколько первых сферических функций: 
+</p>
+
+\begin{equation}
+\label{eq:ylm-first}
+Y_{00} = \frac{1}{\sqrt{4\pi}}, \quad Y_{10} = \sqrt{\frac{3}{4\pi}} \cos \theta, \quad Y_{1,\pm 1} = \mp \sqrt{\frac{3}{8\pi}} \sin \theta e^{\pm i \phi}. 
+\end{equation}
+<p>
+В последнем выражении нам встретилась сферическая функция с
+отрицательным индексом, она определяется следующим образом: 
+</p>
+
+\begin{equation}
+\label{eq:ylm-neg-m}
+Y_{lm} (\theta, \phi) = Y_{l,-m} (-\theta, -\phi). 
+\end{equation}
+
+<p>
+Итого, с учётом всего, что мы теперь знаем о сферических функциях,
+разложение для \(|\vec{r}-\vec{r}'|^{-1}\) можно записать так (соберём вместе
+формулы \eqref{eq:multipoles-legendre-cos-gamma},
+\eqref{eq:legendre-sum} и \eqref{eq:def-ylm}):
+</p>
+
+\begin{equation}
+\label{eq:green-spherical-1}
+\frac{1}{|\vec{r} - \vec{r}'|} = \frac{1}{r} \sum_{l=0}^{\infty} \frac{4\pi}{2l+1} \left( \frac{r'}{r} \right)^l \sum_{m=-l}^l Y^{*}_{lm} (\Omega') Y_{lm} (\Omega).
+\end{equation}
+<p>
+Отметим, что эта формула работает только при \(r'<r\). Но её легко
+переделать для противоположного случая, достаточно просто поменять
+местами \(r'\) и \(r\). С учётом полезных обозначений \(r_{<} = \min (r,
+r')\) и \(r_{>} = \max (r,r')\) окончательная формула приобретает вид
+</p>
+
+\begin{equation}
+\label{eq:green-spherical-2}
+\frac{1}{|\vec{r} - \vec{r}'|} = \frac{1}{r_{>}} \sum_{l=0}^{\infty} \frac{4\pi}{2l+1} \left( \frac{r_{<}}{r_{>}} \right)^l \sum_{m=-l}^l Y^{*}_{lm} (\Omega_{<}) Y_{lm} (\Omega_{>}).
+\end{equation}
+
+<p>
+То, что мы получили, является и функцией Грина для пустого
+пространства, записанной в сферических координатах. Эта функция Грина
+позволяет решать многие задачи статики в системах со сферической
+симметрией. 
 </p>
 </div>
-</div>
-
-<div id="outline-container-orgheadline18" class="outline-3">
-<h3 id="orgheadline18">Разложение по мультиполям.</h3>
 </div>
 </div>
 </div>
 <div id="postamble" class="status">
 <hr>
-<p class="date">Last Updated 2016-04-30 Sat 15:08</p>
+<p class="date">Last Updated 2016-05-06 Fri 10:53</p>
 <p class="postamble">Created by Igor Shenderovich [<a href="mailto:shender.i@gmail.com">shender.i@gmail.com</a>] with <a href="http://www.gnu.org/software/emacs/">Emacs</a> 24.5.1 (<a href="http://orgmode.org">Org</a> mode 8.3.2)</p>
 </div>
 </body>
