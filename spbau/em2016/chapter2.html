@@ -3,7 +3,7 @@
 "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
 <head>
-<!-- 2016-05-07 Sat 10:04 -->
+<!-- 2016-05-11 Wed 18:58 -->
 <meta  http-equiv="Content-Type" content="text/html;charset=utf-8" />
 <meta  name="viewport" content="width=device-width, initial-scale=1" />
 <title>Классическая электродинамика</title>
@@ -1153,12 +1153,14 @@ Y_{lm} (\theta, \phi) = Y_{l,-m} (-\theta, -\phi).
 <p>
 Отметим, что эта формула работает только при \(r' < r\). Но её легко
 переделать для противоположного случая, достаточно просто поменять
-местами \(r'\) и \(r\). С учётом полезных обозначений \(r_{<} = \min (r,r')\) и \(r_{>} = \max (r,r')\) окончательная формула приобретает вид
+местами \(r'\) и \(r\). С учётом полезных обозначений \(r_{<} = \min
+(r,r')\) и \(r_{>} = \max (r,r')\) окончательная формула приобретает вид
+(спасибо Мише Минину за найденную опечатку)
 </p>
 
 \begin{equation}
 \label{eq:green-spherical-2}
-\frac{1}{|\vec{r} - \vec{r}'|} = \frac{1}{r_{>}} \sum_{l=0}^{\infty} \frac{4\pi}{2l+1} \left( \frac{r_{<}}{r_{>}} \right)^l \sum_{m=-l}^l Y^{*}_{lm} (\Omega_{<}) Y_{lm} (\Omega_{>}).
+\frac{1}{|\vec{r} - \vec{r}'|} = \frac{1}{r_{>}} \sum_{l=0}^{\infty} \frac{4\pi}{2l+1} \left( \frac{r_{<}}{r_{>}} \right)^l \sum_{m=-l}^l Y^{*}_{lm} (\Omega') Y_{lm} (\Omega). 
 \end{equation}
 
 <p>
@@ -1173,7 +1175,7 @@ Y_{lm} (\theta, \phi) = Y_{l,-m} (-\theta, -\phi).
 </div>
 <div id="postamble" class="status">
 <hr>
-<p class="date">Last Updated 2016-05-07 Sat 10:04</p>
+<p class="date">Last Updated 2016-05-11 Wed 18:58</p>
 <p class="postamble">Created by Igor Shenderovich [<a href="mailto:shender.i@gmail.com">shender.i@gmail.com</a>] with <a href="http://www.gnu.org/software/emacs/">Emacs</a> 24.5.1 (<a href="http://orgmode.org">Org</a> mode 8.3.2)</p>
 </div>
 </body>
