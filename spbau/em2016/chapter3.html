@@ -1,0 +1,399 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
+<head>
+<!-- 2016-05-12 Thu 15:48 -->
+<meta  http-equiv="Content-Type" content="text/html;charset=utf-8" />
+<meta  name="viewport" content="width=device-width, initial-scale=1" />
+<title>Классическая электродинамика</title>
+<meta  name="generator" content="Org-mode" />
+<meta  name="author" content="Igor Shenderovich" />
+<style type="text/css">
+ <!--/*--><![CDATA[/*><!--*/
+  .title  { text-align: center;
+             margin-bottom: .2em; }
+  .subtitle { text-align: center;
+              font-size: medium;
+              font-weight: bold;
+              margin-top:0; }
+  .todo   { font-family: monospace; color: red; }
+  .done   { font-family: monospace; color: green; }
+  .priority { font-family: monospace; color: orange; }
+  .tag    { background-color: #eee; font-family: monospace;
+            padding: 2px; font-size: 80%; font-weight: normal; }
+  .timestamp { color: #bebebe; }
+  .timestamp-kwd { color: #5f9ea0; }
+  .org-right  { margin-left: auto; margin-right: 0px;  text-align: right; }
+  .org-left   { margin-left: 0px;  margin-right: auto; text-align: left; }
+  .org-center { margin-left: auto; margin-right: auto; text-align: center; }
+  .underline { text-decoration: underline; }
+  #postamble p, #preamble p { font-size: 90%; margin: .2em; }
+  p.verse { margin-left: 3%; }
+  pre {
+    border: 1px solid #ccc;
+    box-shadow: 3px 3px 3px #eee;
+    padding: 8pt;
+    font-family: monospace;
+    overflow: auto;
+    margin: 1.2em;
+  }
+  pre.src {
+    position: relative;
+    overflow: visible;
+    padding-top: 1.2em;
+  }
+  pre.src:before {
+    display: none;
+    position: absolute;
+    background-color: white;
+    top: -10px;
+    right: 10px;
+    padding: 3px;
+    border: 1px solid black;
+  }
+  pre.src:hover:before { display: inline;}
+  pre.src-sh:before    { content: 'sh'; }
+  pre.src-bash:before  { content: 'sh'; }
+  pre.src-emacs-lisp:before { content: 'Emacs Lisp'; }
+  pre.src-R:before     { content: 'R'; }
+  pre.src-perl:before  { content: 'Perl'; }
+  pre.src-java:before  { content: 'Java'; }
+  pre.src-sql:before   { content: 'SQL'; }
+
+  table { border-collapse:collapse; }
+  caption.t-above { caption-side: top; }
+  caption.t-bottom { caption-side: bottom; }
+  td, th { vertical-align:top;  }
+  th.org-right  { text-align: center;  }
+  th.org-left   { text-align: center;   }
+  th.org-center { text-align: center; }
+  td.org-right  { text-align: right;  }
+  td.org-left   { text-align: left;   }
+  td.org-center { text-align: center; }
+  dt { font-weight: bold; }
+  .footpara { display: inline; }
+  .footdef  { margin-bottom: 1em; }
+  .figure { padding: 1em; }
+  .figure p { text-align: center; }
+  .inlinetask {
+    padding: 10px;
+    border: 2px solid gray;
+    margin: 10px;
+    background: #ffffcc;
+  }
+  #org-div-home-and-up
+   { text-align: right; font-size: 70%; white-space: nowrap; }
+  textarea { overflow-x: auto; }
+  .linenr { font-size: smaller }
+  .code-highlighted { background-color: #ffff00; }
+  .org-info-js_info-navigation { border-style: none; }
+  #org-info-js_console-label
+    { font-size: 10px; font-weight: bold; white-space: nowrap; }
+  .org-info-js_search-highlight
+    { background-color: #ffff00; color: #000000; font-weight: bold; }
+  /*]]>*/-->
+</style>
+<link rel="stylesheet" type="text/css" href="css/style.css" />
+<style>h1{counter-reset:section 2;}</style>
+<script type="text/javascript">
+/*
+@licstart  The following is the entire license notice for the
+JavaScript code in this tag.
+
+Copyright (C) 2012-2013 Free Software Foundation, Inc.
+
+The JavaScript code in this tag is free software: you can
+redistribute it and/or modify it under the terms of the GNU
+General Public License (GNU GPL) as published by the Free Software
+Foundation, either version 3 of the License, or (at your option)
+any later version.  The code is distributed WITHOUT ANY WARRANTY;
+without even the implied warranty of MERCHANTABILITY or FITNESS
+FOR A PARTICULAR PURPOSE.  See the GNU GPL for more details.
+
+As additional permission under GNU GPL version 3 section 7, you
+may distribute non-source (e.g., minimized or compacted) forms of
+that code without the copy of the GNU GPL normally required by
+section 4, provided you include this license notice and a URL
+through which recipients can access the Corresponding Source.
+
+
+@licend  The above is the entire license notice
+for the JavaScript code in this tag.
+*/
+<!--/*--><![CDATA[/*><!--*/
+ function CodeHighlightOn(elem, id)
+ {
+   var target = document.getElementById(id);
+   if(null != target) {
+     elem.cacheClassElem = elem.className;
+     elem.cacheClassTarget = target.className;
+     target.className = "code-highlighted";
+     elem.className   = "code-highlighted";
+   }
+ }
+ function CodeHighlightOff(elem, id)
+ {
+   var target = document.getElementById(id);
+   if(elem.cacheClassElem)
+     elem.className = elem.cacheClassElem;
+   if(elem.cacheClassTarget)
+     target.className = elem.cacheClassTarget;
+ }
+/*]]>*///-->
+</script>
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+        displayAlign: "center",
+        displayIndent: "0em",
+
+        "HTML-CSS": { scale: 100,
+                        linebreaks: { automatic: "false" },
+                        webFont: "TeX"
+                       },
+        SVG: {scale: 100,
+              linebreaks: { automatic: "false" },
+              font: "TeX"},
+        NativeMML: {scale: 100},
+        TeX: { equationNumbers: {autoNumber: "AMS"},
+               MultLineWidth: "85%",
+               TagSide: "right",
+               TagIndent: ".8em"
+             }
+});
+</script>
+<script type="text/javascript"
+        src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS_HTML"></script>
+</head>
+<body>
+<div id="content">
+<h1 class="title">Классическая электродинамика
+<br>
+<span class="subtitle">2 курс СПбАУ РАН, весна 2016</span>
+</h1>
+<p>
+<span class="underline">Литература:</span> 
+</p>
+
+<ol class="org-ol">
+<li>Бредов М.М., Румянцев В.В., Топтыгин И.Н., «Классическая
+электродинамика», 1985 (главы 7 и 8).</li>
+<li>Ландау Л.Д., Лифшиц Е.М., «Теория поля», 2003 (главы 8 и 9).</li>
+</ol>
+
+
+<div id="outline-container-orgheadline4" class="outline-2">
+<h2 id="orgheadline4">Динамика.</h2>
+<div class="outline-text-2" id="text-orgheadline4">
+</div><div id="outline-container-orgheadline1" class="outline-3">
+<h3 id="orgheadline1">Постановка задачи.</h3>
+<div class="outline-text-3" id="text-orgheadline1">
+<p>
+Хотим включить в рассмотрение токи и заряды, чьи плотности зависят не
+только от координат, но и от времени, \(\rho (\vec{r},t)\), \(\vec{j}
+(\vec{r},t)\). Как написать уравнения для потенциалов? Вообще-то они
+уже написаны, это уравнения Максвелла: 
+</p>
+
+\begin{equation}
+\label{eq:maxwell-eqs}
+\partial_{\mu} F^{\mu \nu} = \frac{4\pi}{c} j^{\nu}, \quad F^{\mu \nu} = \partial^{\mu} A^{\nu} - \partial^{\nu} A^{\mu}. 
+\end{equation}
+
+<p>
+Можно их упростить, пользуясь калибровкой Лоренца (см. соответствующее
+обсуждение в <a href="chapter1.html">главе 1</a>). Тогда условие на потенциалы приобретёт вид
+</p>
+
+\begin{equation}
+\label{eq:wave-eq-a-mu}
+\partial_{\mu} \partial^{\mu} A^{\nu} = \frac{4\pi}{c}j^{\nu}. 
+\end{equation}
+
+<p>
+Здесь записано 4 уравнения (одно на скалярный потенциал \(\varphi\) и
+три на компоненты векторного потенциала \(\vec{A}\)). Выпишем для
+примера уравнение на \(\vec{A}\): 
+</p>
+
+\begin{equation}
+\label{eq:wave-eq-vec-a}
+\left( \frac{1}{c^2} \frac{\partial^2}{\partial t^2} - \Delta \right) \vec{A} (\vec{r},t) = \frac{4\pi}{c}\vec{j} (\vec{r},t). 
+\end{equation}
+
+<p>
+Понятно, что создаваемые электромагнитные поля будут влиять на \(\rho\)
+и \(\vec{j}\), но мы этим пока пренебрежём. 
+</p>
+</div>
+</div>
+
+<div id="outline-container-orgheadline2" class="outline-3">
+<h3 id="orgheadline2">Функция Грина оператора д'Аламбера.</h3>
+<div class="outline-text-3" id="text-orgheadline2">
+<p>
+Чтобы решать уравнения, подобные \eqref{eq:wave-eq-vec-a}, удобно
+ввести (как и в случае статики) функцию Грина \(G(\vec{r}, t |
+\vec{r}', t')\): 
+</p>
+
+\begin{equation}
+\label{eq:def-greens-wave-1}
+\Delta G - \frac{1}{c^2} \frac{\partial^2 G}{\partial t^2} = - 4\pi \delta (\vec{r} - \vec{r}') \delta (t-t'). 
+\end{equation}
+
+<p>
+С помощью функции Грина решение уравнения \eqref{eq:wave-eq-vec-a}
+записывается так: 
+</p>
+
+\begin{equation}
+\label{eq:sol-wave-eq}
+\vec{A} = \frac{1}{c} \int G (\vec{r}, t | \vec{r}', t') \vec{j} (\vec{r}',t') d\vec{r}' dt'. 
+\end{equation}
+
+<p>
+Можно заметить, что \( G (\vec{r}, t | \vec{r}', t')  = G (\vec{r} -
+\vec{r}', t-t')\). Обозначим \(\vec{R} = \vec{r} - \vec{r}'\), \(\tau =
+t-t'\). Тогда функция Грина \(G = G(\vec{R}, \tau)\). Итого теперь нам
+надо решить такое уравнение: 
+</p>
+
+\begin{equation}
+\label{eq:def-greens-wave-2}
+\Delta G - \frac{1}{c^2} \frac{\partial^2 G}{\partial \tau^2} = - 4\pi \delta (\vec{R}) \delta (\tau). 
+\end{equation}
+
+<p>
+Сначала избавимся от зависимости от \(\tau\). Для этого совершим
+преобразование Фурье. Конкретно, запишем для дельта-функции
+</p>
+
+\begin{equation}
+\label{eq:wave-fourier-1}
+\delta (\tau) = \int_{-\infty}^{\infty} \frac{d\omega}{2\pi} e^{-i \omega \tau}
+\end{equation}
+<p>
+и для \(G(\vec{R}, \tau)\)
+</p>
+
+\begin{equation}
+\label{eq:wave-fourier-2}
+G (\vec{R}, \tau) = \int_{-\infty}^{\infty} \frac{d\omega}{2\pi} e^{-i \omega \tau} G_{\omega} (\vec{R}). 
+\end{equation}
+
+<p>
+Видно, что \(G_{\omega} (\vec{R})\) должно удовлетворять уравнению
+</p>
+
+\begin{equation}
+\label{eq:wave-fourier-3}
+\left( \Delta + \frac{\omega^2}{c^2} \right) G_{\omega} (\vec{R}) = -4 \pi \delta (\vec{R}). 
+\end{equation}
+
+<p>
+Таким образом, мы «разделили переменные», разнеся в разные стороны
+зависимость от \(\vec{R}\) и \(\tau\). 
+</p>
+
+<p>
+Заметим, что в пределе \(\omega \to 0\) функция \(G_{\omega}\) должна
+превращаться в \(1/R\) (это функция Грина оператора Лапласа в
+пустоте). Это подсказывает то, что функцию Грина \(G_{\omega}\) можно
+искать в сферически-симметричном виде, тогда от оператора Лапласа
+можно оставить только радиальную часть: 
+</p>
+
+\begin{equation}
+\label{eq:laplace-r}
+\Delta \to \frac{1}{R^2} \frac{d}{dR} \left( R^2 \frac{d}{dR} \right). 
+\end{equation}
+
+<p>
+Получаем обыкновенное дифференциальное уравнение: 
+</p>
+
+\begin{equation}
+\label{eq:laplace-r-full}
+\left[ \frac{1}{R^2} \frac{d}{dR} \left( R^2 \frac{d}{dR} \right) + \frac{\omega^2}{c^2} \right] G_{\omega} (R) = 0, \quad R>0. 
+\end{equation}
+
+<p>
+Два его фундаментальных решения: 
+</p>
+
+\begin{equation}
+\label{eq:fund-solutions-green-fourier}
+G_{\omega} (R) = \frac{C}{R} e^{ \pm i \omega R/c}. 
+\end{equation}
+
+<p>
+Постоянная \(C\) определяется из уравнения \eqref{eq:wave-fourier-3},
+она равна \(C=1\) для обеих решений. Возвращаясь к исходной функции
+Грина \(G(\vec{R}, \tau)\) от её Фурье-образа \(G_{\omega} (R)\), получим
+</p>
+
+\begin{equation}
+\label{eq:fund-solutions-green}
+G (R, \tau) = \int\limits_{-\infty}^{\infty} \frac{1}{R} \frac{d \omega}{2\pi} \exp (i \omega (\pm R/c - \tau)) = \frac{1}{R} \delta \left( \pm \frac{R}{c} - \tau \right). 
+\end{equation}
+</div>
+
+
+<div id="outline-container-orgheadline3" class="outline-4">
+<h4 id="orgheadline3">Опережающие и запаздывающие потенциалы.</h4>
+<div class="outline-text-4" id="text-orgheadline3">
+<p>
+Мы получили два фундаментальных решения. Но правильное из них только
+одно: то, в котором знак минус в дельта-функции. В этом случае сигнал
+от источника в точке \((\vec{r}',t')\) регистрируется в точке \(\vec{r}\)
+в момент времени \(t = t' + R/c > t'\), как и должно быть по
+причинности. Такая функция Грина называется <i>запаздывающей</i>
+(<i>retarded</i> по-английски). Функция Грина с плюсом тоже используется в
+физике (называется <i>опережающая</i>, <i>advanced</i>), но в квантовой теории
+поля. 
+</p>
+
+<p>
+Итого наша функция Грина выглядит так: 
+</p>
+
+\begin{equation}
+\label{eq:retarded-green}
+G_{ret} (\vec{r} - \vec{r}', t-t') = \frac{1}{|\vec{r} - \vec{r}'|} \, \delta \left( \frac{1}{c} |\vec{r} - \vec{r}'| - (t-t') \right). 
+\end{equation}
+
+<p>
+Теперь мы можем использовать её для вычисления потенциалов
+(см. формулу \eqref{eq:sol-wave-eq}). По времени можно снять интеграл
+с помощью дельта-функции, и выражения для <i>запаздывающих</i> потенциалов
+будут выглядеть так:
+</p>
+
+\begin{equation}
+\label{eq:retarded-phi}
+\varphi(\vec{r},t) = \int d \vec{r}' \frac{1}{|\vec{r} - \vec{r}'|} \rho (\vec{r}, t-\frac{1}{c} |\vec{r} - \vec{r}'|),
+\end{equation}
+
+\begin{equation}
+\label{eq:retarded-A}
+\vec{A} (\vec{r},t) = \frac{1}{c} \int d \vec{r}' \frac{1}{|\vec{r} - \vec{r}'|} \vec{j} (\vec{r}, t-\frac{1}{c} |\vec{r} - \vec{r}'|).
+\end{equation}
+
+<p>
+Наличие параметра времени вида \(t - R/c\) отражает тот факт, что
+распространение сигналов осуществляется со скоростью света \(c\), что с
+самого начала было очевидно с физической точки зрения. 
+</p>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div id="postamble" class="status">
+<hr>
+<p class="date">Last Updated 2016-05-12 Thu 15:48</p>
+<p class="postamble">Created by Igor Shenderovich [<a href="mailto:shender.i@gmail.com">shender.i@gmail.com</a>] with <a href="http://www.gnu.org/software/emacs/">Emacs</a> 24.5.1 (<a href="http://orgmode.org">Org</a> mode 8.3.2)</p>
+</div>
+</body>
+</html>
