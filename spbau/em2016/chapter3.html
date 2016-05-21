@@ -3,7 +3,7 @@
 "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
 <head>
-<!-- 2016-05-12 Thu 15:48 -->
+<!-- 2016-05-22 Sun 02:46 -->
 <meta  http-equiv="Content-Type" content="text/html;charset=utf-8" />
 <meta  name="viewport" content="width=device-width, initial-scale=1" />
 <title>Классическая электродинамика</title>
@@ -182,9 +182,9 @@ for the JavaScript code in this tag.
 </ol>
 
 
-<div id="outline-container-orgheadline4" class="outline-2">
-<h2 id="orgheadline4">Динамика.</h2>
-<div class="outline-text-2" id="text-orgheadline4">
+<div id="outline-container-orgheadline6" class="outline-2">
+<h2 id="orgheadline6">Динамика.</h2>
+<div class="outline-text-2" id="text-orgheadline6">
 </div><div id="outline-container-orgheadline1" class="outline-3">
 <h3 id="orgheadline1">Постановка задачи.</h3>
 <div class="outline-text-3" id="text-orgheadline1">
@@ -388,11 +388,80 @@ G_{ret} (\vec{r} - \vec{r}', t-t') = \frac{1}{|\vec{r} - \vec{r}'|} \, \delta \l
 </div>
 </div>
 </div>
+
+<div id="outline-container-orgheadline4" class="outline-3">
+<h3 id="orgheadline4">Поля на больших расстояниях от источников.</h3>
+<div class="outline-text-3" id="text-orgheadline4">
+<p>
+Будем рассматривать всё на больших расстояниях от источников, т.е. при
+\( r \gg r'\). Тогда \(|r-r'| \approx r - \vec{n} \cdot \vec{r}' +
+O(1/r)\), где \(\vec{n} = \vec{r}/r\). В этом приближении:
+</p>
+
+\begin{equation}
+\label{eq:phi-far}
+\varphi (\vec{r},t) = \frac{1}{r} \int d\vec{r}' \rho (\vec{r}',t-r/c + \vec{n} \cdot \vec{r}'/c). 
+\end{equation}
+
+\begin{equation}
+\label{eq:A-far}
+\vec{A} (\vec{r},t) = \frac{1}{cr} \int d\vec{r}' \vec{j} (\vec{r}',t-r/c + \vec{n} \cdot \vec{r}'/c). 
+\end{equation}
+
+<p>
+Отметим, что в отличие от статики, где поля вели себя как \(1/r^2\),
+здесь поведение уже \(1/r\). Можно вычислить электрическое и магнитное
+поле \(\vec{E}\), \(\vec{H}\): 
+</p>
+
+\begin{equation}
+\label{eq:E-H-far}
+\vec{H} (\vec{r},t) = -\frac{1}{c^2} \vec{n} \times \frac{1}{r} \int d\vec{r}' \frac{\partial}{\partial t} \vec{j} (\vec{r}',t_r), \qquad \vec{E}(\vec{r},t) = - \vec{n} \times \vec{H}(\vec{r},t), \qquad \vec{H} (\vec{r},t) = \vec{n} \times \vec{E} (\vec{r},t),
+\end{equation}
+<p>
+где \(t_r = t - r/c + \vec{n} \cdot \vec{r}'/c\). Отметим, что вдали от
+источников поле становится поперечным, как и должно быть в
+электромагнитной волне. 
+</p>
+</div>
+</div>
+
+<div id="outline-container-orgheadline5" class="outline-3">
+<h3 id="orgheadline5">Дипольное излучение.</h3>
+<div class="outline-text-3" id="text-orgheadline5">
+<p>
+Вектор Пойнтинга:
+</p>
+
+\begin{equation}
+\label{eq:Poynting-def}
+\vec{S} = \frac{c}{4\pi} \vec{E} \times \vec{H}. 
+\end{equation}
+
+<p>
+В нашем случае он направлен по вектору \(\vec{n}\), и его модуль равен 
+</p>
+
+\begin{equation}
+\label{eq:Poynting-module}
+S = \frac{1}{c^3} \frac{1}{4\pi r^2} \left( \vec{n} \times \int d\vec{r}' \frac{\partial }{\partial t} \vec{j} (\vec{r}',t_r) \right)^2. 
+\end{equation}
+
+<p>
+Угловое распределение мощности: 
+</p>
+
+\begin{equation}
+\label{eq:Poynting-angles}
+\frac{dP}{d\Omega} = \frac{1}{4\pi c^3} \left( \vec{n} \times \int d\vec{r}' \frac{\partial }{\partial t} \vec{j} (\vec{r}',t_r) \right)^2. 
+\end{equation}
+</div>
+</div>
 </div>
 </div>
 <div id="postamble" class="status">
 <hr>
-<p class="date">Last Updated 2016-05-12 Thu 15:48</p>
+<p class="date">Last Updated 2016-05-22 Sun 02:45</p>
 <p class="postamble">Created by Igor Shenderovich [<a href="mailto:shender.i@gmail.com">shender.i@gmail.com</a>] with <a href="http://www.gnu.org/software/emacs/">Emacs</a> 24.5.1 (<a href="http://orgmode.org">Org</a> mode 8.3.2)</p>
 </div>
 </body>
