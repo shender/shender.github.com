@@ -3,7 +3,7 @@
 "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
 <head>
-<!-- 2016-05-22 Sun 02:46 -->
+<!-- 2016-05-27 Fri 21:08 -->
 <meta  http-equiv="Content-Type" content="text/html;charset=utf-8" />
 <meta  name="viewport" content="width=device-width, initial-scale=1" />
 <title>Классическая электродинамика</title>
@@ -179,12 +179,13 @@ for the JavaScript code in this tag.
 <li>Бредов М.М., Румянцев В.В., Топтыгин И.Н., «Классическая
 электродинамика», 1985 (главы 7 и 8).</li>
 <li>Ландау Л.Д., Лифшиц Е.М., «Теория поля», 2003 (главы 8 и 9).</li>
+<li>Дж. Джексон, «Классическая электродинамика», 1965 (главы 7,8,9 и 14).</li>
 </ol>
 
 
-<div id="outline-container-orgheadline6" class="outline-2">
-<h2 id="orgheadline6">Динамика.</h2>
-<div class="outline-text-2" id="text-orgheadline6">
+<div id="outline-container-orgheadline15" class="outline-2">
+<h2 id="orgheadline15">Динамика.</h2>
+<div class="outline-text-2" id="text-orgheadline15">
 </div><div id="outline-container-orgheadline1" class="outline-3">
 <h3 id="orgheadline1">Постановка задачи.</h3>
 <div class="outline-text-3" id="text-orgheadline1">
@@ -427,7 +428,7 @@ O(1/r)\), где \(\vec{n} = \vec{r}/r\). В этом приближении:
 </div>
 
 <div id="outline-container-orgheadline5" class="outline-3">
-<h3 id="orgheadline5">Дипольное излучение.</h3>
+<h3 id="orgheadline5">Излучение.</h3>
 <div class="outline-text-3" id="text-orgheadline5">
 <p>
 Вектор Пойнтинга:
@@ -456,12 +457,184 @@ S = \frac{1}{c^3} \frac{1}{4\pi r^2} \left( \vec{n} \times \int d\vec{r}' \frac{
 \frac{dP}{d\Omega} = \frac{1}{4\pi c^3} \left( \vec{n} \times \int d\vec{r}' \frac{\partial }{\partial t} \vec{j} (\vec{r}',t_r) \right)^2. 
 \end{equation}
 </div>
+
+<div id="outline-container-orgheadline6" class="outline-4">
+<h4 id="orgheadline6">Пример: точечный заряд.</h4>
+<div class="outline-text-4" id="text-orgheadline6">
+<p>
+Пусть заряд двигается со скоростью \(v \ll c\). Тогда слагаемым \(\vec{n}
+\cdot \vec{r}'/c\) можно пренебречь, всё значительно упрощается. Ток
+\(\vec{j} (\vec{r},t) = e \vec{v} (t) \delta (\vec{r}' - \vec{R}(t))\),
+где \(\vec{R}(t)\) — траектория заряда. Интеграл
+\eqref{eq:Poynting-angles} берётся легко, и получается 
+</p>
+
+\begin{equation}
+\label{eq:point-charge-radiation-1}
+\frac{dP}{d\Omega} = \frac{1}{4\pi c^3} \left( \vec{n} \times \frac{d\vec{v}}{dt} \right)^2 = \frac{e^2}{4\pi c^3} \left( \frac{d\vec{v}}{dt} \right)^2 \sin^2 \theta,
+\end{equation}
+<p>
+где \(\theta\) — угол между направлением на точку наблюдения и
+ускорением точечного заряда. 
+</p>
+
+<p>
+Можно найти полную мощность, для этого надо проинтегрировать
+\eqref{eq:point-charge-radiation-1} по всем телесным углам (получится
+т.н. <i>формула Лармора</i>):
+</p>
+
+\begin{equation}
+\label{eq:point-charge-radiation-2}
+P = \int \frac{dP}{d\Omega} d\Omega = \frac{2e^2}{3c^3} \left( \frac{d\vec{v}}{dt} \right)^2. 
+\end{equation}
+</div>
+</div>
+
+<div id="outline-container-orgheadline7" class="outline-4">
+<h4 id="orgheadline7">Пример: излучение диполя.</h4>
+<div class="outline-text-4" id="text-orgheadline7">
+<p>
+Пусть теперь у нас излучает не точечный заряд, а некая заряженная
+система. Видно, что задача о нахождении излучения сводится к
+нахождению производной вида
+</p>
+
+\begin{equation}
+\label{eq:dipole-radiation-1}
+\frac{d}{dt} \int d\vec{r}' \vec{j} (\vec{r}',t-r/c). 
+\end{equation}
+
+<p>
+Но такой интеграл легко переписать в терминах дипольного момента
+\(\vec{d}\):
+</p>
+
+\begin{equation}
+\label{eq:dipole-radiation-2}
+\frac{d}{dt} \int d\vec{r}' \vec{j} (\vec{r}',t-r/c) = \frac{d}{dt} \int d\vec{r}' \vec{r}' \rho (\vec{r},t-r/c) = \dot{\vec{d}}. 
+\end{equation}
+
+<p>
+Тогда мощность излучения будет даваться формулами
+</p>
+
+\begin{equation}
+\label{eq:dipole-radiation-3}
+\frac{dP}{d\Omega} = \frac{1}{4\pi c^3} \left( \vec{n} \times \ddot{\vec{d}} \right)^2, \qquad P = \frac{2}{3c^3} \left( \ddot{\vec{d}} \right)^2.
+\end{equation}
+
+<p>
+в точности аналогичными формулам для точечного заряда.
+</p>
+</div>
+</div>
+</div>
+
+<div id="outline-container-orgheadline8" class="outline-3">
+<h3 id="orgheadline8">Дипольная антенна.</h3>
+<div class="outline-text-3" id="text-orgheadline8">
+<p>
+Рассмотрим тонкую линейную антенну длины \(2a\). В ней возбуждается
+переменный ток с плотностью
+</p>
+
+\begin{equation}
+\label{eq:antenna-1}
+\vec{j} (\vec{r}) = \vec{e}_z I \delta (x) \delta (y) \sin (ka - k |z|) \sin \omega t.
+\end{equation}
+
+<p>
+Здесь имеется в виду, что антенна расположена вдоль оси \(z\), а на
+краях плотность тока равна нулю в любой момент времени. Найдём
+излучение такой антенны.
+</p>
+
+<p>
+Для того, чтобы это сделать, нужно сосчитать интеграл
+\eqref{eq:Poynting-angles}. В нашем случае интересно сохранить
+зависимость от \(r'\) (интеграл вычисляется точно), что мы и сделаем: 
+</p>
+
+\begin{equation}
+\label{eq:antenna-2}
+\int d \vec{r}' \frac{1}{c} \frac{\partial}{\partial t} j_z (\vec{r}', t-r/c + \vec{n} \cdot \vec{r}'/c) = k I \int_{-a}^a dz' \sin (ka - k |z'|) \cos \omega \left( t-r/c + z' \cos \theta/c \right). 
+\end{equation}
+
+<p>
+Видно, что этот интеграл вычисляется явно (там только синусы и
+косинусы), ответ будет таким: 
+</p>
+
+\begin{equation}
+\label{eq:antenna-3}
+\frac{dP}{d\Omega} = \frac{1}{4\pi c} 4I^2 \cos^2 \omega (t-r/c) \frac{1}{\sin^2 \theta} \left( \cos (ka \cos \theta) - \cos ka \right)^2. 
+\end{equation}
+
+<p>
+Если усреднить это выражение по периоду колебаний, то среднее от
+косинуса в квадрате даст просто \(1/2\), и тогда 
+</p>
+\begin{equation}
+\label{eq:antenna-4}
+\left \langle \frac{dP}{d\Omega} \right \rangle = \frac{I^2}{2\pi c} \frac{1}{\sin^2 \theta} \left( \cos (ka \cos \theta) - \cos ka \right)^2. 
+\end{equation}
+
+<p>
+Видно, что параметры углового распределения определяются соотношением
+\(ka\). В частности, при \(2a = \lambda/2\) (т.е. когда длина антенны
+равна половине длине волны), угловое распределение мощности будет
+иметь дипольный характер — будет всего два лепестка, в направлении
+которых всё излучается. Такая антенна называется <i>полуволновой</i>. 
+</p>
+</div>
+</div>
+
+<div id="outline-container-orgheadline9" class="outline-3">
+<h3 id="orgheadline9">Монохроматические волны (напоминание).</h3>
+<div class="outline-text-3" id="text-orgheadline9">
+<p>
+В вакууме без источников поля \(\vec{E}\), \(\vec{H}\), а также потенциалы
+\(\varphi\), \(\vec{A}\) удовлетворяют волновому уравнению. Если, скажем,
+в уравнении \eqref{eq:wave-eq-vec-a} подставить \(\vec{j}=0\), то получится
+</p>
+
+\begin{equation}
+\label{eq:wave-eq}
+\Delta \vec{A} - \frac{1}{c^2} \frac{\partial^2 \vec{A}}{\partial t^2}=0. 
+\end{equation}
+
+<p>
+Таким образом, нужно научиться решать это уравнение и исследовать
+свойства решений. 
+</p>
+</div>
+</div>
+
+<div id="outline-container-orgheadline10" class="outline-3">
+<h3 id="orgheadline10">Томсоновское рассеяние.</h3>
+</div>
+
+<div id="outline-container-orgheadline11" class="outline-3">
+<h3 id="orgheadline11">Дифракция.</h3>
+</div>
+
+<div id="outline-container-orgheadline13" class="outline-3">
+<h3 id="orgheadline13">Волноводы.</h3>
+<div class="outline-text-3" id="text-orgheadline13">
+</div><div id="outline-container-orgheadline12" class="outline-4">
+<h4 id="orgheadline12">Пример: прямоугольный волновод.</h4>
+</div>
+</div>
+
+<div id="outline-container-orgheadline14" class="outline-3">
+<h3 id="orgheadline14">Проблемы классической электродинамики.</h3>
 </div>
 </div>
 </div>
 <div id="postamble" class="status">
 <hr>
-<p class="date">Last Updated 2016-05-22 Sun 02:45</p>
+<p class="date">Last Updated 2016-05-27 Fri 21:08</p>
 <p class="postamble">Created by Igor Shenderovich [<a href="mailto:shender.i@gmail.com">shender.i@gmail.com</a>] with <a href="http://www.gnu.org/software/emacs/">Emacs</a> 24.5.1 (<a href="http://orgmode.org">Org</a> mode 8.3.2)</p>
 </div>
 </body>
