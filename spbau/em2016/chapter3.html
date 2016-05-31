@@ -3,7 +3,7 @@
 "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
 <head>
-<!-- 2016-05-27 Fri 21:08 -->
+<!-- 2016-05-29 Sun 00:18 -->
 <meta  http-equiv="Content-Type" content="text/html;charset=utf-8" />
 <meta  name="viewport" content="width=device-width, initial-scale=1" />
 <title>Классическая электродинамика</title>
@@ -534,6 +534,8 @@ P = \int \frac{dP}{d\Omega} d\Omega = \frac{2e^2}{3c^3} \left( \frac{d\vec{v}}{d
 <div id="outline-container-orgheadline8" class="outline-3">
 <h3 id="orgheadline8">Дипольная антенна.</h3>
 <div class="outline-text-3" id="text-orgheadline8">
+<center><iframe width="420" height="315" src="https://www.youtube.com/embed/OLRs2CSu2UA" frameborder="0" allowfullscreen></iframe></center>
+
 <p>
 Рассмотрим тонкую линейную антенну длины \(2a\). В ней возбуждается
 переменный ток с плотностью
@@ -608,6 +610,31 @@ P = \int \frac{dP}{d\Omega} d\Omega = \frac{2e^2}{3c^3} \left( \frac{d\vec{v}}{d
 Таким образом, нужно научиться решать это уравнение и исследовать
 свойства решений. 
 </p>
+
+<p>
+Каждая компонента \(u(x,t)\) решения подобного уравнения устроена так:
+\(u(x,t) = f(x-ct) + g(x+ct)\). 
+</p>
+
+<p>
+Общее свойство полей в вакууме: они <i>поперечны</i>, т.е. \(\vec{H} = \vec{n}
+\times \vec{E}\), \(\vec{E} = \vec{H} \times \vec{n}\). При этом
+\(|\vec{E}| = |\vec{H}|\). 
+</p>
+
+<p>
+Очень важный частный случай: монохроматические волны, т.е. волны вида
+</p>
+
+\begin{equation}
+\label{eq:monochromatic-wave}
+\vec{E} (\vec{r},t) = \vec{E}_{0} e^{i (\vec{k} \cdot \vec{r} - \omega t)}. 
+\end{equation}
+
+<p>
+Если подставить такое решение в волновое уравнение, то немедленно
+найдётся <i>закон дисперсии</i>: \( \omega = c k\). 
+</p>
 </div>
 </div>
 
@@ -627,6 +654,7 @@ P = \int \frac{dP}{d\Omega} d\Omega = \frac{2e^2}{3c^3} \left( \frac{d\vec{v}}{d
 </div>
 </div>
 
+
 <div id="outline-container-orgheadline14" class="outline-3">
 <h3 id="orgheadline14">Проблемы классической электродинамики.</h3>
 </div>
@@ -634,7 +662,7 @@ P = \int \frac{dP}{d\Omega} d\Omega = \frac{2e^2}{3c^3} \left( \frac{d\vec{v}}{d
 </div>
 <div id="postamble" class="status">
 <hr>
-<p class="date">Last Updated 2016-05-27 Fri 21:08</p>
+<p class="date">Last Updated 2016-05-29 Sun 00:18</p>
 <p class="postamble">Created by Igor Shenderovich [<a href="mailto:shender.i@gmail.com">shender.i@gmail.com</a>] with <a href="http://www.gnu.org/software/emacs/">Emacs</a> 24.5.1 (<a href="http://orgmode.org">Org</a> mode 8.3.2)</p>
 </div>
 </body>
