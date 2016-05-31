@@ -3,7 +3,7 @@
 "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
 <head>
-<!-- 2016-05-29 Sun 00:18 -->
+<!-- 2016-05-31 Tue 16:15 -->
 <meta  http-equiv="Content-Type" content="text/html;charset=utf-8" />
 <meta  name="viewport" content="width=device-width, initial-scale=1" />
 <title>Классическая электродинамика</title>
@@ -635,11 +635,93 @@ P = \int \frac{dP}{d\Omega} d\Omega = \frac{2e^2}{3c^3} \left( \frac{d\vec{v}}{d
 Если подставить такое решение в волновое уравнение, то немедленно
 найдётся <i>закон дисперсии</i>: \( \omega = c k\). 
 </p>
+
+<p>
+<i>Поляризация</i> показывает, как устроена волна в плоскости,
+перпендикулярной волновому вектору \(\vec{k}\) (т.е. в плоскости,
+перпендикулярной распространению). Волна может быть поляризована
+эллиптически, в чуть менее общем случае — по кругу, или линейно.
+</p>
 </div>
 </div>
 
 <div id="outline-container-orgheadline10" class="outline-3">
 <h3 id="orgheadline10">Томсоновское рассеяние.</h3>
+<div class="outline-text-3" id="text-orgheadline10">
+<p>
+Явление для описания: на частицу массы \(m\) и заряда \(e\) падает
+электромагнитная волна, частица начинает двигаться (с ускорением), и,
+следовательно, будет излучать. Излучённую волну вполне логично назвать
+<i>рассеянной</i> на частице. Попробуем посмотреть, к чему приводит такое
+рассеяние. 
+</p>
+
+<p>
+Если считать, что поле не очень велико, то частица будет двигаться с
+не очень большой скоростью, а значит, можно просто применить второй
+закон Ньютона: 
+</p>
+
+\begin{equation}
+\label{eq:thomson-scattering-1}
+m \frac{d\vec{v}}{dt} = e \vec{E}
+\end{equation}
+
+<p>
+Как мы знаем (уравнение \eqref{eq:dipole-radiation-3}), дипольное
+излучение определяется ускорением частицы. В нашем случае, полная
+рассеянная мощность равна
+</p>
+
+\begin{equation}
+\label{eq:thomson-scattering-2}
+P_s = \frac{2}{3} \frac{e^2}{c^3} \left( \frac{d\vec{v}}{dt} \right)^2 = \frac{2}{3} \frac{e^4}{m^2 c^3} \vec{E}^2.
+\end{equation}
+
+<p>
+Падающая волна приносит с собой энергию, которая характеризуется
+вектором Пойнтинга
+</p>
+
+\begin{equation}
+\label{eq:thomson-scattering-3}
+S = \frac{c}{4\pi} E^2,
+\end{equation}
+<p>
+так что вполне логично определить <i>сечение рассеяния</i>
+</p>
+\begin{equation}
+\label{eq:thomson-scattering-4}
+\sigma = \frac{P_s}{S} = \frac{8\pi}{3} \left( \frac{e^2}{mc^2} \right)^2.
+\end{equation}
+
+<p>
+Чтобы узнать, как устроено угловое распределение излучения, можно
+воспользоваться той же формулой для дипольного излучения: 
+</p>
+
+\begin{equation}
+\label{eq:thomson-scattering-5}
+\frac{dP_s}{d\Omega} = \frac{e^2}{4\pi c^3} \left( \vec{n} \times \frac{d\vec{v}}{dt} \right)^2 = \frac{1}{4\pi} \frac{e^4}{m^2 c^3} \vec{E}^2 \left( 1 - (\vec{n} \cdot \vec{e})^2 \right), 
+\end{equation}
+<p>
+где \(\vec{e}\) задаёт направление электрического поля \(\vec{E}\). 
+</p>
+
+<p>
+Отсюда видно, что у нас есть две основные возможности: вектор
+\(\vec{e}\) может лежать перпендикулярно плоскости рассеяния, тогда
+множитель \(1- (\vec{n} \cdot \vec{e})^2\) равен 1, а если вектор лежит
+в плоскости рассеяния, то \(\cos^2 \theta\), где \(\theta\) — угол между
+направлением распространения волны и вектором \(\vec{n}\). Усредняя по
+поляризациям, получаем
+</p>
+
+\begin{equation}
+\label{eq:thomson-scattering-6}
+\frac{dP_s}{d\Omega} = \frac{1}{4\pi} \frac{e^2}{m^2c^3} \frac{1+\cos^2 \theta}{2} \vec{E}^2 . 
+\end{equation} 
+</div>
 </div>
 
 <div id="outline-container-orgheadline11" class="outline-3">
@@ -662,7 +744,7 @@ P = \int \frac{dP}{d\Omega} d\Omega = \frac{2e^2}{3c^3} \left( \frac{d\vec{v}}{d
 </div>
 <div id="postamble" class="status">
 <hr>
-<p class="date">Last Updated 2016-05-29 Sun 00:18</p>
+<p class="date">Last Updated 2016-05-31 Tue 16:15</p>
 <p class="postamble">Created by Igor Shenderovich [<a href="mailto:shender.i@gmail.com">shender.i@gmail.com</a>] with <a href="http://www.gnu.org/software/emacs/">Emacs</a> 24.5.1 (<a href="http://orgmode.org">Org</a> mode 8.3.2)</p>
 </div>
 </body>
