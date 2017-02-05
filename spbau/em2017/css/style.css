@@ -1,0 +1,171 @@
+/* hide Org-mode's section numbers */
+span.section-number-2 { display: none; }
+span.section-number-3 { display: none; }
+span.section-number-4 { display: none; }
+span.section-number-5 { display: none; }
+span.section-number-6 { display: none; }
+
+/* define counters for the different headline levels */
+h1 { counter-reset: section; }
+h2 { counter-reset: subsection; }
+h3 { counter-reset: subsubsection; }
+h4 { counter-reset: paragraph; }
+h5 { counter-reset: subparagraph; }
+
+/* prepend section numbers before headlines */
+h2::before {
+/*    content: "§" counter(section) ". "; */
+    content: counter(section) ". ";
+    counter-increment: section;
+}
+h3::before {
+    content: counter(section) "." counter(subsection) ". ";
+    counter-increment: subsection;
+}
+h4::before {
+    content: counter(section) "." counter(subsection) "." counter(subsubsection) ". ";
+    counter-increment: subsubsection;
+}
+h5::before {
+    content: counter(section) "." counter(subsection) "." counter(subsubsection) "." counter(paragraph) " ";
+    counter-increment: paragraph;
+}
+h6::before {
+    content: counter(section) "." counter(subsection) "." counter(subsubsection) "." counter(paragraph) "." counter(subparagraph) " ";
+    counter-increment: subparagraph;
+}
+
+/* suppress numbering for headlines with class="nonumber" */
+.nonumber::before { content: none; }
+
+@font-face {
+    font-family: 'Nissan';
+    src: url('nissan-webfont.eot');
+    src: url('nissan-webfont.eot?#iefix') format('embedded-opentype'),
+         url('nissan-webfont.woff') format('woff'),
+         url('nissan-webfont.ttf') format('truetype'),
+         url('nissan-webfont.svg#nissan_agregular') format('svg');
+    font-weight: normal;
+    font-style: normal;
+
+}
+
+@font-face {
+    font-family: 'museo_sans_cyrl500';
+    src: url('museo_500-webfont.eot');
+    src: url('museo_500-webfont.eot?#iefix') format('embedded-opentype'),
+         url('museo_500-webfont.woff') format('woff'),
+         url('museo_500-webfont.ttf') format('truetype'),
+         url('museo_500-webfont.svg#museo_sans_cyrl500') format('svg');
+    font-weight: normal;
+    font-style: normal;
+
+}
+
+@font-face {
+    font-family: 'museo_sans_cyrl300';
+    src: url('museo_300-webfont.eot');
+    src: url('museo_300-webfont.eot?#iefix') format('embedded-opentype'),
+         url('museo_300-webfont.woff') format('woff'),
+         url('museo_300-webfont.ttf') format('truetype'),
+         url('museo_300-webfont.svg#museo_sans_cyrl300') format('svg');
+    font-weight: normal;
+    font-style: normal;
+
+}
+
+@media all
+{
+    th {
+        background: lightblue;
+        border-color: white;
+        font-family: 'PT Sans';
+
+    }
+    body {
+        color: #000000;
+        background-color: #ffffff;
+        font-family: 'Nissan';
+        font-size: 18px; 
+        line-height: 28px;
+        max-width: 70%;
+        margin: auto;
+    }
+
+    body #content {
+        padding-top: 45px;
+    }
+    body pre {
+        border: none; 
+    }
+    body a {
+        color: #0000ff; 
+    }
+
+    body #content {
+        padding-top: 0px; 
+    }
+
+    #postamble { 
+        color: #777777;
+        font-family: 'PT Sans';
+        font-size: 10px;
+    }
+
+    div#postamble * a {     
+        font-weight: bold;     
+        text-decoration: none; 
+        color: #777777
+    } 
+
+    a:link {
+        font-weight: normal;
+        text-decoration: none;
+        color: #0000FF;
+    }
+    
+    a:visited {
+        font-weight: normal;
+        text-decoration: none;
+        color: #000099;
+    }
+    
+    blockquote {
+        margin-top: 10px;
+        margin-bottom: 10px;
+        margin-left: 30px;
+        padding-left: 15px;
+        border-left: 3px solid #ccc;
+    }
+    .verse {
+        text-align: right;
+    }
+    a:hover, a:active {
+        text-decoration: none;
+        color: #537d7b;
+    }
+    h1 {
+        font-family: 'PT Sans';
+        text-align:center;
+    }
+    h2 {
+        font-family: 'PT Sans';
+        /* text-align:center; */
+        /* text-decoration: underline; */
+        /*        margin-left: 50px;        */
+    }
+    h3,h4 {
+        font-family: 'PT Sans';
+        text-align:left;
+        font-size: 18px; 
+    }
+
+}
+
+
+code {
+    background-color: #eeeeee;
+    padding: 1pt;
+    margin-right: 1pt;
+    box-shadow: 1px 1px 1px #aaa;
+}
